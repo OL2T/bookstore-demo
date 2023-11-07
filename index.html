@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="dist/css/style.css">
+  <title>Bookstore</title>
+</head>
+<body id="body">
+<div id="page" class="page">
+  <div id="overlay" class="overlay"></div>
+  <div id="notification" class="notification">
+    <div class="content-wrapper">
+      <span class="icon-close"></span>
+      <div class="heading">Đăng ký thành công</div>
+      <div class="pop-up-content">
+        <p>Cảm ơn bạn vì đã đăng ký thành viên. Bạn có muốn đăng nhập không? </p>
+        <button class="btn-login">Đăng nhập</button>
+      </div>
+    </div>
+  </div>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="block block-logo">
+          <a href="./index.html" class="logo">
+            BookStore
+            <!--        <img src="" alt="logo">-->
+          </a>
+        </div>
+        <div class="block block-search">
+          <div class="block-search-inner">
+            <label for="search-desktop" class="visually-hidden">Search</label>
+            <input id="search-desktop" type="text" placeholder="Tìm kiếm sản phẩm mong muốn">
+            <span id= "btn-search" class="button-search">Search button</span>
+          </div>
+        </div>
+        <div class="block-wrapper">
+          <div class="block block-categories">
+            <h6>Thể loại</h6>
+            <ul class="menu">
+              <li class="menu-item menu-item-literature">Sách Văn học</li>
+              <li class="menu-item menu-item-children">Sách thiếu nhi</li>
+              <li class="menu-item menu-item-textbook">Sách giáo khoa</li>
+              <li class="menu-item menu-item-foreign-language-book">Sách Ngoại ngữ</li>
+            </ul>
+          </div>
+          <div class="block block-cart">
+          <span class="cart">
+            <i class="icon-cart"></i>
+          </span>
+          </div>
+          <div class="block block-user">
+            <span class="icon-user"></span>
+            <ul class="menu">
+              <li class="menu-item menu-item-user-login">
+                <button id="btn-login" class="login">Đăng nhập</button>
+              </li>
+              <li class="menu-item menu-item-user-register">
+                <button id="btn-register" class="register">Đăng kí</button>
+              </li>
+              <li class="menu-item menu-item-user-logout" style="display: none">
+                <button id="btn-logout" class="btn-logout">Đăng xuất</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="main-content">
+    <div class="container">
+      <section id="literature-product-list" class="section section-product-list">
+        <div class="header-content">Sách văn học</div>
+        <div class="view-content-wrapper"></div>
+      </section>
+
+      <section id="children-book-product-list" class="section section-product-list">
+        <div class="header-content">Sách thiếu nhi</div>
+        <div class="view-content-wrapper"></div>
+      </section>
+
+      <section id="textbook-product-list" class="section section-product-list">
+        <div class="header-content">Sách giáo khoa</div>
+        <div class="view-content-wrapper"></div>
+      </section>
+
+      <section id="foreign-language-book-product-list" class="section section-product-list">
+        <div class="header-content">Sách ngoại ngữ</div>
+        <div class="view-content-wrapper"></div>
+      </section>
+
+      <section class="section-list-users">
+        <div class="header-content">Danh Sách Users</div>
+        <table id="table-list-users">
+        </table>
+      </section>
+    </div>
+  </main>
+  <footer class="footer">
+
+  </footer>
+
+  <div class="pop-up-form-register">
+    <form action="" method="POST" class="form form-register" id="form-register">
+      <h3 class="heading">Đăng ký</h3>
+      <div class="spacer"></div>
+
+      <div class="form-group">
+        <label for="fullname" class="form-label">Họ và tên</label>
+        <input id="fullname" name="fullname" type="text" placeholder="VD: Lâm Tài" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="username" class="form-label">Tên đăng nhập</label>
+        <input id="username" name="username" type="text" placeholder="VD: user123" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="phone-number" class="form-label">Số điện thoại</label>
+        <input id="phone-number" name="phone-number" type="text" placeholder="VD: 0937695210" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Mật khẩu</label>
+        <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+        <span class="icon-show-password"></span>
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+        <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" type="password"
+               class="form-control">
+        <span class="icon-show-password"></span>
+        <span class="form-message"></span>
+      </div>
+
+      <button class="form-submit">Đăng ký</button>
+    </form>
+  </div>
+
+  <div class="pop-up-form-login">
+    <form action="" method="POST" class="form form-login" id="form-login">
+      <h3 class="heading">Đăng nhập</h3>
+      <div class="spacer"></div>
+
+      <div class="form-group">
+        <label for="username-login" class="form-label">Tên đăng nhập</label>
+        <input id="username-login" name="username" type="text" placeholder="VD: Lâm Tài" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password-login" class="form-label">Mật khẩu</label>
+        <input id="password-login" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+        <span class="icon-show-password"></span>
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-content">
+        <p>Bạn chưa có tài khoản?<a href="#" id="btn-register-form-action"> Đăng ký ngay</a></p>
+      </div>
+
+      <button class="form-submit">Đăng nhập</button>
+    </form>
+  </div>
+</div>
+</body>
+<script src="./js/init.js"></script>
+<script src="./js/main.js"></script>
+<script src="./js/validateFormRegister.js"></script>
+<script src="./js/login.js"></script>
+</html>
