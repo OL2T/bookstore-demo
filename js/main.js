@@ -82,7 +82,7 @@ function renderProductList() {
 	 const renderMarkup = productDiv.innerHTML = `
 	 <div class="view-row-content">
 		<div class="view-field-image">
-			<a href="#"><img src="${productArray.img}" alt="${productArray.name}"></a>
+			<a href="#"><img src="${productArray.img}" alt="${productArray.name}" style="object-fit: contain;"></a>
 			<div class="product-buttons">
 				<div class="action quick-view">
 				  <span class="tool-tip">Xem nhanh</span>
