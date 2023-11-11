@@ -80,8 +80,8 @@ function renderProductList() {
 	 productDiv.classList.add('views-row');
 
 	 const renderMarkup = productDiv.innerHTML = `
-	 <div class="view-row-content">
-		<div class="view-field-image">
+	 <div class="view-row-content" style="height: 100%;">
+		<div class="view-field-image" style="height: 300px;">
 			<a href="#"><img src="${productArray.img}" alt="${productArray.name}" style="object-fit: contain;"></a>
 			<div class="product-buttons">
 				<div class="action quick-view">
@@ -94,7 +94,7 @@ function renderProductList() {
 				</div>
   			</div>
 		</div>
-		<div class="content-wrapper">
+		<div class="content-wrapper" style="height: calc(100% - 300px);">
 		  <div class="view-field-category"><span>${productArray.categories}</span></div>
 		  <div class="view-field-title"><a href="#">${productArray.name}</a></div>
 		  <div class="view-field-author"><span>Tác giả: </span><span class="author-title">${productArray.author}</span></div>
