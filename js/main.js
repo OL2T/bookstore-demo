@@ -6,8 +6,12 @@ function main() {
   const pop_up_login = document.querySelector(".pop-up-form-login");
   const popup_success = document.getElementById('notification');
   const btn_login_popup = popup_success.querySelector('.btn-login');
-  const body = document.getElementById('body');
+  const body = document.querySelector('body');
+  const btnLogout = document.getElementById('btn-logout')
+  let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
+  const header = document.querySelector('.header');
 
+  body.style.paddingTop = header.offsetHeight + 'px';
 
   btn_register.addEventListener("click", function () {
 	 pop_up.classList.add('is-active');
@@ -27,8 +31,8 @@ function main() {
   if (btn_login) {
 	 btn_login.addEventListener('click', function () {
 		pop_up_login.classList.add('is-active');
-		body.classList.add('no-scrollable');
 		overlay.classList.add('is-active');
+		body.classList.add('no-scrollable');
 	 });
   }
 
@@ -36,8 +40,8 @@ function main() {
 	 if (e.target.id === 'overlay') {
 		pop_up.classList.remove('is-active');
 		overlay.classList.remove('is-active');
-		body.classList.remove('no-scrollable');
 		pop_up_login.classList.remove('is-active');
+		body.classList.remove('no-scrollable');
 	 }
   }
 
@@ -58,68 +62,75 @@ function main() {
 	 })
   })
 
-  document.getElementById('btn-logout').addEventListener('click', function (e) {
+  if (JSON.parse(localStorage.getItem('isLoggedIn'))) {
+	 document.querySelector('body').classList.add('user-logged-in');
+	 document.getElementById('btn-login').parentElement.style.display = 'none';
+	 document.getElementById('btn-register').parentElement.style.display = 'none';
+	 btnLogout.parentElement.style.display = 'block';
+	 overlay.classList.remove('is-active');
+	 pop_up_login.classList.remove('is-active');
+  }
+
+  btnLogout.addEventListener('click', function (e) {
 	 e.preventDefault();
 	 logout();
   });
+
 }
 
-function renderProductList() {
-  let storedProducts = localStorage.getItem('List-products') ? JSON.parse(localStorage.getItem('List-products')) : [];
-  const literatureProductList = document.getElementById('literature-product-list').querySelector('.view-content-wrapper');
-  const childrenBookProductList = document.getElementById('children-book-product-list').querySelector('.view-content-wrapper');
-  const textbookProductList = document.getElementById('textbook-product-list').querySelector('.view-content-wrapper');
-  const foreignLanguageBookProductList = document.getElementById('foreign-language-book-product-list').querySelector('.view-content-wrapper');
-  const formatVND = new Intl.NumberFormat('vi-VN', {
-	 style: 'currency',
-	 currency: 'VND',
-  })
 
-  storedProducts.forEach(productArray => {
-	 const productDiv = document.createElement('div');
-	 productDiv.classList.add('views-row');
+function createAdmin() {
+  let user = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
 
-	 const renderMarkup = productDiv.innerHTML = `
-	 <div class="view-row-content">
-		<div class="view-field-image">
-			<a href="#"><img src="${productArray.img}" alt="${productArray.name}" style="object-fit: contain;"></a>
-			<div class="product-buttons">
-				<div class="action quick-view">
-				  <span class="tool-tip">Xem nhanh</span>
-				  <a href="" class="btn-quick-view"></a>
-				</div>
-				<div class="action add-to-cart">
-				  <span class="tool-tip">Thêm vào giỏ hàng</span>
-				  <a href="" class="btn-add-to-cart"></a>
-				</div>
-  			</div>
-		</div>
-		<div class="content-wrapper">
-		  <div class="view-field-category"><span>${productArray.categories}</span></div>
-		  <div class="view-field-title"><a href="#">${productArray.name}</a></div>
-		  <div class="view-field-author"><span>Tác giả: </span><span class="author-title">${productArray.author}</span></div>
-		  <div class="view-field-price"><p>${formatVND.format(productArray.price)}</p></div>
-		</div>
-    </div>`;
+  const admin = {
+	 userID: 1000,
+	 fullName: 'Lâm Tấn Tài',
+	 username: 'admin1',
+	 email: 'lamtantai200@gmail.com',
+	 phone: '0981210174',
+	 password: 'admin1',
+	 role: 'admin'
+  }
 
-	 if (productArray.categories === 'Văn học') {
-		literatureProductList.appendChild(productDiv);
-	 } else if (productArray.categories === 'Thiếu nhi') {
-		childrenBookProductList.appendChild(productDiv);
-	 } else if (productArray.categories === 'Sách giáo khoa') {
-		textbookProductList.appendChild(productDiv);
-	 } else if (productArray.categories === 'Sách ngoại ngữ') {
-		foreignLanguageBookProductList.appendChild(productDiv);
+  // user.push(admin);
+  // console.log(admin)
+  // console.log(user)
+  if (user == '') {
+	 user.push(admin)
+	 // console.log('them thanh cong')
+  }
+  let json = JSON.stringify(user);
+  localStorage.setItem('List-users', json);
+  // console.log(user)
+  for (let i = 0; i < user.length; i++) {
+	 // console.log(user)
+	 if (user[i].username === user[i].username) {
+		// console.log('tai khoan da ton tai')
 	 }
-  });
+  }
+
 }
 
+window.addEventListener('scroll', function () {
+  const body = document.querySelector('body');
+  const header = document.querySelector('.header');
+  if (window.scrollY > header.offsetHeight) {
+	 header.classList.add('fixed')
+  } else {
+	 header.classList.remove('fixed')
+  }
+})
 
 window.onload = function () {
-  main();
   createProduct();
+  createAdmin();
   renderProductList();
+  calculatorQuantity()
+  // indexLoadPage();
   validateRegisterForm();
   renderListUser();
   login();
+  main();
+  checkLogin();
+  renderProductToCart()
 }

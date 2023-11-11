@@ -1,5 +1,5 @@
 function createProduct() {
-  if(localStorage.getItem('product')===null){
+  if(localStorage.getItem('List-products')===null){
 	 let productArray = [
 		{productId:10000, categories:'Văn học',  author:'Nguyễn Hồng', publishingHouse:'NXB Văn Học',  img:'images/sachvanhoc/BiVo_NguyenHong.jpg', name:'Bỉ Vỏ', price:349000},
 		{productId:10001, categories:'Văn học',  author:'Phan Đức Lộc', publishingHouse:'NXB Văn Học',  img:'images/sachvanhoc/ToiSeBay.jpg', name:'Tôi Sẽ Bay', price:290000},

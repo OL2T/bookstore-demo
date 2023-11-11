@@ -1,9 +1,10 @@
 function login() {
-  let isLogin = false;
   let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
   let form = document.getElementById('form-login');
   const overlay = document.getElementById('overlay');
   const pop_up_login = document.querySelector(".pop-up-form-login");
+  const body = document.getElementById('body');
+  const blockUser = document.querySelector('.block-user .icon-user');
 
   function showMessageError(input, message) {
 	 let parent = input.parentElement;
@@ -21,92 +22,84 @@ function login() {
 	 form_message.innerText = '';
   }
 
-  function checkEmpty(listInput) {
-	 let isEmptyError = false;
-	 listInput.forEach(input => {
-		input.value = input.value.trim();
-		if (!input.value) {
-		  isEmptyError = true;
-		  showMessageError(input, 'Vui lòng nhập vào ô này')
-		} else {
-		  showSuccess(input);
-		}
-	 });
-	 return isEmptyError;
-  }
-
-  function checkMathInputError(usernameDataInput, passwordDataInput) {
-	 return false
-  }
-
-
   form.addEventListener('submit', function (e) {
 	 e.preventDefault();
+	 let isLogin = false;
 
 	 let usernameDataInput = document.getElementById('username-login');
 	 let passwordDataInput = document.getElementById('password-login');
-
-	 // let isCheckEmptyError = checkEmpty([usernameDataInput, passwordDataInput]);
-	 // let isCheckMatchData = checkMathInputError(usernameDataInput, passwordDataInput);
-	 //
-	 // if (isCheckEmptyError || isCheckMatchData) {
-	 // console.log('Còn lỗi đăng nhập')
-	 // } 
-	 // else {
-	 // // console.log('Dang nhap thanh cong 2222222222')
-	 //
-	 // }
 
 	 for (let i = 0; i < listUsers.length; i++) {
 
 		if (listUsers[i].username === usernameDataInput.value) {
 		  showSuccess(usernameDataInput);
 		} else {
-		  showMessageError(usernameDataInput, 'Ten dang nhap khong trung khop')
+		  showMessageError(usernameDataInput, 'Tên đăng nhập không trùng khớp')
 		}
 
 		if (listUsers[i].password === passwordDataInput.value) {
 		  showSuccess(passwordDataInput);
 		} else {
-		  showMessageError(passwordDataInput, 'Mat khau khong trung khop')
+		  showMessageError(passwordDataInput, 'Mật khẩu không trùng khớp');
 		}
 
 		if (listUsers[i].username === usernameDataInput.value && listUsers[i].password === passwordDataInput.value) {
 		  isLogin = true;
-		  console.log('Dang nhap thanh cong');
-		  break;
+		  // console.log('UserID:', listUsers[i].userID);
+		  localStorage.setItem('loggedInUsername', listUsers[i].fullName);
+		  checkLogin();
+
+		} else {
+		  console.log('dang nhap that bai')
 		}
 	 }
+	 // console.log(isLogin)
 	 if (isLogin) {
-		// window.location.href = 'index.html';
+		form.reset();
 		localStorage.setItem('isLoggedIn', 'true');
+		body.classList.remove('no-scrollable');
+
+		const btnLogout = document.getElementById('btn-logout')
 		document.querySelector('body').classList.add('user-logged-in');
 		document.getElementById('btn-login').parentElement.style.display = 'none';
 		document.getElementById('btn-register').parentElement.style.display = 'none';
-		document.getElementById('btn-logout').parentElement.style.display = 'block';
+		btnLogout.parentElement.style.display = 'block';
 		overlay.classList.remove('is-active');
 		pop_up_login.classList.remove('is-active');
+
+	 } else {
+		blockUser.innerText = '';
 	 }
-	 // else {
-	 // alert('Đăng nhập thất bại');
-	 // showMessageError(usernameDataInput, 'Ten dang nhap khong trung khop')
-	 // showMessageError(passwordDataInput, 'Mat khau khong trung khop')
-	 // }
   })
 }
 
+function checkLogin(){
+  const loggedInUsername = localStorage.getItem('loggedInUsername');
+  const blockUser = document.querySelector('.block-user .icon-user');
+
+  if (loggedInUsername) {
+	 // Người dùng đã đăng nhập, bạn có thể sử dụng `loggedInUsername` để biết người dùng là ai.
+	 console.log('Người đã đăng nhập:', loggedInUsername);
+	 // Hiển thị tên đăng nhập hoặc thông tin người dùng trên giao diện.
+	 blockUser.innerText = loggedInUsername;
+  } else {
+	 // Người dùng chưa đăng nhập.
+	 console.log('Chưa có người dùng đăng nhập.');
+  }
+}
+
 function logout() {
-  // const btnLogout = document.getElementById('btn-logout');
-  //
-  // btnLogout.addEventListener('click', function (e) {
-  //  // e.preventDefault();
-  //  localStorage.removeItem('isLoggedIn');
-  //  document.querySelector('body').classList.remove('user-logged-in');
-  //
-  // })
+  let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
+  const blockUser = document.querySelector('.block-user .icon-user');
+
   localStorage.setItem('isLoggedIn', 'false');
   document.querySelector('body').classList.remove('user-logged-in');
   document.getElementById('btn-login').parentElement.style.display = 'block';
   document.getElementById('btn-register').parentElement.style.display = 'block';
   document.getElementById('btn-logout').parentElement.style.display = 'none';
+
+  for (let i = 0; i < listUsers.length; i++) {
+	 blockUser.innerText = '';
+	 localStorage.setItem('loggedInUsername', '');
+  }
 }

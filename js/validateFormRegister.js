@@ -51,6 +51,7 @@ function validateRegisterForm() {
 	 showSuccess(input)
 	 return false
   }
+
   function checkFullName(input, min, max) {
 	 // Trim the input to remove leading and trailing spaces
 	 input.value = input.value.trim();
@@ -195,22 +196,27 @@ function validateRegisterForm() {
 		let emailData = email.value;
 		let phoneData = phone.value;
 		let passwordData = password.value;
+		let role = 'Khách hàng'
+		let maxUserId = 1000;
+
+		for (const userData of user) {
+		  if (userData.userID > maxUserId) {
+			 maxUserId = userData.userID;
+		  }
+		}
+
+		// Tăng giá trị maxUserId lên 1 để tạo userID mới
+		let userId = maxUserId + 1;
 
 		user.push({
+		  userID: userId,
 		  fullName: fullNameData,
 		  username: usernameData,
 		  email: emailData,
 		  phone: phoneData,
 		  password: passwordData,
+		  role: role,
 		});
-
-		// user.push({
-		//   username: username.value,
-		//   email: email.value,
-		//   phone: phone.value,
-		//   password: password.value,
-		// });
-
 
 		let json = JSON.stringify(user);
 		localStorage.setItem('List-users', json);
@@ -218,6 +224,7 @@ function validateRegisterForm() {
 		accessibility();
 		form.reset();
 		login();
+		// createAdmin()
 		// logout();
 	 }
   })
@@ -234,6 +241,7 @@ function renderListUser() {
 			 <th>Email</th>
 			 <th>Số điện thoại</th>
 			 <th>Mật khẩu</th>
+			 <th>Quyền</th>
 			 <th></th>
 		  </tr>
      </thead>`
@@ -241,14 +249,15 @@ function renderListUser() {
   listUsers.map((value, index) => {
 	 users +=
 		`<tbody>
-		  <tr>
-			 <td>${index + 1}</td>
+		  <tr> 
+			 <td>${value.userID}</td>
 			 <td>${value.fullName}</td>
 			 <td>${value.username}</td>
 			 <td>${value.email}</td>
 			 <td>${value.phone}</td>
 			 <td>${value.password}</td>
-			 <td>
+			 <td>${value.role}</td>
+			 <td class="btn-action">
 			 <button>Edit</button>
 			 <button>Delete</button>
 			</td>

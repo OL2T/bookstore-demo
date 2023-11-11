@@ -1,0 +1,9 @@
+body {
+  &.path-cart {
+    .main-content .container {
+      > .section:not(.section-product-in-cart) {
+        display: none;
+      }
+    }
+  }
+}

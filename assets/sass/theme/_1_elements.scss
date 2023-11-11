@@ -88,7 +88,7 @@ input {
   outline: none;
 }
 
-button {
+button:not(.btn-action,.btn-quantity) {
   @include button();
 }
 
@@ -114,6 +114,10 @@ table {
         vertical-align: middle;
         padding: 15px;
         border: 1px solid #ddd;
+
+        &.btn-action {
+          white-space: nowrap;
+        }
       }
     }
   }
