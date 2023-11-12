@@ -153,11 +153,13 @@ function renderProductItems(products, wrapDiv) {
 				<div class="product-buttons">
 					<div class="action quick-view">
 					<span class="tool-tip">Xem nhanh</span>
-					<a href="" class="btn-quick-view"></a>
+					<button class="btn-action btn-quick-view"></button>
 					</div>
 					<div class="action add-to-cart">
 					<span class="tool-tip">Thêm vào giỏ hàng</span>
-					<a href="" class="btn-add-to-cart"></a>
+					<button class="btn-action btn-add-to-cart" onclick="addTocCart(${
+					productArray.productId
+					})"></button>
 					</div>
 				</div>
 			</div>
@@ -439,7 +441,18 @@ window.addEventListener('scroll', function () {
 window.onload = function () {
   createProduct();
   createAdmin();
-  renderProductList();
+//   renderProductList();
+  const urlPath = location.href;
+	const splitPath = urlPath.split('/');
+	if (splitPath[splitPath.length - 1] === 'index.html') {
+		renderProductList();
+	} else {
+		const urlParams = new URLSearchParams(window.location.search);
+		const type = urlParams.get('type');
+		if (type) {
+			renderProductByType(type, 1);
+		}
+	}
   calculatorQuantity()
   // indexLoadPage();
   validateRegisterForm();

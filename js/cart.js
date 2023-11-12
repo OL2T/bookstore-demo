@@ -1,67 +1,67 @@
-function renderProductList() {
-  let storedProducts = localStorage.getItem("List-products")
-	 ? JSON.parse(localStorage.getItem("List-products"))
-	 : [];
-  const literatureProductList = document
-	 .getElementById("literature-product-list")
-	 .querySelector(".view-content-wrapper");
-  const childrenBookProductList = document
-	 .getElementById("children-book-product-list")
-	 .querySelector(".view-content-wrapper");
-  const textbookProductList = document
-	 .getElementById("textbook-product-list")
-	 .querySelector(".view-content-wrapper");
-  const foreignLanguageBookProductList = document
-	 .getElementById("foreign-language-book-product-list")
-	 .querySelector(".view-content-wrapper");
-  const formatVND = new Intl.NumberFormat("vi-VN", {
-	 style: "currency",
-	 currency: "VND",
-  });
+// function renderProductList() {
+//   let storedProducts = localStorage.getItem("List-products")
+// 	 ? JSON.parse(localStorage.getItem("List-products"))
+// 	 : [];
+//   const literatureProductList = document
+// 	 .getElementById("literature-product-list")
+// 	 .querySelector(".view-content-wrapper");
+//   const childrenBookProductList = document
+// 	 .getElementById("children-book-product-list")
+// 	 .querySelector(".view-content-wrapper");
+//   const textbookProductList = document
+// 	 .getElementById("textbook-product-list")
+// 	 .querySelector(".view-content-wrapper");
+//   const foreignLanguageBookProductList = document
+// 	 .getElementById("foreign-language-book-product-list")
+// 	 .querySelector(".view-content-wrapper");
+//   const formatVND = new Intl.NumberFormat("vi-VN", {
+// 	 style: "currency",
+// 	 currency: "VND",
+//   });
 
-  storedProducts.forEach((productArray) => {
-	 const productDiv = document.createElement("div");
-	 productDiv.classList.add("views-row");
-	 const renderMarkup = (productDiv.innerHTML = `
-	 <div class="view-row-content">
-		<div class="view-field-image">
-			<a href="#"><img src="${productArray.img}" alt="${productArray.name}"></a>
-			<div class="product-buttons">
-				<div class="action quick-view">
-				  <span class="tool-tip">Xem nhanh</span>
-				  <button class="btn-action btn-quick-view"></button>
-				</div>
-				<div class="action add-to-cart">
-				  <span class="tool-tip">Thêm vào giỏ hàng</span>
-				  <button class="btn-action btn-add-to-cart" onclick="addTocCart(${
-		productArray.productId
-	 })"></button>
-				</div>
-  			</div>
-		</div>
-		<div class="content-wrapper">
-		  <div class="view-field-category"><span>${productArray.categories}</span></div>
-		  <div class="view-field-title"><a href="#">${productArray.name}</a></div>
-		  <div class="view-field-author"><span>Tác giả: </span><span class="author-title">${
-		productArray.author
-	 }</span></div>
-		  <div class="view-field-price"><p>${formatVND.format(
-		productArray.price
-	 )}</p></div>
-		</div>
-    </div>`);
+//   storedProducts.forEach((productArray) => {
+// 	 const productDiv = document.createElement("div");
+// 	 productDiv.classList.add("views-row");
+// 	 const renderMarkup = (productDiv.innerHTML = `
+// 	 <div class="view-row-content">
+// 		<div class="view-field-image">
+// 			<a href="#"><img src="${productArray.img}" alt="${productArray.name}"></a>
+// 			<div class="product-buttons">
+// 				<div class="action quick-view">
+// 				  <span class="tool-tip">Xem nhanh</span>
+// 				  <button class="btn-action btn-quick-view"></button>
+// 				</div>
+// 				<div class="action add-to-cart">
+// 				  <span class="tool-tip">Thêm vào giỏ hàng</span>
+// 				  <button class="btn-action btn-add-to-cart" onclick="addTocCart(${
+// 		productArray.productId
+// 	 })"></button>
+// 				</div>
+//   			</div>
+// 		</div>
+// 		<div class="content-wrapper">
+// 		  <div class="view-field-category"><span>${productArray.categories}</span></div>
+// 		  <div class="view-field-title"><a href="#">${productArray.name}</a></div>
+// 		  <div class="view-field-author"><span>Tác giả: </span><span class="author-title">${
+// 		productArray.author
+// 	 }</span></div>
+// 		  <div class="view-field-price"><p>${formatVND.format(
+// 		productArray.price
+// 	 )}</p></div>
+// 		</div>
+//     </div>`);
 
-	 if (productArray.categories === "Văn học") {
-		literatureProductList.appendChild(productDiv);
-	 } else if (productArray.categories === "Thiếu nhi") {
-		childrenBookProductList.appendChild(productDiv);
-	 } else if (productArray.categories === "Sách giáo khoa") {
-		textbookProductList.appendChild(productDiv);
-	 } else if (productArray.categories === "Sách ngoại ngữ") {
-		foreignLanguageBookProductList.appendChild(productDiv);
-	 }
-  });
-}
+// 	 if (productArray.categories === "Văn học") {
+// 		literatureProductList.appendChild(productDiv);
+// 	 } else if (productArray.categories === "Thiếu nhi") {
+// 		childrenBookProductList.appendChild(productDiv);
+// 	 } else if (productArray.categories === "Sách giáo khoa") {
+// 		textbookProductList.appendChild(productDiv);
+// 	 } else if (productArray.categories === "Sách ngoại ngữ") {
+// 		foreignLanguageBookProductList.appendChild(productDiv);
+// 	 }
+//   });
+// }
 
 // function saveToCartLocalStorage() {
 //   localStorage.setItem('Carts', JSON.stringify(productInCart));

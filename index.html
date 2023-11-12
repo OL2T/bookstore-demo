@@ -52,10 +52,10 @@
               <div class="block-categories">
                 <h6>Thể loại</h6>
                 <ul class="menu">
-                  <li class="menu-item menu-item-literature">Sách Văn học</li>
-                  <li class="menu-item menu-item-children">Sách thiếu nhi</li>
-                  <li class="menu-item menu-item-textbook">Sách giáo khoa</li>
-                  <li class="menu-item menu-item-foreign-language-book">
+                  <li class="menu-item menu-item-literature" onclick="changeCategory('literature')">Sách Văn học</li>
+                  <li class="menu-item menu-item-children" onclick="changeCategory('children-book')">Sách thiếu nhi</li>
+                  <li class="menu-item menu-item-textbook" onclick="changeCategory('textbook')">Sách giáo khoa</li>
+                  <li class="menu-item menu-item-foreign-language-book" onclick="changeCategory('foreign-language-book')">
                     Sách Ngoại ngữ
                   </li>
                 </ul>
@@ -91,13 +91,13 @@
       <main class="main-content">
         <div id="main-content" class="container">
     
-          <section class="section section-list-users">
+          <section class="section section-list-users" style="margin-bottom: 20px;">
             <div class="header-content">Danh Sách Users</div>
             <table id="table-list-users"></table>
           </section>
         </div>
       </main>
-      <footer class="footer"></footer>
+      <!-- <footer class="footer"></footer> -->
 
       <div class="pop-up-form-register">
         <form
