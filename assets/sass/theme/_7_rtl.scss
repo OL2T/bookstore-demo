@@ -1,0 +1,33 @@
+#left {
+    width: 25%;
+    float: left;
+    display: flex;
+    border: 2px solid black;
+    border-radius: 10px;
+  }
+  
+  #right {
+    width: 75%;
+    float: right;
+    display: flex;
+    border: 2px solid black;
+    border-radius: 10px;
+  }
+  
+  #accordion .filter {
+    padding: 8px 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  
+  #accordion .catePrice label {
+    display: block;
+    font-size: 15px;
+    margin: 8px 0 8px 30px;
+  }
+  
+  
+  .filterByCategory {}
+  
+  .filterByPrice {}
