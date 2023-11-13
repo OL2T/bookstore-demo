@@ -1,0 +1,67 @@
+#left {
+  width: 20%;
+  float: left;
+  display: flex;
+}
+
+#right {
+  width: 75%;
+  float: right;
+  /* display: flex; */
+}
+
+#accordion {
+  width: 100%;
+}
+
+#accordion .filter {
+  padding: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 15px;
+  background-color:#b3b3b3 ;
+}
+
+#accordion .catePrice {
+  padding: 5px 15px;
+}
+
+#accordion .catePrice .filter-item  {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+#accordion .catePrice label {
+  font-size: 15px;
+}
+
+#accordion .catePrice input {
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+
+}
+
+.pagination {
+  display: block;
+  width: 80%;
+  margin: 20px auto;
+
+}
+
+.pagination .pagination-button {
+  margin: 0 5px;
+  background-color: white;
+  color: #121823;
+  font-size:13px;
+  border-color: #121823;
+  padding: 5px 15px;
+}
+.pagination .pagination-button:hover {
+  background-color: #121823;
+  color: white;
+}
+.pagination .pagination-button.active {
+  background-color: #121823;
+  color: white;
+}

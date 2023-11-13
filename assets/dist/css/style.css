@@ -1024,6 +1024,9 @@ img {
   }
 }
 .section .view-content-wrapper .view-row-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
 }
 .section .view-content-wrapper .view-row-content:hover {
@@ -1039,7 +1042,7 @@ img {
   opacity: 1;
   visibility: visible;
 }
-.section .view-content-wrapper .view-row-content:hover .product-buttons .action a {
+.section .view-content-wrapper .view-row-content:hover .product-buttons .action button {
   transform: translateY(0);
 }
 .section .view-content-wrapper .view-field-image {
@@ -1065,6 +1068,7 @@ img {
   border-bottom-right-radius: 10px;
   aspect-ratio: 1;
   box-shadow: 9px 10px 5px 0 rgba(92, 92, 92, 0.2);
+  object-fit: contain;
 }
 .section .view-content-wrapper .view-field-image .product-buttons {
   display: flex;
@@ -1146,6 +1150,9 @@ img {
   transition: transform 0.6s, background-color 0.3s;
 }
 .section .view-content-wrapper .content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   background-color: #fff;
   border-bottom-left-radius: 10px;
@@ -1177,6 +1184,9 @@ img {
 .section .view-content-wrapper .view-field-author .author-title {
   font-weight: 600;
   color: #1d2530;
+}
+.section .view-content-wrapper .view-field-price {
+  margin-top: auto;
 }
 .section .view-content-wrapper .view-field-price p {
   font-size: 18px;
@@ -1287,6 +1297,42 @@ img {
   min-width: 80%;
   font-weight: 600;
 }
+.section-product-in-cart .view-field-quantity-inner .quantity {
+  position: relative;
+}
+.section-product-in-cart .view-field-quantity-inner .tool-tip {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  white-space: nowrap;
+  background-color: #1d2530;
+  font-size: 12px;
+  padding: 0 11px;
+  color: #fff;
+  border-radius: 2px;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+.section-product-in-cart .view-field-quantity-inner .tool-tip.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+.section-product-in-cart .view-field-quantity-inner .tool-tip:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  margin-left: -4px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #1d2530;
+}
 .section-product-in-cart .btn-quantity {
   border: none;
   outline: none;
@@ -1309,6 +1355,39 @@ img {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
+.section-product-in-cart .footer-product {
+  position: sticky;
+  z-index: 5;
+  bottom: 0;
+  box-shadow: 0px -10px 20px 5px rgba(150, 150, 150, 0.24);
+  margin-top: 24px;
+}
+.section-product-in-cart .footer-product:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.06));
+}
+.section-product-in-cart .footer-product-inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 32px;
+  padding: 15px 40px;
+  background-color: #fff;
+  border-top: 1px dotted #ddd;
+}
+.section-product-in-cart .total-price {
+  font-size: 20px;
+  line-height: 28px;
+  color: #121212;
+  font-weight: 700;
+}
+.section-product-in-cart .total-price > span {
+  font-weight: 600;
+  color: #F18E7D;
+}
 
 .footer {
   padding: 100px;
@@ -1318,9 +1397,6 @@ img {
 body.path-cart .main-content .container > .section:not(.section-product-in-cart) {
   display: none;
 }
-
-/*# sourceMappingURL=style.css.map */
-
 
 #left {
   width: 20%;
@@ -1343,18 +1419,19 @@ body.path-cart .main-content .container > .section:not(.section-product-in-cart)
   text-transform: uppercase;
   font-weight: bold;
   font-size: 15px;
-  background-color:#b3b3b3 ;
+  background-color: #b3b3b3;
 }
 
 #accordion .catePrice {
   padding: 5px 15px;
 }
 
-#accordion .catePrice .filter-item  {
+#accordion .catePrice .filter-item {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
+
 #accordion .catePrice label {
   font-size: 15px;
 }
@@ -1363,29 +1440,31 @@ body.path-cart .main-content .container > .section:not(.section-product-in-cart)
   margin-right: 10px;
   width: 16px;
   height: 16px;
-
 }
 
 .pagination {
   display: block;
   width: 80%;
   margin: 20px auto;
-  
 }
 
 .pagination .pagination-button {
   margin: 0 5px;
   background-color: white;
   color: #121823;
-  font-size:13px;
+  font-size: 13px;
   border-color: #121823;
   padding: 5px 15px;
 }
+
 .pagination .pagination-button:hover {
   background-color: #121823;
   color: white;
 }
+
 .pagination .pagination-button.active {
   background-color: #121823;
   color: white;
 }
+
+/*# sourceMappingURL=style.css.map */

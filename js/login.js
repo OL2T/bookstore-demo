@@ -3,7 +3,7 @@ function login() {
   let form = document.getElementById('form-login');
   const overlay = document.getElementById('overlay');
   const pop_up_login = document.querySelector(".pop-up-form-login");
-  const body = document.getElementById('body');
+  const body = document.querySelector('body');
   const blockUser = document.querySelector('.block-user .icon-user');
 
   function showMessageError(input, message) {
@@ -73,7 +73,7 @@ function login() {
   })
 }
 
-function checkLogin(){
+function checkLogin() {
   const loggedInUsername = localStorage.getItem('loggedInUsername');
   const blockUser = document.querySelector('.block-user .icon-user');
 
@@ -90,6 +90,7 @@ function checkLogin(){
 
 function logout() {
   let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
+  let productInCart = localStorage.getItem("Carts") ? JSON.parse(localStorage.getItem("Carts")) : [];
   const blockUser = document.querySelector('.block-user .icon-user');
 
   localStorage.setItem('isLoggedIn', 'false');
@@ -102,4 +103,10 @@ function logout() {
 	 blockUser.innerText = '';
 	 localStorage.setItem('loggedInUsername', '');
   }
+
+  productInCart = [];
+
+  localStorage.setItem('Carts', JSON.stringify(productInCart));
+  calculatorQuantity()
+  renderProductToCart()
 }
