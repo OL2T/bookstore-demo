@@ -1443,6 +1443,7 @@ body.path-cart .main-content .container > .section:not(.section-product-in-cart)
 }
 
 .pagination {
+  clear:both;
   display: block;
   width: 80%;
   margin: 20px auto;
