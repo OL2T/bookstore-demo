@@ -64,6 +64,9 @@ function login() {
 		document.getElementById('btn-login').parentElement.style.display = 'none';
 		document.getElementById('btn-register').parentElement.style.display = 'none';
 		btnLogout.parentElement.style.display = 'block';
+		document.querySelector('.block-navigation-mobile .btn-login').parentElement.style.display = 'none';
+		document.querySelector('.block-navigation-mobile .btn-register').parentElement.style.display = 'none';
+		document.querySelector('.block-navigation-mobile .btn-logout').parentElement.style.display = 'block';
 		overlay.classList.remove('is-active');
 		pop_up_login.classList.remove('is-active');
 
@@ -76,6 +79,7 @@ function login() {
 function checkLogin() {
   const loggedInUsername = localStorage.getItem('loggedInUsername');
   const blockUser = document.querySelector('.block-user .icon-user');
+  // const blockMobile = document.querySelector('.block-navigation-mobile')
 
   if (loggedInUsername) {
 	 // Người dùng đã đăng nhập, bạn có thể sử dụng `loggedInUsername` để biết người dùng là ai.
@@ -98,6 +102,10 @@ function logout() {
   document.getElementById('btn-login').parentElement.style.display = 'block';
   document.getElementById('btn-register').parentElement.style.display = 'block';
   document.getElementById('btn-logout').parentElement.style.display = 'none';
+
+  document.querySelector('.block-navigation-mobile .btn-login').parentElement.style.display = 'block';
+  document.querySelector('.block-navigation-mobile .btn-register').parentElement.style.display = 'block';
+  document.querySelector('.block-navigation-mobile .btn-logout').parentElement.style.display = 'none';
 
   for (let i = 0; i < listUsers.length; i++) {
 	 blockUser.innerText = '';

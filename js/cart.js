@@ -1,8 +1,6 @@
 const overlay = document.getElementById('overlay');
 const pop_up_login = document.querySelector(".pop-up-form-login");
-let productInCart = localStorage.getItem("Carts")
-  ? JSON.parse(localStorage.getItem("Carts"))
-  : [];
+let productInCart = localStorage.getItem("Carts") ? JSON.parse(localStorage.getItem("Carts")) : [];
 
 function saveToCartLocalStorage() {
   localStorage.setItem('Carts', JSON.stringify(productInCart));
@@ -67,22 +65,20 @@ function renderProductToCart() {
   productInCart.map((productArray, index) => {
 	 data += `
 	 	<div class="views-row">
-		<div class="view-row-content">
-		  <div class="view-field-inner">
-			  <div class="view-field-image"><img src="${productArray.img}" alt="${productArray.name}"></div>
-			  <div class="product-group">
-				  <div class="view-field-category">${productArray.categories}</div>
-				  <div class="view-field-title"><a href="#">${productArray.name}</a></div>
-			  </div>
-		  </div>
-		  <div class="view-field view-field-price">${formatVND.format(productArray.price)}</div>		
-		  <div class="view-field view-field-quantity">
-			  <div class="view-field-quantity-inner"><button class="btn-quantity btn-quantity-minus" onclick="minusQuantity(${index},${productArray.quantity})"></button><span class="quantity">${productArray.quantity} <span class="tool-tip">Số lượng sản phẩm không được nhỏ hơn 1</span> </span><button class="btn-quantity btn-quantity-plus" onclick="plusQuantity(${index})"></button></div>
-		  </div>
-		  <div class="view-field view-field-sub-total">${formatVND.format(productArray.price * productArray.quantity)}</div>
-		  <div class="view-field view-field-btn-product-action"><button onclick="deleteProductInCart(${index})">Xoá</button></div>
-		</div>
-	</div>`;
+		  <div class="view-row-content">
+				 <div class="view-field-image"><img src="${productArray.img}" alt="${productArray.name}"></div>
+				 <div class="product-group">
+					 <div class="view-field-category">${productArray.categories}</div>
+					 <div class="view-field-title"><a href="#">${productArray.name}</a></div>
+				 </div>
+				 <div class="view-field view-field-price">${formatVND.format(productArray.price)}</div>		
+			 <div class="view-field view-field-quantity">
+				 <div class="view-field-quantity-inner"><button class="btn-quantity btn-quantity-minus" onclick="minusQuantity(${index},${productArray.quantity})"></button><span class="quantity">${productArray.quantity} <span class="tool-tip">Số lượng sản phẩm không được nhỏ hơn 1</span> </span><button class="btn-quantity btn-quantity-plus" onclick="plusQuantity(${index})"></button></div>
+			 </div>
+			 <div class="view-field view-field-sub-total">${formatVND.format(productArray.price * productArray.quantity)}</div>
+			 <div class="view-field view-field-btn-product-action"><button onclick="deleteProductInCart(${index})">Xoá</button></div>
+			 </div>
+	   </div>`;
   });
 
   products.querySelector('.product-content-wrapper').innerHTML = data;
@@ -113,6 +109,7 @@ function minusQuantity(index, quantity) {
 	 const toolTip = document.querySelectorAll('.tool-tip')
 	 if (toolTip[index]) {
 		toolTip[index].classList.add('is-active');
+		// console.log(toolTip[index])
 	 }
   }
 }

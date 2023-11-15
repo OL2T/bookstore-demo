@@ -86,9 +86,13 @@ input {
   border: 1px solid #E6E9EB;
   background-color: #fdfdfd;
   outline: none;
+
+  &[type="checkbox"] {
+    @include checkbox(24px);
+  }
 }
 
-button:not(.btn-action,.btn-quantity) {
+button:not(.btn-action,.btn-quantity,.btn-reject,.btn-agree) {
   @include button();
 }
 
@@ -133,16 +137,20 @@ img {
   height: 100%;
   object-fit: cover;
 }
+select{
+  @include select();
+}
 
 .container {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 24px;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
+  //margin: 0 -24px;
 }
 
 .visually-hidden {
@@ -154,7 +162,7 @@ img {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 4;
+  z-index: 5;
 
   &.is-active {
     display: block;
@@ -222,4 +230,26 @@ img {
 .no-scrollable {
   height: 100%;
   overflow: hidden;
+}
+
+.custom-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 48px -8px 0 -8px;
+
+  .pagination-item {
+    font-weight: 600;
+    color: $primary-color;
+    padding: 7px 16px;
+    border-radius: 4px;
+    margin: 0 8px;
+    background-color: #fff;
+
+    &.is-active, &:hover {
+      cursor: pointer;
+      background-color: $primary-color;
+      color: #fff;
+    }
+  }
 }
