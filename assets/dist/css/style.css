@@ -1722,6 +1722,7 @@ select:invalid {
 }
 
 .footer {
+  clear: both;
   padding: 100px;
   background-color: #000;
 }
@@ -1873,7 +1874,6 @@ body.path-cart .main-content .container > .section:not(.section-product-in-cart)
 #right {
   width: 75%;
   float: right;
-  /* display: flex; */
 }
 
 #accordion {
