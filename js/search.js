@@ -12,8 +12,8 @@ let perProducts = storedProducts.slice(
 function renderProductSearch(array) {
   // totalPage = Math.ceil(array.length / itemPerPage);
   // let perProducts = array.slice(
-	//  (currentPage - 1) * itemPerPage,
-	//  (currentPage - 1) * itemPerPage + itemPerPage,
+  //  (currentPage - 1) * itemPerPage,
+  //  (currentPage - 1) * itemPerPage + itemPerPage,
   // )
   let products = document.getElementById('product-by-search');
   let formatVND = new Intl.NumberFormat("vi-VN", {
@@ -135,17 +135,38 @@ function applyFilter(array) {
 	 }
 
 	 let valueFilter = e.target.elements;
+	 // console.log(valueFilter)
 	 let productFilter = array.filter(item => {
-		let literature = item.categories === 'Văn học';
-		let childrenBook = item.categories === 'Thiếu nhi';
-		let textbook = item.categories === 'Sách giáo khoa';
-		let foreignLanguageBook = item.categories === 'Sách ngoại ngữ';
-		if (valueFilter.category.value !== '') {
+		// let literature = item.categories === 'Văn học';
+		// let childrenBook = item.categories === 'Thiếu nhi';
+		// let textbook = item.categories === 'Sách giáo khoa';
+		// let foreignLanguageBook = item.categories === 'Sách ngoại ngữ';
 
+		if (valueFilter.category.value !== '') {
 		  if (item.categories !== valueFilter.category.value) {
 			 return false;
 		  }
 		}
+
+		if (valueFilter.minPrice.value !== '') {
+		  if (item.price < valueFilter.minPrice.value) {
+			 return false;
+		  }
+		}
+
+		if (valueFilter.maxPrice.value !== '') {
+		  if (item.price > valueFilter.maxPrice.value) {
+			 return false;
+		  }
+		}
+
+		if (valueFilter.minPrice.value !== '' && valueFilter.maxPrice.value !== '') {
+		  if (item.price < valueFilter.minPrice.value && item.price > valueFilter.maxPrice.value) {
+			 return false
+		  }
+		}
+
+
 		// console.log(item.categories)
 		return true;
 	 })

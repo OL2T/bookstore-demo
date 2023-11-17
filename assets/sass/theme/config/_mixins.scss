@@ -140,7 +140,7 @@
   }
 }
 
-@mixin checkbox($size) {
+@mixin checkbox($size, $name) {
   display: inline-block;
   position: relative;
   width: $size - 2;
@@ -173,7 +173,7 @@
   &:focus {
     &:before {
       width: $size + 2;
-      height: $size +2;
+      height: $size + 2;
       outline: 2px solid #8B5CD7;
     }
   }
@@ -186,32 +186,16 @@
     }
 
     &:after {
-      border-color: $primary-color;
+      border-color: $valid;
       border-width: 2px;
-      background-image: url("../../images/icon-checked.svg");
+      background-image: url("../../images/#{$name}.svg");
       background-repeat: no-repeat;
       background-size: $size;
     }
   }
-
-  //&:active {
-  //  &:after {
-  //    border-color: $txt-body;
-  //    border-width: 2px;
-  //    background-image: url("../../../images/icon-checked-active.svg");
-  //  }
-  //}
-  //
-  //&:invalid {
-  //  &:after {
-  //    border-color: #CE3836;
-  //    border-width: 2px;
-  //    background-image: url("../../../images/icon-checked-invalid.svg");
-  //  }
-  //}
 }
 
-@mixin select() {
+@mixin select($name) {
   display: flex;
   align-items: center;
   padding: 9px 15px;
@@ -222,7 +206,7 @@
   line-height: 28px;
   height: auto;
   min-width: 190px;
-  background-image: url("../../images/icon-select.svg");
+  background-image: url("../../images/#{$name}.svg");
   background-repeat: no-repeat;
   background-size: 20px;
   background-position: calc(100% - 12px);
@@ -240,10 +224,42 @@
   }
   &:hover {
     cursor: pointer;
-    border-color: $primary-color;
+    border-color: $blue-100;
   }
   &:focus, &:active, &:focus-visible {
-    border-color: $primary-color;
+    border-color: $valid;
+  }
+  &:invalid {
+    border-color: $invalid;
+  }
+}
+
+@mixin input() {
+  display: block;
+  padding: 9px 15px;
+  border-radius: 4px;
+  border: 1px solid #E6E9EB;
+  background: #fdfdfd;
+  font-size: inherit;
+  line-height: 28px;
+  color: #393d49;
+  width: 100%;
+
+  @media(max-width: 575px) {
+    line-height: 26px;
+  }
+  &:hover, &:focus, &:active, &:invalid, &:focus-visible {
+    border-width: 2px;
+    padding: 8px 14px;
+    outline: none;
+  }
+  &:hover {
+    cursor: pointer;
+    border-color: $blue-100;
+  }
+  &:focus, &:active, &:focus-visible {
+    //box-shadow: 0 2px 8px 0px rgba(0, 0, 0, 0.24);
+    border-color: $valid;
   }
   &:invalid {
     border-color: $invalid;

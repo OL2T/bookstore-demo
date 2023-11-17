@@ -37,7 +37,7 @@
 body {
   font-size: 16px;
   line-height: 24px;
-  color: #333;
+  color: $txt-body;
   font-family: $font-family;
   background-color: $bg-gray;
 }
@@ -76,19 +76,11 @@ ul {
   margin: 0;
 }
 
-input {
-  display: block;
-  padding: 9px 15px;
-  border-radius: 4px;
-  font-size: 14px;
-  line-height: 28px;
-  width: 100%;
-  border: 1px solid #E6E9EB;
-  background-color: #fdfdfd;
-  outline: none;
+input:not([type="checkbox"]) {
+  @include input();
 
   &[type="checkbox"] {
-    @include checkbox(24px);
+    @include checkbox(24px,icon-checkbox);
   }
 }
 
@@ -138,7 +130,7 @@ img {
   object-fit: cover;
 }
 select{
-  @include select();
+  @include select(icon-select);
 }
 
 .container {
