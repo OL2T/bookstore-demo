@@ -1964,6 +1964,7 @@ select:invalid {
 }
 
 .footer {
+  clear: both;
   padding: 100px;
   background-color: #000;
 }
@@ -2210,7 +2211,6 @@ p {
   width: 75%;
   float: right;
   /* display: flex; */
-
 
 
 #accordion {
