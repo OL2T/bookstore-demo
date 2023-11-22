@@ -167,29 +167,36 @@ function renderProductByType(type, currentPage, priceRange) {
 		const tempPrice = priceRange.split('-');
 		const minPrice = parseInt(tempPrice[0] + '000');
 		const maxPrice = parseInt(tempPrice[1] + '000');
-		if (tempPrice[1] === 'Infinity') {
-			products = products.filter(product => {
-				if (product.price >= minPrice) {
-					return product;
-				}
-			})
-		}
-		else {
-			products = products.filter(product => {
-				if (product.price >= minPrice && product.price <= maxPrice) {
-					return product;
-				}
-			})
-		}
+		// if (tempPrice[1] === 'Infinity') {
+		// 	products = products.filter(product => {
+		// 		if (product.price >= minPrice) {
+		// 			return product;
+		// 		}
+		// 	})
+		// }
+		// else {
+		// 	products = products.filter(product => {
+		// 		if (product.price >= minPrice && product.price <= maxPrice) {
+		// 			return product;
+		// 		}
+		// 	})
+		// }
+		products = products.filter(product => {
+			if (tempPrice[1] === 'Infinity') {
+				return product.price >= minPrice;
+			} else {
+				return product.price >= minPrice && product.price <= maxPrice;
+			}
+		});
 	}
 
 	const main_content = document.getElementById('main-content');
+	const contentDiv = document.getElementById('contentDiv');
 	const rightDiv = document.createElement('div');
 	rightDiv.id = 'right';
 
 	const productWrap = document.createElement('div');
-	productWrap.style.display = 'flex';
-	productWrap.style.flexDirection = 'row';
+	productWrap.classList = 'product-wrap';
 	const section = document.createElement('section');
 	section.classList.add('section', 'section-product-list');
 	section.style.marginTop = '0';
@@ -205,7 +212,8 @@ function renderProductByType(type, currentPage, priceRange) {
 	productWrap.appendChild(section);
 	rightDiv.appendChild(productWrap);
 	createPaginationbuttons(rightDiv, products, currentPage);
-	main_content.appendChild(rightDiv);
+	contentDiv.appendChild(rightDiv);
+	main_content.appendChild(contentDiv);
 }
 
 function changeCategory(type) {
@@ -230,6 +238,8 @@ function changePriceRange(priceRange) {
 }
 
 function renderFilterLeft(type, price) {
+	const contentDiv = document.createElement('div');
+	contentDiv.id = 'contentDiv';
 	const leftDiv = document.createElement('div');
 	leftDiv.id = 'left';
 	const accordionDiv = document.createElement('div');
@@ -274,6 +284,7 @@ function renderFilterLeft(type, price) {
 	accordionDiv.appendChild(filterDiv);
 	accordionDiv.appendChild(catePriceDiv);
 	leftDiv.appendChild(accordionDiv);
+	contentDiv.appendChild(leftDiv);
 
 	//Giá
 	const priceDiv = document.createElement('div');
@@ -326,17 +337,18 @@ function renderFilterLeft(type, price) {
 	accordionDiv.appendChild(priceDiv);
 	accordionDiv.appendChild(priceRangeDiv);
 	leftDiv.appendChild(accordionDiv);
+	contentDiv.appendChild(leftDiv);
 
 	const main_content = document.getElementById('main-content');
 	main_content.style.marginTop = '50px';
-	main_content.appendChild(leftDiv);
+	main_content.appendChild(contentDiv);
 
 	const urlPath = location.href;
 	const splitPath = urlPath.split('/');
 	if (splitPath[splitPath.length - 1] === 'cart.html') {
-		leftDiv.style.display = 'none';
+		contentDiv.style.display = 'none';
 	} else {
-		leftDiv.style.display = 'block';
+		contentDiv.style.display = 'flex';
 	}
 }
 

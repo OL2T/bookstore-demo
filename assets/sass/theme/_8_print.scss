@@ -1,14 +1,28 @@
 #left {
   width: 20%;
-  float: left;
-  display: flex;
 }
 
 #right {
   width: 75%;
-  float: right;
 }
 
+#contentDiv {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.product-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+.main-content {
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
 
 #accordion {
   width: 100%;
@@ -45,7 +59,7 @@
 .pagination {
   display: block;
   width: 80%;
-  margin: 20px auto;
+  margin: 20px 39%;
 }
 
 .pagination .pagination-button {
@@ -65,4 +79,91 @@
 .pagination .pagination-button.active {
   background-color: #121823;
   color: white;
+}
+
+@media (max-width: 800px) {
+  #contentDiv {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #left,
+  #right {
+    width: 100%;
+  }
+}
+
+.banner {
+  background: url("D:\bookstore-demo\images\banner\banner.jpg");
+  background-position: center;
+  background-repeat: space;
+}
+
+.banner img {
+  width: 100%;
+  height: 800px;
+  object-fit: cover;
+}
+
+.slideshow {
+  padding-top: 20px;
+  overflow: hidden;
+  width: 59%;
+  height: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+
+.slide-wrapper {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  transition: all 1.0s ease;
+}
+
+.slide img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider-btn{
+  position: absolute;
+  top: 45%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.slider-btn i{
+  color: #333;
+  font-size: 32px;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.8s ease;
+  cursor: pointer;
+  margin: 0 1%;
+}
+
+.slideshow:hover i{
+  opacity: 1;
+}
+
+.slide-wrapper div:nth-child(2) img{
+  transform: translateX(100%);
+}
+
+.slide-wrapper div:nth-child(3) img{
+  transform: translateX(200%);
+}
+
+.slide-wrapper div:nth-child(4) img{
+  transform: translateX(300%);
 }
