@@ -32,9 +32,9 @@
     <header class="header">
       <div class="container">
         <div class="row">
-          <div class="block block-logo" style="width: 30%;">
+          <div class="block block-logo">
             <a href="index.html" class="logo">
-              <img src="images/logo.png" alt=" logo" style="width:80% " ;>
+              <img src="images/logo.png" alt="logo" ;>
             </a>
           </div>
           <div class="block block-search">
@@ -132,21 +132,23 @@
       </div>
     </header>
     <main class="main-content">
-      <div class="banner">
-        <!-- <img src="images\banner\banner.jpg" alt="Book Banner"> -->
+      <div class="banner" id="banner">
         <div class="slideshow">
           <div class="slide-wrapper">
-            <div class="slide">
-              <img src="images\banner\banner1.jpg" alt="picture 1">
+            <div class="banner-img">
+              <img src="images\banner\banner1.png" alt="picture 1">
             </div>
-            <div class="slide">
-              <img src="images\banner\banner8.jpg" alt="picture 2">
+            <div class="banner-img">
+              <img src="images\banner\banner6.jpg" alt="picture 2">
             </div>
-            <div class="slide">
-              <img src="images\banner\banner3.png" alt="picture 3">
+            <div class="banner-img">
+              <img src="images\banner\banner8.jpg" alt="picture 3">
             </div>
-            <div class="slide">
-              <img src="images\banner\banner4.jpg" alt="picture 4">
+            <div class="banner-img">
+              <img src="images\banner\ban2.jpg" alt="picture 4">
+            </div>
+            <div class="banner-img">
+              <img src="images\banner\ban3.jpg" alt="picture 5">
             </div>
           </div>
           <div class="slider-btn">
@@ -156,29 +158,29 @@
         </div>
       </div>
       <div id="main-content" class="container">
+        <!-- <span class="heading">Danh mục sản phẩm</span> -->
+        <h1 id="heading">Danh mục sản phẩm</h1>
         <!--      <section class="section section-list-users" style="margin-bottom: 20px;">-->
         <!--        <div class="header-content">Danh Sách Users</div>-->
         <!--        <table id="table-list-users"></table>-->
         <!--      </section>-->
       </div>
     </main>
-    <footer style="background-color: rgb(1, 1, 21);">
+    <footer>
       <div class="footer-content">
         <div class="footer-section">
-          <div class="logo" style="margin-bottom: 50px;margin-top: 0; width: 300px;"><img src="images/logo1.png" alt="">
+          <div class="logo"><img src="images/logo1.png" alt="">
           </div>
           <div class="info">
-
             <span><i class="fa-solid fa-map-location-dot"></i> <span>273 An Dương Vương, phường 3, quận 5,
                 TPHCM</span></span>
           </div>
           <div class="info">
-
             <span><i class="fa-solid fa-phone"></i> <span>012345678</span></span>
           </div>
         </div>
         <div class="footer-section">
-          <div style="font-weight: bold; font-size: x-large; margin-bottom: 30px;">Danh mục</div>
+          <div class="footer-section-text">Danh mục</div>
           <div>
             <a href="">Văn học</a>
             <a href="">Thiếu nhi</a>
@@ -188,7 +190,7 @@
         </div>
 
         <div class="footer-section">
-          <div style="font-weight: bold; font-size: x-large; margin-bottom: 30px;">Lối tắt</div>
+          <div class="footer-section-text">Lối tắt</div>
           <div>
             <a href="">Về chúng tôi</a>
             <a href="">FAQ</a>
@@ -199,7 +201,7 @@
         </div>
 
         <div class="footer-section">
-          <div style="font-weight: bold; font-size: x-large; margin-bottom: 30px;">Đăng ký theo dõi</div>
+          <div class="footer-section-text">Đăng ký theo dõi</div>
           <p>Cập nhật những chính sách ưu đãi và sự kiện mới nhất</p>
           <input type="text" placeholder="Email của bạn:  ">
         </div>
@@ -209,7 +211,6 @@
         Copyright © 2023
       </div>
     </footer>
-
     <div class="pop-up-form-register">
       <form action="" method="POST" class="form form-register" id="form-register">
         <h3 class="heading">Đăng ký</h3>
