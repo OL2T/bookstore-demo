@@ -6,7 +6,8 @@
   <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="stylesheet" href="./css/admin.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="../assets/dist/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -40,11 +41,11 @@
         <div class="nav-upper-options">
           <div class="nav-option option1">
             <i class="fa-solid fa-table-cells"></i>
-            <span>Dashboard</span>
+            <span>Dashboard</span></a>
           </div>
 
           <div class="nav-option option2">
-            <i class="fa-solid fa-users-line"></i>
+            <i class=" fa-solid fa-users-line"></i>
             <span>Khách Hàng</span>
           </div>
 
@@ -52,7 +53,7 @@
             <i class="fa-solid fa-clipboard"></i>
             <span> Đơn Hàng</span>
           </div>
-          <div class="nav-option option4">
+          <div class="nav-option option4" onclick=" bookSort()">
             <i class="fa-solid fa-book"></i>
             <span>Sách</span>
           </div>
@@ -70,8 +71,33 @@
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
       </div>
+      <div class="booktype"></div>
+      <div class="report-container">
+        <div class="report-header">
+          <h1 class="recent-Articles">Recent orders</h1>
+
+        </div>
+        <div class="report-body">
+          <div class="report-topic-heading">
+            <h3 class="t-op">Mã đơn</h3>
+            <h3 class="t-op">Khách hàng</h3>
+            <h3 class="t-op">Tổng thanh toán</h3>
+            <h3 class="t-op">Trạng thái</h3>
+          </div>
+
+          <div class="items">
+            <div class="item1">
+              <h3 class="t-op-nextlvl">111</h3>
+              <h3 class="t-op-nextlvl">111</h3>
+              <h3 class="t-op-nextlvl">111</h3>
+              <h3 class="t-op-nextlvl label-tag">111</h3>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 </body>
 <script>
   let menuicn = document.querySelector(".menu-icn");
@@ -80,6 +106,16 @@
   menuicn.addEventListener("click", () => {
     nav.classList.toggle("navclose");
   })
+
 </script>
+<script src="../js/init.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/validateFormRegister.js"></script>
+<script src="../js/login.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/filter.js"></script>
+
+<script src="ad-product.js"></script>
 
 </html>
