@@ -19,6 +19,8 @@ function main() {
 		body.classList.add('no-scrollable');
 	});
 
+
+
 	if (btn_login_popup) {
 		btn_login_popup.addEventListener('click', function () {
 			pop_up_login.classList.add('is-active');
