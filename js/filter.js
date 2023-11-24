@@ -23,41 +23,48 @@ const formatVND = new Intl.NumberFormat('vi-VN', {
 });
 
 function renderProductItems(products, wrapDiv) {
-	products.forEach(productArray => {
-		const productDiv = document.createElement('div');
-		productDiv.classList.add('views-row');
-		const urlPath = location.href;
-		const splitPath = urlPath.split('/');
-		if (splitPath[splitPath.length - 1] !== 'index.html') {
-			// productDiv.style.flex = '0 0 calc(33.3333333333% - 24px)';
-			// productDiv.style.maxWidth = 'calc(33.3333333333% - 24px)';
-		}
-
-		productDiv.innerHTML = `
-		<div class="view-row-content" >
-			<div class="view-field-image" >
-				<a href="#"><img src="${productArray.img}" alt="${productArray.name}"></a>
-				<div class="product-buttons">
-					<div class="action quick-view">
-					<span class="tool-tip">Xem nhanh</span>
-					<button class="btn-action btn-quick-view"></button>
-					</div>
-					<div class="action add-to-cart">
-					<span class="tool-tip">Thêm vào giỏ hàng</span>
-					<button class="btn-action btn-add-to-cart" onclick="addTocCart(${productArray.productId
-			})"></button>
+	if (products.length === 0) {
+		const contentDiv = document.createElement('div');
+		contentDiv.innerText = 'Không tìm thấy sản phẩm';
+		wrapDiv.appendChild(contentDiv);
+	} else {
+		products.forEach(productArray => {
+			const productDiv = document.createElement('div');
+			productDiv.classList.add('views-row');
+			const urlPath = location.href;
+			const splitPath = urlPath.split('/');
+			if (splitPath[splitPath.length - 1] !== 'index.html') {
+				productDiv.classList.add('width-33');	
+				// productDiv.style.flex = '0 0 calc(33.3333333333% - 24px)';
+				// productDiv.style.maxWidth = 'calc(33.3333333333% - 24px)';
+			}
+	
+			productDiv.innerHTML = `
+			<div class="view-row-content" >
+				<div class="view-field-image" >
+					<a href="#"><img src="${productArray.img}" alt="${productArray.name}"></a>
+					<div class="product-buttons">
+						<div class="action quick-view">
+						<span class="tool-tip">Xem nhanh</span>
+						<button class="btn-action btn-quick-view"></button>
+						</div>
+						<div class="action add-to-cart">
+						<span class="tool-tip">Thêm vào giỏ hàng</span>
+						<button class="btn-action btn-add-to-cart" onclick="addTocCart(${productArray.productId
+				})"></button>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="content-wrapper">
-			<div class="view-field-category"><span>${productArray.categories}</span></div>
-			<div class="view-field-title"><a href="#">${productArray.name}</a></div>
-			<div class="view-field-author"><span>Tác giả: </span><span class="author-title">${productArray.author}</span></div>
-			<div class="view-field-price"><p>${formatVND.format(productArray.price)}</p></div>
-			</div>
-		</div>`;
-		wrapDiv.appendChild(productDiv);
-	});
+				<div class="content-wrapper">
+				<div class="view-field-category"><span>${productArray.categories}</span></div>
+				<div class="view-field-title"><a href="#">${productArray.name}</a></div>
+				<div class="view-field-author"><span>Tác giả: </span><span class="author-title">${productArray.author}</span></div>
+				<div class="view-field-price"><p>${formatVND.format(productArray.price)}</p></div>
+				</div>
+			</div>`;
+			wrapDiv.appendChild(productDiv);
+		});
+	}
 }
 
 function renderProductList() {
@@ -167,36 +174,29 @@ function renderProductByType(type, currentPage, priceRange) {
 		const tempPrice = priceRange.split('-');
 		const minPrice = parseInt(tempPrice[0] + '000');
 		const maxPrice = parseInt(tempPrice[1] + '000');
-		if (tempPrice[1] === 'Infinity') {
-			products = products.filter(product => {
-				if (product.price >= minPrice) {
-					return product;
-				}
-			})
-		}
-		else {
-			products = products.filter(product => {
-				if (product.price >= minPrice && product.price <= maxPrice) {
-					return product;
-				}
-			})
-		}
+		products = products.filter(product => {
+			if (tempPrice[1] === 'Infinity') {
+				return product.price >= minPrice;
+			} else {
+				return product.price >= minPrice && product.price <= maxPrice;
+			}
+		});
 	}
 
 	const main_content = document.getElementById('main-content');
+	const contentDiv = document.getElementById('contentDiv');
 	const rightDiv = document.createElement('div');
 	rightDiv.id = 'right';
 
 	const productWrap = document.createElement('div');
-	productWrap.style.display = 'flex';
-	productWrap.style.flexDirection = 'row';
+	productWrap.classList = 'product-wrap';
 	const section = document.createElement('section');
 	section.classList.add('section', 'section-product-list');
 	section.style.marginTop = '0';
 	const categoryContent = document.createElement('div');
 	categoryContent.classList.add('view-content-wrapper');
 
-	const itemsPerPage = 8;
+	const itemsPerPage = 6;
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
 	const tempProducts = products.slice(startIndex, endIndex);
@@ -205,7 +205,8 @@ function renderProductByType(type, currentPage, priceRange) {
 	productWrap.appendChild(section);
 	rightDiv.appendChild(productWrap);
 	createPaginationbuttons(rightDiv, products, currentPage);
-	main_content.appendChild(rightDiv);
+	contentDiv.appendChild(rightDiv);
+	main_content.appendChild(contentDiv);
 }
 
 function changeCategory(type) {
@@ -230,6 +231,8 @@ function changePriceRange(priceRange) {
 }
 
 function renderFilterLeft(type, price) {
+	const contentDiv = document.createElement('div');
+	contentDiv.id = 'contentDiv';
 	const leftDiv = document.createElement('div');
 	leftDiv.id = 'left';
 	const accordionDiv = document.createElement('div');
@@ -274,6 +277,7 @@ function renderFilterLeft(type, price) {
 	accordionDiv.appendChild(filterDiv);
 	accordionDiv.appendChild(catePriceDiv);
 	leftDiv.appendChild(accordionDiv);
+	contentDiv.appendChild(leftDiv);
 
 	//Giá
 	const priceDiv = document.createElement('div');
@@ -326,17 +330,18 @@ function renderFilterLeft(type, price) {
 	accordionDiv.appendChild(priceDiv);
 	accordionDiv.appendChild(priceRangeDiv);
 	leftDiv.appendChild(accordionDiv);
+	contentDiv.appendChild(leftDiv);
 
 	const main_content = document.getElementById('main-content');
 	main_content.style.marginTop = '50px';
-	main_content.appendChild(leftDiv);
+	main_content.appendChild(contentDiv);
 
 	const urlPath = location.href;
 	const splitPath = urlPath.split('/');
 	if (splitPath[splitPath.length - 1] === 'cart.html') {
-		leftDiv.style.display = 'none';
+		contentDiv.style.display = 'none';
 	} else {
-		leftDiv.style.display = 'block';
+		contentDiv.style.display = 'flex';
 	}
 }
 
@@ -353,54 +358,56 @@ function changePage(currentPage) {
 }
 
 function createPaginationbuttons(wrapper, productList, currentPage) {
-	const itemsPerPage = 8;
-	const totalPages = Math.ceil(productList.length / itemsPerPage);
-	const paginationContainer = document.createElement('div');
-	paginationContainer.classList.add('pagination');
+	if (productList && productList.length > 0) {
+		const itemsPerPage = 6;
+		const totalPages = Math.ceil(productList.length / itemsPerPage);
+		const paginationContainer = document.createElement('div');
+		paginationContainer.classList.add('pagination');
 
-	//add previous button
-	const prev = document.createElement('button');
-	prev.innerText = '<';
-	prev.addEventListener('click', () => {
-		changePage(parseInt(currentPage) - 1);
-	});
-	prev.classList.add('pagination-button');
-	if (parseInt(currentPage) === 1) {
-		prev.classList.add('disabled');
-		prev.setAttribute('disabled', 'true');
-	} else {
-		prev.classList.remove('disabled');
-	}
-	paginationContainer.appendChild(prev);
-
-	for (let i = 1; i <= totalPages; i++) {
-		const button = document.createElement('button');
-		button.classList.add('pagination-button');
-		button.innerText = i;
-		if (i == currentPage) {
-			button.classList.add('active');
-		} else {
-			button.classList.remove('active');
-		}
-		button.addEventListener('click', () => {
-			changePage(i);
+		//add previous button
+		const prev = document.createElement('button');
+		prev.innerText = '<';
+		prev.addEventListener('click', () => {
+			changePage(parseInt(currentPage) - 1);
 		});
-		paginationContainer.appendChild(button);
-	}
+		prev.classList.add('pagination-button');
+		if (parseInt(currentPage) === 1) {
+			prev.classList.add('disabled');
+			prev.setAttribute('disabled', 'true');
+		} else {
+			prev.classList.remove('disabled');
+		}
+		paginationContainer.appendChild(prev);
 
-	// add next button
-	const next = document.createElement('button');
-	next.innerText = '>';
-	next.addEventListener('click', () => {
-		changePage(parseInt(currentPage) + 1);
-	});
-	next.classList.add('pagination-button');
-	if (parseInt(currentPage) === totalPages) {
-		next.classList.add('disabled');
-		next.setAttribute('disabled', 'true');
-	} else {
-		next.classList.remove('disabled');
+		for (let i = 1; i <= totalPages; i++) {
+			const button = document.createElement('button');
+			button.classList.add('pagination-button');
+			button.innerText = i;
+			if (i == currentPage) {
+				button.classList.add('active');
+			} else {
+				button.classList.remove('active');
+			}
+			button.addEventListener('click', () => {
+				changePage(i);
+			});
+			paginationContainer.appendChild(button);
+		}
+
+		// add next button
+		const next = document.createElement('button');
+		next.innerText = '>';
+		next.addEventListener('click', () => {
+			changePage(parseInt(currentPage) + 1);
+		});
+		next.classList.add('pagination-button');
+		if (parseInt(currentPage) === totalPages) {
+			next.classList.add('disabled');
+			next.setAttribute('disabled', 'true');
+		} else {
+			next.classList.remove('disabled');
+		}
+		paginationContainer.appendChild(next);
+		wrapper.appendChild(paginationContainer);
 	}
-	paginationContainer.appendChild(next);
-	wrapper.appendChild(paginationContainer);
 }

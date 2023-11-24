@@ -22,6 +22,10 @@
     @include font-bold(32px, 28px, null);
     text-decoration: none;
     margin-right: 16px;
+
+    img {
+      max-width: 150px;
+    }
   }
 
   .block {
@@ -551,6 +555,7 @@
 
 
 .footer {
+  clear: both;
   padding: 100px;
   background-color: #000;
 }

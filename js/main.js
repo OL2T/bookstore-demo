@@ -202,7 +202,14 @@ window.onload = function () {
 			const urlParams = new URLSearchParams(window.location.search);
 			const type = urlParams.get('type');
 			const priceRange = urlParams.get('priceRange');
-			renderProductByType(type, 1, priceRange);
+			const page = urlParams.get('page') || 1;
+			if (type || priceRange || page) {
+				const banner = document.getElementById('banner');
+				banner.style.display = 'none';
+				const heading = document.getElementById('heading');
+				heading.style.display = 'none';
+			}
+			renderProductByType(type, page, priceRange);
 		}
 
 	} else if (a.includes('cart.html')) {
