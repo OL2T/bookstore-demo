@@ -356,9 +356,10 @@ option1 {
 
 
 
+
 .pop-up-upload-form {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -368,6 +369,7 @@ option1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 9999;
   max-width: 400px;
+  margin-top: 40px;
 }
 
 .pop-up-upload-form label,
@@ -375,6 +377,7 @@ option1 {
 .pop-up-upload-form button {
   display: block;
   margin-bottom: 10px;
+
 }
 
 .cancel-upload {
