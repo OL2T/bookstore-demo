@@ -1,11 +1,8 @@
-var dataorder = [
-  { id: 1, idbill: 10, name: "AAA", address: "HCM", date: '2023-01-01', price: 100, status: 'Chưa xử lý', detail: [{ id: 1, name: "San pham 1", quantity: 10, price: 100 }] },
-  { id: 2, idbill: 11, name: "BBB", address: "HCM", date: '2023-01-02', price: 400, status: 'Đang xuất', detail: [{ id: 2, name: "San pham 2", quantity: 12, price: 400 }] },
-  { id: 3, idbill: 12, name: "CCC", address: "HCM", date: '2023-01-03', price: 300, status: 'Đã xử lý', detail: [{ id: 3, name: "San pham 3", quantity: 3, price: 300 }] },
-  { id: 4, idbill: 13, name: "DDD", address: "HCM", date: '2023-01-04', price: 200, status: 'Đang xuất', detail: [{ id: 4, name: "San pham 4", quantity: 7, price: 200 }] },
-]
+let orders = JSON.parse(localStorage.getItem('CartArray')) || [];
+
 
 function createBill() {
+
   const reportContainer = document.querySelector('.report-container');
   reportContainer.innerHTML = '';
   reportContainer.style.display = 'none';
@@ -57,33 +54,38 @@ function createBill() {
   const bill_header = document.createElement('thead');
   bill_header.innerHTML = `
   <tr>
-    <th>STT</th>
     <th>Mã đơn hàng</th>
     <th>Tên khách hàng</th>
+    <th>Tên tài khoản</th>
     <th>Địa chỉ</th>
-    <th>Ngày lập</th>
+    <th>Số điện thoại</th>
     <th>Tổng tiền</th>
+    <th>Ngày đặt</td>
     <th class="order-status">Trạng thái</th>
-    <th>Chi tiết đơn hàng</th>
+    <th class="see-order-detail" >Chi tiết đơn hàng</th>
   </tr>
+ 
 `;
   bill_table.appendChild(bill_header);
 
   const bill_data = document.createElement('tbody');
-  dataorder.forEach(order => {
+  cartArray.forEach(order => {
     const orderItem = document.createElement('tr');
     orderItem.classList.add('order-item');
     orderItem.innerHTML = `
+
     <td>${order.id}</td>
-    <td>${order.idbill}</td>
-    <td>${order.name}</td>
-    <td>${order.address}</td>
-    <td>${order.date}</td>
-    <td>${order.price}</td>
+    <td>${order.Khách_hàng}</td>
+    <td>${order.username}</td>
+    <td>${order.địa_chỉ}</td>
+    <td>${order.phonenumber}</td>
+    <td>${order.tổng_tiền}</td>
+   <td>${order.date}</td>
     <td class="order-status">${order.status}</td>
     <td>
-      <button class="view-btn"><i class="fa-solid fa-eye"></i></button>
+      <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
     </td>
+     
   `;
     bill_data.appendChild(orderItem);
   });
@@ -91,30 +93,47 @@ function createBill() {
   bill_table.appendChild(bill_data);
   billListSection.appendChild(bill_table);
   main_bill.appendChild(billListSection);
-
-
 }
 
-// function displayBills(dataorder) {
-//   const main_bill = document.getElementById('main-bill');
-//   const billListSection = document.getElementById('bill-list-section');
-//   const bill_data = document.createElement('div');
-//   bill_data.classList.add('bill-data');
-//   dataorder.forEach(order => {
-//     const orderItem = document.createElement('div');
-//     orderItem.classList.add('order-item');
-//     orderItem.innerHTML = `
-//       <p>${order.id}</p>
-//       <p>${order.idbill}</p>
-//       <p>${order.name}</p>
-//       <p>${order.address}</p>
-//       <p>${order.date}</p>
-//       <p>${order.price}</p>
-//       <p class="order-status">${order.status}</p>
-//       <p>Xem chi tiết</p>
-//     `;
-//     bill_data.appendChild(orderItem);
-//   });
-//   billListSection.appendChild(bill_data);
-//   main_bill.appendChild(billListSection);
-// }
+function see_order_detail(id) {
+
+  const formatVND = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+
+  let data = ``;
+
+  const order = cartArray.find(order => order.id === id);
+  if (order) {
+    order.products.forEach(product => {
+      data += `
+        <div class="views-row">
+          <div class="view-row-content">
+            <div class="view-field-image"><img src="${product.img}" alt="${product.name}"></div>
+           <div class="book-order-info">
+            <div class="view-field-title"><a href="#">${product.name}</a></div>   
+              <div class="view-field-category">Thể loại: ${product.categories}</div>               
+              <div class="view-field view-field-price">Đơn giá: ${formatVND.format(product.price)}</div> 
+              <div class="book-order-quantity">Số lượng: ${product.quantity} </div>       
+              <div class="view-field view-field-sub-total">Thành tiền: ${formatVND.format(product.price * product.quantity)}</div>
+            </div>
+          </div>
+        </div>`;
+    });
+  }
+  const detail = document.querySelector(".order-detail-popup");
+  const detail1 = document.querySelector(".order-detail")
+  detail.style.display = 'block';
+  detail1.innerHTML = data;
+  detail1.style.display = 'block';
+
+}
+function closeOrderDetailPopup() {
+  const detail = document.querySelector(".order-detail-popup");
+  detail.style.display = 'none';
+}
+
+
+
+
