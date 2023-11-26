@@ -262,25 +262,26 @@ h1#heading {
   }
 }
 
-// @media (max-width: 1924px) {
-//   .banner {
-//     height: 730px;
-//   }
+@media (min-width: 1920px) {
+  .banner {
+    height: 730px;
+  }
 
-//   .slideshow {
-//     height: 720px;
-//   }
+  .slideshow {
+    height: 720px;
+  }
 
-//   .banner-img img {
-//     height: 720px;
-//     width: 100%;
-//   }
+  .banner-img img {
+    height: 720px;
+    width: 100%;
+  }
 
-//   .slider-btn i {
-//     font-size: 50px;
-//   }
+  .slider-btn i {
+    font-size: 50px;
+  }
 
-//   h1#heading {
-//     padding-top: 100px;
-//   }
-// }
+  h1#heading {
+    padding-top: 100px;
+  }
+}
+
