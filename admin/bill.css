@@ -1,0 +1,65 @@
+.main-bill {
+  padding: 15px;
+  margin-top: 20px;
+  width: 100%;
+  height: auto;
+}
+
+.date-section {
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 10px;
+}
+
+.date-section label {
+  display: flex;
+  line-height: 30px;
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+input[type="date"] {
+  width: 200px !important;
+  height: 60px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.bill-list-section {
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  padding: 20px 10px;
+  margin-top: 20px;
+}
+
+.bill-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bill-header p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+thead {
+  text-align: center;
+}
+
+.order-item {
+  text-align: center;
+}
+
+.view-btn{ 
+  background-color: white !important;
+  color: green !important;
+  border: none !important;
+}

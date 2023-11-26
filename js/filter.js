@@ -35,8 +35,6 @@ function renderProductItems(products, wrapDiv) {
 			const splitPath = urlPath.split('/');
 			if (splitPath[splitPath.length - 1] !== 'index.html') {
 				productDiv.classList.add('width-33');	
-				// productDiv.style.flex = '0 0 calc(33.3333333333% - 24px)';
-				// productDiv.style.maxWidth = 'calc(33.3333333333% - 24px)';
 			}
 	
 			productDiv.innerHTML = `

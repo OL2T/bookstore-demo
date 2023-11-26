@@ -42,7 +42,7 @@
 }
 
 .main-content {
-  margin-top: 48px;
+  margin-top: 38px;
   margin-bottom: 48px;
 
   .section-product-list {
@@ -372,6 +372,7 @@
       border: 2px solid #eee;
       min-width: 80%;
       font-weight: 600;
+
       //font-size: 12px;
       .quantity {
         position: relative;
@@ -469,7 +470,7 @@
     .total-price {
       @include font-bold(20px, 28px, #121212);
 
-      & > span {
+      &>span {
         font-weight: 600;
         color: $primary-color;
       }
