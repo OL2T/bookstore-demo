@@ -63,3 +63,7 @@ thead {
   color: green !important;
   border: none !important;
 }
+
+.order-status {
+  color: green;
+}

@@ -34,11 +34,9 @@ function createBill() {
   const button = document.createElement('button');
   button.type = 'submit';
   button.innerText = 'Lọc đơn hàng';
-  // button.addEventListener('click', function () {
-  //   const startDate = document.getElementById('start-date').value;
-  //   const endDate = document.getElementById('end-date').value;
-
-  // });
+  button.addEventListener('click', function () {
+    filterOrders();
+  });
 
   dateSection.appendChild(label1);
   dateSection.appendChild(input1);
@@ -53,6 +51,7 @@ function createBill() {
 
   const bill_table = document.createElement('table');
   bill_table.classList.add('bill-table');
+  bill_table.id = 'table';
 
   const bill_header = document.createElement('thead');
   bill_header.innerHTML = `
@@ -69,52 +68,67 @@ function createBill() {
 `;
   bill_table.appendChild(bill_header);
 
+  displayOrders(dataorder);
+
+  // const bill_data = document.createElement('tbody');
+  // dataorder.forEach(order => {
+  //   const orderItem = document.createElement('tr');
+  //   orderItem.classList.add('order-item');
+  //   orderItem.innerHTML = `
+  //   <td>${order.id}</td>
+  //   <td>${order.idbill}</td>
+  //   <td>${order.name}</td>
+  //   <td>${order.address}</td>
+  //   <td>${order.date}</td>
+  //   <td>${order.price}</td>
+  //   <td class="order-status">${order.status}</td>
+  //   <td>
+  //     <button class="view-btn"><i class="fa-solid fa-eye"></i></button>
+  //   </td>
+  // `;
+  //   bill_data.appendChild(orderItem);
+  // });
+
+  // bill_table.appendChild(bill_data);
+
+  billListSection.appendChild(bill_table);
+  main_bill.appendChild(billListSection);
+}
+
+function filterOrders() {
+  const startDate = new Date(document.getElementById('start-date').value);
+  const endDate = new Date(document.getElementById('end-date').value);
+
+  const filteredOrders = dataorder.filter(order => {
+    const orderDate = new Date(order.date);
+    return orderDate >= startDate && orderDate <= endDate;
+  });
+
+  displayOrders(filteredOrders);
+}
+
+function displayOrders(dataorder) {
+  const bill_table = document.getElementById('table');
+  // bill_table.innerHTML = '';
+
   const bill_data = document.createElement('tbody');
   dataorder.forEach(order => {
     const orderItem = document.createElement('tr');
     orderItem.classList.add('order-item');
     orderItem.innerHTML = `
-    <td>${order.id}</td>
-    <td>${order.idbill}</td>
-    <td>${order.name}</td>
-    <td>${order.address}</td>
-    <td>${order.date}</td>
-    <td>${order.price}</td>
-    <td class="order-status">${order.status}</td>
-    <td>
-      <button class="view-btn"><i class="fa-solid fa-eye"></i></button>
-    </td>
-  `;
+      <td>${order.id}</td>
+      <td>${order.idbill}</td>
+      <td>${order.name}</td>
+      <td>${order.address}</td>
+      <td>${order.date}</td>
+      <td>${order.price}</td>
+      <td class="order-status">${order.status}</td>
+      <td>
+        <button class="view-btn"><i class="fa-solid fa-eye"></i></button>
+      </td>
+    `;
     bill_data.appendChild(orderItem);
   });
 
   bill_table.appendChild(bill_data);
-  billListSection.appendChild(bill_table);
-  main_bill.appendChild(billListSection);
-
-
 }
-
-// function displayBills(dataorder) {
-//   const main_bill = document.getElementById('main-bill');
-//   const billListSection = document.getElementById('bill-list-section');
-//   const bill_data = document.createElement('div');
-//   bill_data.classList.add('bill-data');
-//   dataorder.forEach(order => {
-//     const orderItem = document.createElement('div');
-//     orderItem.classList.add('order-item');
-//     orderItem.innerHTML = `
-//       <p>${order.id}</p>
-//       <p>${order.idbill}</p>
-//       <p>${order.name}</p>
-//       <p>${order.address}</p>
-//       <p>${order.date}</p>
-//       <p>${order.price}</p>
-//       <p class="order-status">${order.status}</p>
-//       <p>Xem chi tiết</p>
-//     `;
-//     bill_data.appendChild(orderItem);
-//   });
-//   billListSection.appendChild(bill_data);
-//   main_bill.appendChild(billListSection);
-// }
