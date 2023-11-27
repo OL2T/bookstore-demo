@@ -1,0 +1,27 @@
+.customer-management h3 {
+  text-align: center;
+  color: green;
+}
+
+.users-list {
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  padding: 20px 10px;
+  margin-top: 20px;
+}
+
+tbody {
+  text-align: center;
+}
+
+.btn-edit {
+  background-color: yellow !important;
+  color: black !important;
+  font-size: small;
+}
+
+.btn-delete {
+  margin-top: 8px;
+  font-size: small;
+}

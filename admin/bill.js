@@ -1,11 +1,14 @@
 let orders = JSON.parse(localStorage.getItem('CartArray')) || [];
 
-
 function createBill() {
-
-  const reportContainer = document.querySelector('.report-container');
-  reportContainer.innerHTML = '';
-  reportContainer.style.display = 'none';
+  const report = document.getElementById('report-container');
+  report.style.display = 'none';
+  const booktype = document.getElementsByClassName('booktype')[0];
+  booktype.style.display = 'none';
+  const oldCustomerManagement = document.getElementById('customer-management');
+  if (oldCustomerManagement) {
+    oldCustomerManagement.remove();
+  }
 
   const main = document.getElementById('main');
   const main_bill = document.createElement('div');
@@ -66,49 +69,6 @@ function createBill() {
  
 `;
   bill_table.appendChild(bill_header);
-
-  displayOrders(dataorder);
-
-  // const bill_data = document.createElement('tbody');
-  // dataorder.forEach(order => {
-  //   const orderItem = document.createElement('tr');
-  //   orderItem.classList.add('order-item');
-  //   orderItem.innerHTML = `
-  //   <td>${order.id}</td>
-  //   <td>${order.idbill}</td>
-  //   <td>${order.name}</td>
-  //   <td>${order.address}</td>
-  //   <td>${order.date}</td>
-  //   <td>${order.price}</td>
-  //   <td class="order-status">${order.status}</td>
-  //   <td>
-  //     <button class="view-btn"><i class="fa-solid fa-eye"></i></button>
-  //   </td>
-  // `;
-  //   bill_data.appendChild(orderItem);
-  // });
-
-  // bill_table.appendChild(bill_data);
-
-  billListSection.appendChild(bill_table);
-  main_bill.appendChild(billListSection);
-}
-
-function filterOrders() {
-  const startDate = new Date(document.getElementById('start-date').value);
-  const endDate = new Date(document.getElementById('end-date').value);
-
-  const filteredOrders = dataorder.filter(order => {
-    const orderDate = new Date(order.date);
-    return orderDate >= startDate && orderDate <= endDate;
-  });
-
-  displayOrders(filteredOrders);
-}
-
-function displayOrders(dataorder) {
-  const bill_table = document.getElementById('table');
-  // bill_table.innerHTML = '';
 
   const bill_data = document.createElement('tbody');
   cartArray.forEach(order => {
@@ -175,7 +135,3 @@ function closeOrderDetailPopup() {
   const detail = document.querySelector(".order-detail-popup");
   detail.style.display = 'none';
 }
-
-
-
-

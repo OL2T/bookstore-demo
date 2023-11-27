@@ -276,9 +276,6 @@ function createSuccessPopup() {
 
 		localStorage.setItem('CartArray', JSON.stringify(cartArray));
 
-
-
-
 	}
 }
 function closeSuccessPopup() {

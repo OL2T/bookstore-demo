@@ -504,18 +504,3 @@ option1 {
   flex-direction: column;
   padding-top: 30px;
 }
-
-.close-btn {
-  /* Styles for the close button */
-  position: fixed;
-  top: 5px;
-  /* Adjust as needed for top spacing */
-  right: 5px;
-  /* Adjust as needed for right spacing */
-  padding: 5px 10px;
-  background-color: #ccc;
-  border: none;
-  cursor: pointer;
-  z-index: 999;
-  /* Ensure the button stays above the popup content */
-}

@@ -2,8 +2,19 @@ let arr = JSON.parse(localStorage.getItem('List-products'));
 let data = '';
 
 function bookSort() {
+  const oldBill = document.getElementsByClassName('main-bill')[0];
+  if (oldBill) {
+    oldBill.remove();
+  }
+  const oldCustomerManagement = document.getElementById('customer-management');
+  if (oldCustomerManagement) {
+    oldCustomerManagement.remove();
+  }
+
   let holder = document.querySelector(".report-container");
   let list = document.querySelector(".booktype");
+  list.style.display = "block";
+  holder.style.display = "block";
   data = ` 
   <div class="book-upload">
 
@@ -179,3 +190,4 @@ function closeUploadForm() {
   var uploadForm = document.querySelector('.pop-up-upload-form');
   uploadForm.style.display = 'none';
 }
+

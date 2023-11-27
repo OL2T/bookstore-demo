@@ -17,7 +17,7 @@
 <body id="body" onload="login()">
   <div id="page" class="page">
     <div id="overlay" class="overlay"></div>
-    <div id="notification" class="notification">
+    <div id="notification" class="notification" >
       <div class="content-wrapper">
         <span class="icon-close"></span>
         <div class="heading">Đăng ký thành công</div>
@@ -254,8 +254,10 @@
           <span class="form-message"></span>
         </div>
 
-        <button class="form-submit">Đăng ký</button>
+        <button class="form-submit" onclick="submitRegistration()">Đăng ký</button>
       </form>
+      <div id="registration-success-message"></div>
+
     </div>
 
     <div class="pop-up-form-login">
