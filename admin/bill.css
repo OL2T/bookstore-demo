@@ -37,6 +37,7 @@ input[type="date"] {
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   padding: 20px 10px;
   margin-top: 20px;
+  overflow-x: auto;
 }
 
 .bill-header {
@@ -58,7 +59,7 @@ thead {
   text-align: center;
 }
 
-.view-btn{ 
+.view-btn {
   background-color: white !important;
   color: green !important;
   border: none !important;

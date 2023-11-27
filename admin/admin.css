@@ -9,7 +9,7 @@ body {
   padding: 0 30px;
   background-color: #fff;
   position: fixed;
-  z-index: 100;
+  z-index: 0;
   box-shadow: 1px 1px 15px rgba(161, 182, 253, 0.825);
   display: flex;
   justify-content: space-between;
@@ -68,7 +68,7 @@ body {
   width: 100vw;
   position: relative;
   top: 70px;
-  z-index: 1;
+  z-index: 0;
 }
 
 .main {
@@ -258,6 +258,8 @@ option1 {
   border-radius: 30px;
   box-shadow: 3px 3px 10px rgb(188, 188, 188);
   padding: 0px 20px 20px 20px;
+  overflow-x: auto;
+
 }
 
 .report-header {
@@ -369,6 +371,8 @@ option1 {
   z-index: 9999;
   max-width: 400px;
   margin-top: 40px;
+  overflow-y: auto;
+  max-height: 700px;
 }
 
 .pop-up-upload-form label,
@@ -477,30 +481,83 @@ option1 {
   border-width: 20px;
   box-shadow: 0 0 10px rgba(12, 1, 1, 0.1);
   z-index: 9999;
-  width: 800px;
+  width: 50%;
   font-size: large;
   max-height: 80vh;
   overflow-y: auto;
+  overflow-x: auto;
 }
+
+
 
 .order-detail {
   position: relative;
+  overflow-x: auto;
 }
+
 
 .view-row-content {
+  width: fit-content;
+  height: min-content;
   display: flex;
   flex-direction: row;
-  padding: 80px;
-  justify-content: space-between;
-
+  gap: 50px;
+  margin-bottom: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 100px;
 }
 
-.view-row-content .view-field-image {
-  width: 200px;
+.book-order-info {
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.view-field-image {
+  width: fit-content;
+  max-width: 50%;
+}
+
+@media (max-width: 1000px) {
+  .order-detail-popup {
+    width: 100%;
+  }
+
+  .view-row-content {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .book-order-info {
+    justify-content: center;
+    align-items: center;
+  }
+
+
+
 }
 
 .book-order-info {
   display: flex;
   flex-direction: column;
   padding-top: 30px;
+}
+
+.close-btn {
+  /* Styles for the close button */
+  position: fixed;
+  top: 5px;
+  /* Adjust as needed for top spacing */
+  right: 5px;
+  /* Adjust as needed for right spacing */
+  padding: 5px 10px;
+  background-color: #ccc;
+  border: none;
+  cursor: pointer;
+  z-index: 999;
+  /* Ensure the button stays above the popup content */
 }
