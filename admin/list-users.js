@@ -6,7 +6,8 @@ function displayCustomerList() {
   const list = document.querySelector(".booktype");
   list.innerHTML = '';
   const main = document.getElementById('main');
-  const customerManagement = document.createElement('div class="customer-div"');
+  const customerManagement = document.createElement('div');
+  customerManagement.classList.add('customer-div');
   customerManagement.classList.add('customer-management');
   customerManagement.id = 'customer-management';
   customerManagement.innerHTML = `

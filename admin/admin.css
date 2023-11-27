@@ -350,7 +350,6 @@ option1 {
   display: flex;
   flex-direction: row;
   padding: 30px;
-  padding-left: 100px;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 10px 10px 0 rgba(51, 62, 73, 0.1);
