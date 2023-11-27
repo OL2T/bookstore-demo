@@ -1,21 +1,12 @@
 let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
 
 function displayCustomerList() {
-  const report = document.getElementById('report-container');
-  report.style.display = 'none';
-  const booktype = document.getElementsByClassName('booktype')[0];
-  booktype.style.display = 'none';
-  const oldBill = document.getElementsByClassName('main-bill')[0];
-  if (oldBill) {
-    oldBill.remove();
-  }
-  const oldCustomerManagement = document.getElementById('customer-management');
-  if (oldCustomerManagement) {
-    oldCustomerManagement.remove();
-  }
-
+  const reportContainer = document.querySelector('.report-container');
+  reportContainer.innerHTML = '';
+  const list = document.querySelector(".booktype");
+  list.innerHTML = '';
   const main = document.getElementById('main');
-  const customerManagement = document.createElement('div');
+  const customerManagement = document.createElement('div class="customer-div"');
   customerManagement.classList.add('customer-management');
   customerManagement.id = 'customer-management';
   customerManagement.innerHTML = `
@@ -61,13 +52,14 @@ function displayCustomerList() {
   }
 
   main.appendChild(customerManagement);
+  reportContainer.appendChild(customerManagement);
 
 }
 
 function deleteUser(index) {
   const user = listUsers[index];
   const confirmation = confirm('Are you sure you want to delete this user?');
-  
+
   if (confirmation) {
     listUsers.splice(index, 1);
     localStorage.setItem('List-users', JSON.stringify(listUsers));

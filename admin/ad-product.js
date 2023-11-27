@@ -2,19 +2,8 @@ let arr = JSON.parse(localStorage.getItem('List-products'));
 let data = '';
 
 function bookSort() {
-  const oldBill = document.getElementsByClassName('main-bill')[0];
-  if (oldBill) {
-    oldBill.remove();
-  }
-  const oldCustomerManagement = document.getElementById('customer-management');
-  if (oldCustomerManagement) {
-    oldCustomerManagement.remove();
-  }
-
   let holder = document.querySelector(".report-container");
   let list = document.querySelector(".booktype");
-  list.style.display = "block";
-  holder.style.display = "block";
   data = ` 
   <div class="book-upload">
 
@@ -26,8 +15,14 @@ function bookSort() {
   <input type="text" id="book-upload-name" name="book-upload-name">
   <label for="book-upload-price">Book's price:</label>
   <input type="text" id="book-upload-price" name="book-upload-price">
-   <label for="book-upload-type">Book's category:</label>
-  <input type="text" id="book-upload-type" name="book-upload-type">
+            <label for="book-category">Book's category:</label>
+            <select id="book-upload-type">
+             <option value="" disabled selected>Choose category</option>
+            <option value="type1">Thiếu nhi</option>
+            <option value="type2">Sách giáo khoa</option>
+            <option value="type3">Sách ngoại ngữ</option>
+            <option value="type4">Văn học</option>
+            </select>
    <label for="book-upload-author">Book's author:</label>
   <input type="text" id="book-upload-author" name="book-upload-author">
    <label for="book-upload-publisher">Book's publisher:</label>
@@ -63,6 +58,10 @@ function bookSort() {
 }
 
 function displayProducts(category) {
+  const formatVND = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
   let selectedCategory = category;
   let categoryBooks = arr.filter(product => product.categories === selectedCategory);
 
@@ -79,8 +78,14 @@ function displayProducts(category) {
         <div class="book-image">
           <img src="${book.img}" alt="${book.name}">
         </div>
-        <div class="book-category">${book.categories}</div>
-        <div class="book-title">${book.name}</div>
+        <div class="book-info">
+        <div class="book-title">Tên: ${book.name}</div>
+        <div class="book-id">Mã: ${book.productId}</div>
+        <div class="book-category>Thể loại: ${book.categories}</div>
+        <div class="book-author">Tác giả: ${book.author}</div>
+        <div class ="book-publisher">NXB: ${book.publishingHouse}</div>
+        <div class="book-price">Giá: ${formatVND.format(book.price)}</div>
+        </div>
         <button class="delete-book-btn">Delete</button>
       </div>
     `;
@@ -99,7 +104,7 @@ function displayProducts(category) {
       if (confirmed) {
         const bookRow = event.target.parentElement.parentElement;
 
-        const indexToRemove = arr.findIndex(product => product.name === bookRow.querySelector('.book-title').textContent);
+        const indexToRemove = arr.findIndex(product => product.productId.toString() === bookRow.querySelector('.book-id').textContent);
         if (indexToRemove !== -1) {
           arr.splice(indexToRemove, 1);
 
@@ -120,7 +125,7 @@ function handleImageUpload(event) {
     imgElement.src = e.target.result;
 
 
-    imgElement.style.maxWidth = '100%';
+    imgElement.style.maxWidth = '70%';
     imgElement.style.height = 'auto';
 
     const imageContainer = document.querySelector('.image-container');
@@ -157,6 +162,11 @@ function validateAndSave() {
   }
   const imgElement = document.querySelector('.image-container img');
   const imageData = imgElement ? imgElement.src : '';
+
+  if (imageData === '') {
+    alert('Please upload an image');
+    return;
+  }
   const product = {
     productId: bookId,
     categories: bookCategory,
@@ -190,4 +200,3 @@ function closeUploadForm() {
   var uploadForm = document.querySelector('.pop-up-upload-form');
   uploadForm.style.display = 'none';
 }
-

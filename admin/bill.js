@@ -50,7 +50,7 @@ function createBill() {
 
     // Comparing dates
 
-    const filteredOrders = cartArray.filter(order => {
+    const filteredOrders = orders.filter(order => {
       // Assuming order.date is in format 'YYYY-MM-DD'
       const orderDate = new Date(order.date);
       return orderDate >= startDateObj && orderDate <= endDateObj;
@@ -72,7 +72,7 @@ function createBill() {
               <td>${order.phonenumber}</td>
               <td>${formatVND.format(order.tổng_tiền)} </td>
               <td>${order.date}</td>
-             <td class="order-status"><button class="confirm-order-status title="Xác nhận đơn hàng" onclick="confirmDelivery(${order.id})">${order.status}</button></td>
+             <td class="order-status"><button class="confirm-order-status onclick="confirmDelivery(${order.id})">${order.status}</button></td>
               <td>
               <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
               </td>
@@ -114,7 +114,7 @@ function createBill() {
   bill_table.appendChild(bill_header);
 
   const bill_data = document.createElement('tbody');
-  cartArray.forEach(order => {
+  orders.forEach(order => {
     const orderItem = document.createElement('tr');
     orderItem.classList.add('order-item');
     orderItem.setAttribute('data-order-id', order.id);
@@ -127,7 +127,7 @@ function createBill() {
     <td>${order.phonenumber}</td>
     <td>${formatVND.format(order.tổng_tiền)}</td>
    <td>${order.date}</td>
-    <td class="order-status"><button class="confirm-order-status" title="Xác nhận đơn hàng" onclick="confirmDelivery(${order.id})">${order.status}</button></td>
+    <td class="order-status"><button class="confirm-order-status" onclick="confirmDelivery(${order.id})">${order.status}</button></td>
     <td>
       <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
     </td>
@@ -141,6 +141,7 @@ function createBill() {
   main_bill.appendChild(billListSection);
   reportContainer.appendChild(main_bill);
 }
+
 function see_order_detail(id) {
 
   const formatVND = new Intl.NumberFormat("vi-VN", {
@@ -150,13 +151,13 @@ function see_order_detail(id) {
 
   let data = ``;
 
-  const order = order.find(order => order.id === id);
+  const order = orders.find(order => order.id === id);
   if (order) {
     order.products.forEach(product => {
       data += `
         <div class="views-row">
           <div class="view-row-content">
-           <div class="view-field-image"><img src="${product.img}" alt="${product.name}"></div>
+            <div class="view-field-image"><img src="${product.img}" alt="${product.name}"></div>
            <div class="book-order-info">
             <div class="view-field-title"><a href="#">${product.name}</a></div>   
               <div class="view-field-category">Thể loại: ${product.categories}</div>               
@@ -180,27 +181,18 @@ function closeOrderDetailPopup() {
   detail.style.display = 'none';
 }
 
-// function confirm_delivery(){
 
-// }
 
 
 function confirmDelivery(orderId) {
   // Add your logic here to confirm delivery, if needed
 
   // Delete the row associated with the orderId
-  const confirmed = window.confirm('Are you sure to confirm the delivery? This action will delete the order.');
+  const confirmed = window.confirm('Are you sure to confirm the delivery. This action will delete this order.');
   if (confirmed) {
     const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
     if (row) {
       row.remove(); // Remove the row from the table
-
-      const indexToRemove = orders.findIndex(order => order.id === orderId);
-      if (indexToRemove !== -1) {
-        orders.splice(indexToRemove, 1);
-
-        localStorage.setItem('CartArray', JSON.stringify(orders));
-      }
     }
   }
 }

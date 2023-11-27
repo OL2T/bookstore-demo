@@ -66,7 +66,7 @@ body {
 .main-container {
   display: flex;
   width: 100vw;
-  position: relative;
+  position: fixed;
   top: 70px;
   z-index: 0;
 }
@@ -74,7 +74,7 @@ body {
 .main {
   height: calc(100vh - 70px);
   width: 100%;
-  overflow-y: scroll;
+
   overflow-x: hidden;
   padding: 40px 30px 30px 30px;
 }
@@ -114,6 +114,7 @@ body {
 
 .navcontainer {
   height: calc(100vh - 70px);
+  position: fixed;
   width: 250px;
   position: relative;
   overflow-y: scroll;
@@ -259,6 +260,7 @@ option1 {
   box-shadow: 3px 3px 10px rgb(188, 188, 188);
   padding: 0px 20px 20px 20px;
   overflow-x: auto;
+  overflow-y: scroll;
 
 }
 
@@ -340,19 +342,30 @@ option1 {
   display: block;
 }
 
+.book-upload {
+  overflow-y: auto;
+}
+
 .book-row-content {
   display: flex;
   flex-direction: row;
   padding: 30px;
-  row-gap: 40px;
-  column-gap: 40px;
+  padding-left: 100px;
+  align-items: center;
   justify-content: space-between;
+  box-shadow: 0 10px 10px 0 rgba(51, 62, 73, 0.1);
+  font-weight: 600;
+}
+
+.book-info {
+  width: 30%;
 }
 
 
 .book-image {
   width: 100px;
   height: 150px;
+
 }
 
 
@@ -369,10 +382,12 @@ option1 {
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 9999;
-  max-width: 400px;
-  margin-top: 40px;
+  max-width: 500px;
+  height: 600px;
   overflow-y: auto;
-  max-height: 700px;
+
+
+
 }
 
 .pop-up-upload-form label,
