@@ -409,3 +409,7 @@ function createPaginationbuttons(wrapper, productList, currentPage) {
 		wrapper.appendChild(paginationContainer);
 	}
 }
+
+// function renderMoreProduct() {
+
+// }

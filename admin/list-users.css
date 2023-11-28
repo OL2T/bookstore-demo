@@ -9,6 +9,7 @@
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   padding: 20px 10px;
   margin-top: 20px;
+  overflow-x: auto;
 }
 
 tbody {
@@ -108,12 +109,4 @@ input[type="text"], input[type="email"]{
 
 .modal-footer {
   text-align: center;
-}
-
-@media (max-width: 1200px) {
-  .users-list{
-    overflow-x: auto;
-    overflow-y: auto;
-    overflow: auto;
-  }
 }
