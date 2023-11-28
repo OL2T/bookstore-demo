@@ -246,7 +246,7 @@ const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Get t
 const year = currentDate.getFullYear(); // Get the full year
 
 // Formatted date in dd-mm-yyyy format
-const formattedDate = `${day}-${month}-${year}`;
+const formattedDate = `${month}-${day}-${year}`;
 function createSuccessPopup() {
 
 
