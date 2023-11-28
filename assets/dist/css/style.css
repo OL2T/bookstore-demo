@@ -2218,5 +2218,10 @@ h1#heading {
     padding-top: 100px;
   }
 }
+.section .header-content {
+  background-color: rgb(54, 162, 54);
+  color: white;
+  padding: 10px 0 10px 10px;
+}
 
 /*# sourceMappingURL=style.css.map */
