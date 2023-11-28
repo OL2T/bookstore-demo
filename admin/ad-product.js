@@ -31,11 +31,40 @@ function bookSort() {
   <input type="file" id="myfile" name="myfile" accept="image/*" onchange="handleImageUpload(event)">
   <div class="image-container"></div>
   <div class="upload-form-btn">
-  <button onclick="validateAndSave()">Save</button>
+  <button class="saving-upload-form" onclick="validateAndSave()" >Save</button>
   <button class="cancel-upload" onclick="closeUploadForm()">Cancel</button>
   </div>
   </div>
+
+   <div class="pop-up-edit-form">
+  <label for="book-edit-id">Book's mmmID:</label>
+  <input type="text" id="book-edit-id" name="book-edit-id">
+  <label for="book-edit-name">Book's title:</label>
+  <input type="text" id="book-edit-name" name="book-edit-name">
+  <label for="book-edit-price">Book's price:</label>
+  <input type="text" id="book-edit-price" name="book-edit-price">
+            <label for="book-category">Book's category:</label>
+            <select id="book-edit-type">
+             <option value="" disabled selected>Choose category</option>
+            <option value="type1">Thiếu nhi</option>
+            <option value="type2">Sách giáo khoa</option>
+            <option value="type3">Sách ngoại ngữ</option>
+            <option value="type4">Văn học</option>
+            </select>
+   <label for="book-edit-author">Book's author:</label>
+  <input type="text" id="book-edit-author" name="book-edit-author">
+   <label for="book-edit-publisher">Book's publisher:</label>
+  <input type="text" id="book-edit-publisher" name="book-edit-publisher">
+  <label for="myfile">Select a file:</label>
+  <input type="file" id="myfile" name="myfile" accept="image/*" onchange="handleImageUpload(event)">
+  <div class="image-container"></div>
+  <div class="edit-form-btn">
+  <button class="saving-form">Save</button>
+  <button class="cancel-edit" onclick="closeEditForm()">Cancel</button>
+  </div>
 </div>
+
+
     <div class="book-category">
       <select id="categoryDropdown">
       <option value="" disabled selected>Select a category</option>
@@ -79,43 +108,49 @@ function displayProducts(category) {
           <img src="${book.img}" alt="${book.name}">
         </div>
         <div class="book-info">
-        <div class="book-title">Tên: ${book.name}</div>
-        <div class="book-id">Mã: ${book.productId}</div>
-        <div class="book-category>Thể loại: ${book.categories}</div>
-        <div class="book-author">Tác giả: ${book.author}</div>
-        <div class ="book-publisher">NXB: ${book.publishingHouse}</div>
-        <div class="book-price">Giá: ${formatVND.format(book.price)}</div>
+          <div class="book-title">Tên: ${book.name}</div>
+          <div class="book-id">Mã: ${book.productId}</div>
+          <div class="book-category">Thể loại: ${book.categories}</div>
+          <div class="book-author">Tác giả: ${book.author}</div>
+          <div class ="book-publisher">NXB: ${book.publishingHouse}</div>
+          <div class="book-price">Giá: ${formatVND.format(book.price)}</div>
         </div>
-        <button class="delete-book-btn">Delete</button>
+        <button class="edit-book-btn" onclick="showEditForm(this)">Edit</button>
+        <button class="delete-book-btn" data-productId="${book.productId}">Delete</button>
       </div>
     `;
 
     bookDiv.innerHTML = bookContent;
-
-
     categoryContainer.appendChild(bookDiv);
   });
-
 
   const deleteButtons = document.querySelectorAll('.delete-book-btn');
   deleteButtons.forEach(button => {
     button.addEventListener('click', function (event) {
       const confirmed = window.confirm('Are you sure you want to delete this book?');
       if (confirmed) {
-        const bookRow = event.target.parentElement.parentElement;
 
-        const indexToRemove = arr.findIndex(product => product.productId.toString() === bookRow.querySelector('.book-id').textContent);
+        const bookRow = event.target.closest('.book-row');
+        const bookId = bookRow.querySelector('.book-id').textContent.split(':')[1].trim(); // Get the book ID and remove extra whitespace
+        console.log(bookId)// Get the productId from the data attribute
+
+        // Use productId to remove the corresponding book
+        const indexToRemove = arr.findIndex(product => product.productId.toString() === bookId);
+        console.log(indexToRemove);
         if (indexToRemove !== -1) {
           arr.splice(indexToRemove, 1);
-
           localStorage.setItem('List-products', JSON.stringify(arr));
-
-          bookRow.remove();
+          const bookRow = event.target.closest('.book-row');
+          if (bookRow) {
+            bookRow.remove();
+          }
         }
       }
     });
   });
 }
+
+
 function handleImageUpload(event) {
   const uploadedImage = event.target.files[0];
   const reader = new FileReader();
@@ -139,6 +174,7 @@ function handleImageUpload(event) {
 function validateAndSave() {
 
   var bookId = document.getElementById('book-upload-id').value.trim();
+
   var bookTitle = document.getElementById('book-upload-name').value.trim();
   var bookPrice = document.getElementById('book-upload-price').value.trim();
   var bookCategory = document.getElementById('book-upload-type').value.trim();
@@ -181,6 +217,8 @@ function validateAndSave() {
 
 }
 
+
+
 function saveProduct(product) {
 
   let products = JSON.parse(localStorage.getItem('List-products')) || [];
@@ -194,9 +232,124 @@ function saveProduct(product) {
 function showUploadForm() {
   var uploadForm = document.querySelector('.pop-up-upload-form');
   uploadForm.style.display = 'block';
+  var bookId = document.getElementById('book-upload-id');
+
 }
+function showEditForm(editButton) {
+
+  var uploadForm = document.querySelector('.pop-up-edit-form');
+  uploadForm.style.display = 'block';
+  var bookRow = editButton.closest('.book-row-content');
+  var bookIdvalue = bookRow.querySelector('.book-id').textContent.split(':')[1].trim();
+
+
+  let arr = JSON.parse(localStorage.getItem('List-products'));
+  const Book = arr.find(book => book.productId.toString() === bookIdvalue);
+
+  var bookId = document.getElementById('book-edit-id');
+  bookId.placeholder = Book.productId + " (not editable)";
+  bookId.disabled = true;
+  var bookTitle = document.getElementById('book-edit-name');
+  bookTitle.placeholder = Book.name;
+  var bookPrice = document.getElementById('book-edit-price');
+  bookPrice.placeholder = Book.price;
+  var bookCategory = document.getElementById('book-edit-type');
+  bookCategory.placeholder = Book.categories;
+  var bookAuthor = document.getElementById('book-edit-author');
+  bookAuthor.placeholder = Book.author;
+  var bookPublisher = document.getElementById('book-edit-publisher');
+  bookPublisher.placeholder = Book.publishingHouse;
+
+
+
+
+
+
+  // var imgElement = document.querySelector('.image-container img');
+  // var imageData = imgElement ? imgElement.src : '';
+  // if (bookTitlenew === '') {
+  //   bookTitlenew = Book.name;
+  // }
+  // if (bookPricenew === '') {
+  //   bookPricenew = Book.price;
+  // }
+  // if (bookCategorynew === '') {
+  //   bookCategorynew = Book.categories;
+  // } if (bookAuthornew === '') {
+  //   bookAuthornew = Book.author;
+  // }
+  // if (bookPublishernew === '') {
+  //   bookPublishernew = Book.publishingHouse;
+  // }
+  // if (imgElement === '') {
+  //   imgElement = Book.img;
+  // }
+
+  console.log('Found Book:', Book);
+  // console.log(bookTitlenew);
+  const editButtons = document.querySelectorAll('.saving-form');
+  editButtons.forEach(button => {
+    button.addEventListener('click', function (event) {
+      const confirmed = window.confirm('Are you sure you want to save the editing to this book?');
+      if (confirmed) {
+
+
+        var bookId = document.getElementById('book-edit-id').value.trim();
+
+        var bookTitle = document.getElementById('book-edit-name').value.trim();
+
+        var bookPrice = document.getElementById('book-edit-price').value.trim();
+        var bookCategory = document.getElementById('book-edit-type').value.trim();
+        var bookAuthor = document.getElementById('book-edit-author').value.trim();
+        var bookPublisher = document.getElementById('book-edit-publisher').value.trim();
+        var bookImg = document.getElementById
+
+
+
+        var imgElement = document.querySelector('.image-container img');
+        var imageData = imgElement ? imgElement.src : '';
+        if (bookTitle === '') {
+          bookTitle = Book.name;
+        }
+        if (bookPrice.toString() === '') {
+          bookPrice = Book.price.toString();
+        }
+        if (bookCategory === '') {
+          bookCategory = Book.categories;
+        } if (bookAuthor === '') {
+          bookAuthor = Book.author;
+        }
+        if (bookPublisher === '') {
+          bookPublisher = Book.publishingHouse;
+        }
+        if (imageData === '') {
+          imageData = Book.img;
+        }
+        Book.name = Book.price = Book.categories = Book.author = Book.publishingHouse = Book.img = '';
+        Book.name = bookTitle;
+
+        Book.price = bookPrice;
+        Book.categories = bookCategory;
+        Book.author = bookAuthor;
+        Book.publishingHouse = bookPublisher;
+        Book.img = imageData;
+        console.log(Book);
+
+        localStorage.setItem('List-products', JSON.stringify(arr));
+        alert("Saved");
+
+
+      }
+    });
+  });
+}
+
 
 function closeUploadForm() {
   var uploadForm = document.querySelector('.pop-up-upload-form');
+  uploadForm.style.display = 'none';
+}
+function closeEditForm() {
+  var uploadForm = document.querySelector('.pop-up-edit-form');
   uploadForm.style.display = 'none';
 }
