@@ -18,10 +18,10 @@ function bookSort() {
             <label for="book-category">Book's category:</label>
             <select id="book-upload-type">
              <option value="" disabled selected>Choose category</option>
-            <option value="type1">Thiếu nhi</option>
-            <option value="type2">Sách giáo khoa</option>
-            <option value="type3">Sách ngoại ngữ</option>
-            <option value="type4">Văn học</option>
+            <option value="Thiếu nhi">Thiếu nhi</option>
+            <option value="Sách giáo khoa">Sách giáo khoa</option>
+            <option value="Sách ngoại ngữ">Sách ngoại ngữ</option>
+            <option value="Văn học">Văn học</option>
             </select>
    <label for="book-upload-author">Book's author:</label>
   <input type="text" id="book-upload-author" name="book-upload-author">
@@ -46,10 +46,10 @@ function bookSort() {
             <label for="book-category">Book's category:</label>
             <select id="book-edit-type">
              <option value="" disabled selected>Choose category</option>
-            <option value="type1">Thiếu nhi</option>
-            <option value="type2">Sách giáo khoa</option>
-            <option value="type3">Sách ngoại ngữ</option>
-            <option value="type4">Văn học</option>
+            <option value="Thiếu nhi">Thiếu nhi</option>
+            <option value="Sách giáo khoa">Sách giáo khoa</option>
+            <option value="Sách ngoại ngữ">Sách ngoại ngữ</option>
+            <option value="Văn học">Văn học</option>
             </select>
    <label for="book-edit-author">Book's author:</label>
   <input type="text" id="book-edit-author" name="book-edit-author">
@@ -143,7 +143,9 @@ function displayProducts(category) {
           const bookRow = event.target.closest('.book-row');
           if (bookRow) {
             bookRow.remove();
+            // location.reload();
           }
+
         }
       }
     });
@@ -174,7 +176,6 @@ function handleImageUpload(event) {
 function validateAndSave() {
 
   var bookId = document.getElementById('book-upload-id').value.trim();
-
   var bookTitle = document.getElementById('book-upload-name').value.trim();
   var bookPrice = document.getElementById('book-upload-price').value.trim();
   var bookCategory = document.getElementById('book-upload-type').value.trim();
@@ -212,6 +213,7 @@ function validateAndSave() {
     name: bookTitle,
     price: bookPrice
   }
+  console.log(product)
   saveProduct(product);
   alert('Product added');
 
@@ -222,10 +224,7 @@ function validateAndSave() {
 function saveProduct(product) {
 
   let products = JSON.parse(localStorage.getItem('List-products')) || [];
-
-
   products.push(product);
-
   localStorage.setItem('List-products', JSON.stringify(products));
 }
 
@@ -261,32 +260,8 @@ function showEditForm(editButton) {
   bookPublisher.placeholder = Book.publishingHouse;
 
 
-
-
-
-
-  // var imgElement = document.querySelector('.image-container img');
-  // var imageData = imgElement ? imgElement.src : '';
-  // if (bookTitlenew === '') {
-  //   bookTitlenew = Book.name;
-  // }
-  // if (bookPricenew === '') {
-  //   bookPricenew = Book.price;
-  // }
-  // if (bookCategorynew === '') {
-  //   bookCategorynew = Book.categories;
-  // } if (bookAuthornew === '') {
-  //   bookAuthornew = Book.author;
-  // }
-  // if (bookPublishernew === '') {
-  //   bookPublishernew = Book.publishingHouse;
-  // }
-  // if (imgElement === '') {
-  //   imgElement = Book.img;
-  // }
-
   console.log('Found Book:', Book);
-  // console.log(bookTitlenew);
+
   const editButtons = document.querySelectorAll('.saving-form');
   editButtons.forEach(button => {
     button.addEventListener('click', function (event) {
@@ -302,10 +277,6 @@ function showEditForm(editButton) {
         var bookCategory = document.getElementById('book-edit-type').value.trim();
         var bookAuthor = document.getElementById('book-edit-author').value.trim();
         var bookPublisher = document.getElementById('book-edit-publisher').value.trim();
-        var bookImg = document.getElementById
-
-
-
         var imgElement = document.querySelector('.image-container img');
         var imageData = imgElement ? imgElement.src : '';
         if (bookTitle === '') {
@@ -325,6 +296,13 @@ function showEditForm(editButton) {
         if (imageData === '') {
           imageData = Book.img;
         }
+        var Regex = /^\d+$/; // 
+        var isValidPrice = Regex.test(bookPrice);
+        if (!isValidPrice) {
+          alert('Please enter a valid price');
+          return;
+        }
+
         Book.name = Book.price = Book.categories = Book.author = Book.publishingHouse = Book.img = '';
         Book.name = bookTitle;
 

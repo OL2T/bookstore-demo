@@ -185,9 +185,10 @@ function closeOrderDetailPopup() {
 
 
 function confirmDelivery(orderId) {
-  // Add your logic here to confirm delivery, if needed
 
-  // Delete the row associated with the orderId
+  const order = orders.find(order => order.id === orderId);
+  console.log(order);
+
   const confirmed = window.confirm('Are you sure to confirm the delivery. This action will delete this order.');
   if (confirmed) {
     const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
