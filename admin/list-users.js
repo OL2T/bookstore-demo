@@ -1,15 +1,21 @@
 let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
 
-
 function displayCustomerList() {
-  let realUsers = listUsers.filter(user => user.role === "Khách hàng")
-  const reportContainer = document.querySelector('.report-container');
-  reportContainer.innerHTML = '';
-  const list = document.querySelector(".booktype");
-  list.innerHTML = '';
+  const report = document.getElementById('report-container');
+  report.innerHTML = '';
+  const booktype = document.getElementsByClassName('booktype')[0];
+  booktype.innerHTML = '';
+  const oldBill = document.getElementsByClassName('main-bill')[0];
+  if (oldBill) {
+    oldBill.remove();
+  }
+  const oldCustomerManagement = document.getElementById('customer-management');
+  if (oldCustomerManagement) {
+    oldCustomerManagement.remove();
+  }
+
   const main = document.getElementById('main');
   const customerManagement = document.createElement('div');
-  customerManagement.classList.add('customer-div');
   customerManagement.classList.add('customer-management');
   customerManagement.id = 'customer-management';
   customerManagement.innerHTML = `
@@ -35,8 +41,8 @@ function displayCustomerList() {
     </div>
   `;
 
-  for (let i = 0; i < realUsers.length; i++) {
-    const user = realUsers[i];
+  for (let i = 0; i < listUsers.length; i++) {
+    const user = listUsers[i];
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${i + 1}</td>
@@ -47,15 +53,15 @@ function displayCustomerList() {
       <td>${user.password}</td>
       <td>${user.role}</td>
       <td>
-        <button class="btn-edit" onclick="editUser('${user.username}')">Sửa</button>
-        <button class="btn-delete" onclick="deleteUser('${user.username}')">Xóa</button>
+        <button class="btn-edit" onclick="editUser(${i})">Sửa</button>
+        <button class="btn-delete" onclick="deleteUser(${i})">Xóa</button>
       </td>
     `;
     customerManagement.querySelector('tbody').appendChild(row);
   }
 
   main.appendChild(customerManagement);
-  reportContainer.appendChild(customerManagement);
+  report.appendChild(customerManagement);
 
 }
 

@@ -3,7 +3,7 @@ let data = '';
 
 function bookSort() {
 
-  let holder = document.querySelector(".report-container");
+  let holder = document.querySelector(".report-container"); ``
   let list = document.querySelector(".booktype");
   data = ` 
   <div class="book-upload">
@@ -44,7 +44,7 @@ function bookSort() {
   </div>
 
    <div class="pop-up-edit-form">
-  <label for="book-edit-id">Book's mmmID:</label>
+  <label for="book-edit-id">Book's ID:</label>
   <input type="text" id="book-edit-id" name="book-edit-id">
   <label for="book-edit-name">Book's title:</label>
   <input type="text" id="book-edit-name" name="book-edit-name">
