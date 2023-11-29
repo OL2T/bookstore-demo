@@ -1,6 +1,8 @@
 let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
 
+
 function displayCustomerList() {
+  let realUsers = listUsers.filter(user => user.role === "Khách hàng")
   const reportContainer = document.querySelector('.report-container');
   reportContainer.innerHTML = '';
   const list = document.querySelector(".booktype");
@@ -33,8 +35,8 @@ function displayCustomerList() {
     </div>
   `;
 
-  for (let i = 0; i < listUsers.length; i++) {
-    const user = listUsers[i];
+  for (let i = 0; i < realUsers.length; i++) {
+    const user = realUsers[i];
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${i + 1}</td>
@@ -45,8 +47,8 @@ function displayCustomerList() {
       <td>${user.password}</td>
       <td>${user.role}</td>
       <td>
-        <button class="btn-edit" onclick="editUser(${i})">Sửa</button>
-        <button class="btn-delete" onclick="deleteUser(${i})">Xóa</button>
+        <button class="btn-edit" onclick="editUser('${user.username}')">Sửa</button>
+        <button class="btn-delete" onclick="deleteUser('${user.username}')">Xóa</button>
       </td>
     `;
     customerManagement.querySelector('tbody').appendChild(row);
@@ -57,40 +59,25 @@ function displayCustomerList() {
 
 }
 
-function deleteUser(index) {
-  const user = listUsers[index];
+function deleteUser(username) {
+  const indexToRemove = listUsers.findIndex(user => user.username === username);
+  console.log(indexToRemove);
+
   const confirmation = confirm('Are you sure you want to delete this user?');
 
   if (confirmation) {
-    listUsers.splice(index, 1);
+    listUsers.splice(indexToRemove, 1);
     localStorage.setItem('List-users', JSON.stringify(listUsers));
     displayCustomerList();
   }
 }
 
-function editUser(index) {
-  const user = listUsers[index];
+function editUser(username) {
+  const indexToRemove = listUsers.findIndex(user => user.username === username);
   const confirmation = confirm('Are you sure you want to edit this user?');
   if (!confirmation) {
     return;
   }
-  else {
-    const name = prompt('Nhập tên khách hàng:', user.name);
-    const username = prompt('Nhập tên tài khoản:', user.username);
-    const phone = prompt('Nhập số điện thoại:', user.phone);
-    const email = prompt('Nhập email:', user.email);
-    const address = prompt('Nhập địa chỉ:', user.address);
-    const role = prompt('Nhập vai trò:', user.role);
 
-    user.name = name;
-    user.username = username;
-    user.phone = phone;
-    user.email = email;
-    user.address = address;
-    user.role = role;
-
-    localStorage.setItem('List-users', JSON.stringify(listUsers));
-    displayCustomerList();
-  }
 
 }

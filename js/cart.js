@@ -270,7 +270,7 @@ function createSuccessPopup() {
 			products: productInCart,
 			date: formattedDate,
 			tổng_tiền: totalMoney(),
-			status: 'not_checked',
+			status: 'Chưa xác nhận',
 		};
 		cartArray.push(modifiedList);
 

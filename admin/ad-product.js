@@ -63,8 +63,6 @@ function bookSort() {
   <button class="cancel-edit" onclick="closeEditForm()">Cancel</button>
   </div>
 </div>
-
-
     <div class="book-category">
       <select id="categoryDropdown">
       <option value="" disabled selected>Select a category</option>
@@ -76,10 +74,7 @@ function bookSort() {
     </div>`;
   holder.innerHTML = ' ';
   list.innerHTML = data;
-
-
   let dropdown = document.getElementById('categoryDropdown');
-
   dropdown.addEventListener('change', function () {
     let selectedCategory = dropdown.value;
     displayProducts(selectedCategory);
@@ -140,11 +135,7 @@ function displayProducts(category) {
         if (indexToRemove !== -1) {
           arr.splice(indexToRemove, 1);
           localStorage.setItem('List-products', JSON.stringify(arr));
-          const bookRow = event.target.closest('.book-row');
-          if (bookRow) {
-            bookRow.remove();
-            // location.reload();
-          }
+          displayProducts(category);
 
         }
       }
@@ -205,13 +196,13 @@ function validateAndSave() {
     return;
   }
   const product = {
-    productId: bookId,
+    productId: parseInt(bookId),
     categories: bookCategory,
     author: bookAuthor,
     publishingHouse: bookPublisher,
     img: imageData,
     name: bookTitle,
-    price: bookPrice
+    price: parseInt(bookPrice)
   }
   console.log(product)
   saveProduct(product);
@@ -231,7 +222,7 @@ function saveProduct(product) {
 function showUploadForm() {
   var uploadForm = document.querySelector('.pop-up-upload-form');
   uploadForm.style.display = 'block';
-  var bookId = document.getElementById('book-upload-id');
+
 
 }
 function showEditForm(editButton) {
@@ -267,10 +258,6 @@ function showEditForm(editButton) {
     button.addEventListener('click', function (event) {
       const confirmed = window.confirm('Are you sure you want to save the editing to this book?');
       if (confirmed) {
-
-
-        var bookId = document.getElementById('book-edit-id').value.trim();
-
         var bookTitle = document.getElementById('book-edit-name').value.trim();
 
         var bookPrice = document.getElementById('book-edit-price').value.trim();
@@ -305,18 +292,14 @@ function showEditForm(editButton) {
 
         Book.name = Book.price = Book.categories = Book.author = Book.publishingHouse = Book.img = '';
         Book.name = bookTitle;
-
-        Book.price = bookPrice;
+        Book.price = parseInt(bookPrice);
         Book.categories = bookCategory;
         Book.author = bookAuthor;
         Book.publishingHouse = bookPublisher;
         Book.img = imageData;
         console.log(Book);
-
         localStorage.setItem('List-products', JSON.stringify(arr));
         alert("Saved");
-
-
       }
     });
   });
