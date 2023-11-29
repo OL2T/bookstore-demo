@@ -18,10 +18,10 @@ function renderProductSearch(array) {
 	//  (currentPage - 1) * itemPerPage + itemPerPage,
 	// )
 	let products = document.getElementById('product-by-search');
-	let formatVND = new Intl.NumberFormat("vi-VN", {
-		style: "currency",
-		currency: "VND",
-	});
+	// let formatVND = new Intl.NumberFormat("vi-VN", {
+	// 	style: "currency",
+	// 	currency: "VND",
+	// });
 
 	let data = ``;
 	array.map((productArray) => {
@@ -32,9 +32,8 @@ function renderProductSearch(array) {
 				  <a href="#"><img src="${productArray.img}" alt="${productArray.name}" style="object-fit: contain;"></a>
 				  <div class="product-buttons">
 					  <div class="action quick-view">
-					  <span class="tool-tip">Xem nhanh</span>
-					  <button class="btn-action btn-quick-view" onclick="viewProductDetail(${productArray.productId})"></button>
-						
+					  <span class="tool-tip">Xem chi tiết</span>
+					  <button class="btn-action btn-quick-view" onclick="renderViewDetailProduct(${productArray.productId})"></button>
 					  </div>
 					  <div class="action add-to-cart">
 					  <span class="tool-tip">Thêm vào giỏ hàng</span>
@@ -140,10 +139,10 @@ function applyFilter(array) {
 		let valueFilter = e.target.elements;
 		// console.log(valueFilter)
 		let productFilter = array.filter(item => {
-			// let literature = item.categories === 'Văn học';
-			// let childrenBook = item.categories === 'Thiếu nhi';
-			// let textbook = item.categories === 'Sách giáo khoa';
-			// let foreignLanguageBook = item.categories === 'Sách ngoại ngữ';
+			let literature = item.categories === 'Văn học';
+			let childrenBook = item.categories === 'Thiếu nhi';
+			let textbook = item.categories === 'Sách giáo khoa';
+			let foreignLanguageBook = item.categories === 'Sách ngoại ngữ';
 
 			if (valueFilter.category.value !== '') {
 				if (item.categories !== valueFilter.category.value) {
