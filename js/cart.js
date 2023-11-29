@@ -57,9 +57,26 @@ function calculatorQuantity() {
 }
 
 function renderProductToCart() {
-	// let productInCart = localStorage.getItem("Carts")
-	//  ? JSON.parse(localStorage.getItem("Carts"))
-	//  : [];
+	const holder = document.querySelector(".section-product-in-cart");
+	let data1 = ` <section id="product-in-cart" class="section section-product-in-cart">
+          <div class="cart-heading">
+            <div class="heading-product heading-product-title">Sản phẩm</div>
+            <div class="heading-product product-price">Đơn giá</div>
+            <div class="heading-product product-quantity">Số lượng</div>
+            <div class="heading-product product-sub-total">Thành tiền</div>
+            <div class="heading-product product-actions">Thao tác</div>
+          </div>
+          <div class="product-content-wrapper"></div>
+          <!--        <div class="product-content-wrapper mobile"></div>-->
+          <div class="footer-product">
+            <div class="footer-product-inner">
+              <div class="total-price">Tổng số tiền: <span></span></div>
+              <button onclick="showPaymentForm() ">Thanh Toán</button>
+            </div>
+          </div>
+        </section>`
+	holder.innerHTML = '';
+	holder.innerHTML = data1;
 	let products = document.getElementById('product-in-cart');
 	const formatVND = new Intl.NumberFormat("vi-VN", {
 		style: "currency",
@@ -84,7 +101,7 @@ function renderProductToCart() {
 			 </div>
 	   </div>`;
 	});
-
+	totalMoney();
 	products.querySelector('.product-content-wrapper').innerHTML = data;
 }
 
@@ -284,4 +301,75 @@ function closeSuccessPopup() {
 	localStorage.setItem("Carts", JSON.stringify([]));
 	location.reload();
 
+}
+function seeWaitingList() {
+	const formatVND = new Intl.NumberFormat("vi-VN", {
+		style: "currency",
+		currency: "VND",
+	});
+	const holder = document.querySelector(".section-product-in-cart");
+	holder.innerHTML = ''; // Clear the content of the holder
+
+	const thisUserCarts = cartArray.filter(cart => cart.username === currentUser);
+	console.log(thisUserCarts);
+
+	thisUserCarts.forEach(cart => {
+		const waitingCart = document.createElement('div');
+		waitingCart.classList.add('waiting-cart');
+
+		const info = document.createElement('div');
+		info.innerHTML = `
+						<div class="cart-info">
+            <span>Mã đơn hàng: ${cart.id}</span>
+            <span>Ngày đặt: ${cart.date}</span>
+            <span>Trạng thái: ${cart.status}</span>
+						</div>
+        `;
+		waitingCart.appendChild(info);
+		const cartHeader = document.createElement('div');
+		cartHeader.innerHTML = ` <div class="waiting-list-views-row" >
+                    <div class="view-row-content">
+											<div class="view-field-image"></div>
+                       
+											  <div class="view-field">Sách</div>
+                        <div class="view-field view-field-price">Đơn giá</div>
+												<div class="view-field view-field-quantity">Số lượng</div>
+                        <div class="view-field view-field-sub-total">Thành tiền</div>
+                    </div>
+                </div>
+            `;
+		waitingCart.appendChild(cartHeader);
+		const productSection = document.createElement('div');
+		productSection.classList.add('this-cart-section');
+		cart.products.forEach(book => {
+			const product = document.createElement('div');
+			product.innerHTML = `
+                <div class="waiting-list-views-row" >
+                    <div class="view-row-content">
+                        <div class="view-field-image"><img src="${book.img}" alt="${book.name}"></div>
+                        <div class="product-group">
+                            <div class="view-field-category">${book.categories}</div>
+                            <div class="view-field-title"><a href="#">${book.name}</a></div>
+                        </div>
+                        <div class="view-field view-field-price">${formatVND.format(book.price)}</div>
+												<div class="view-field view-field-quantity">${book.quantity}</div>
+                        <div class="view-field view-field-sub-total">${formatVND.format(book.price * book.quantity)}</div>
+                    </div>
+                </div>
+            `;
+			productSection.appendChild(product);
+		});
+		waitingCart.appendChild(productSection);
+		const total = document.createElement('div');
+		total.classList.add('cart-footer');
+		total.innerHTML = `<div class="footer-product" >
+            <div class="footer-product-inner">
+              <div class="total-price">Tổng số tiền: ${formatVND.format(cart.tổng_tiền)}</div>
+             
+            </div>
+          </div>`
+		waitingCart.appendChild(total);
+
+		holder.appendChild(waitingCart); // Append each waitingCart to the holder
+	});
 }

@@ -1,4 +1,4 @@
-let orders = JSON.parse(localStorage.getItem('CartArray')) || [];
+
 
 
 function createBill() {
@@ -194,6 +194,8 @@ function confirmDelivery(orderId) {
     const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
     if (row) {
       row.remove(); // Remove the row from the table
+      order.status = 'Đã xác nhận';
+      localStorage.setItem('CartArray', JSON.stringify(orders));
     }
   }
 }

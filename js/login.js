@@ -46,7 +46,7 @@ function login() {
 			if (listUsers[i].username === usernameDataInput.value && listUsers[i].password === passwordDataInput.value) {
 				isLogin = true;
 				// console.log('UserID:', listUsers[i].userID);
-				localStorage.setItem('loggedInUsername', listUsers[i].fullName);
+				localStorage.setItem('loggedInUsername', listUsers[i].username);
 				checkLogin();
 
 			} else {
