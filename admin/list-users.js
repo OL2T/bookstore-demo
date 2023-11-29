@@ -66,13 +66,6 @@ function displayCustomerList() {
 
 function deleteUser(index) {
   const user = listUsers[index];
-  // const confirmation = confirm('Are you sure you want to delete this user?');
-
-  // if (confirmation) {
-  //   listUsers.splice(index, 1);
-  //   localStorage.setItem('List-users', JSON.stringify(listUsers));
-  //   displayCustomerList();
-  // }
 
   const deleteModal = document.createElement('div');
   deleteModal.classList.add('modal');
@@ -99,7 +92,7 @@ function deleteUser(index) {
 
   deleteModal.appendChild(modalContent);
   document.body.appendChild(deleteModal);
-  openModal();
+  openModal1();
 }
 
 function confirmDeleteUser(index) {
@@ -107,6 +100,13 @@ function confirmDeleteUser(index) {
   localStorage.setItem('List-users', JSON.stringify(listUsers));
   closeModal1();
   displayCustomerList();
+}
+
+function openModal1() {
+  const deleteModal = document.getElementById('deleteModal');
+  if (deleteModal) {
+    deleteModal.style.display = 'block';
+  }
 }
 
 function closeModal1() {
@@ -121,11 +121,6 @@ function openModal() {
   const editUserModal = document.getElementById('editUserModal');
   if (editUserModal) {
     editUserModal.style.display = 'block';
-  }
-
-  const deleteModal = document.getElementById('deleteModal');
-  if (deleteModal) {
-    deleteModal.style.display = 'block';
   }
 }
 
