@@ -68,7 +68,7 @@ h1#heading {
 .pagination {
   display: block;
   width: 80%;
-  margin: 20px 39%;
+  margin: 20px auto;
 }
 
 .pagination .pagination-button {
@@ -283,4 +283,31 @@ h1#heading {
   h1#heading {
     padding-top: 100px;
   }
+}
+
+.section .header-content {
+  background-color: rgb(30, 112, 30);
+  color: white;
+  padding: 10px 0 10px 30px;
+  // border-top-right-radius: 100px;
+  // border-bottom-right-radius: 100px;
+  border-radius: 100px;
+}
+
+.btn-show-more {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: gray !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-show-more:hover {
+  background-color: white !important;
+  color: black !important;
+  border: none !important;
 }

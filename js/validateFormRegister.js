@@ -222,7 +222,7 @@ function validateRegisterForm() {
 			localStorage.setItem('List-users', json);
 
 
-			renderListUser();
+			// renderListUser();
 			accessibility();
 			form.reset();
 			login();

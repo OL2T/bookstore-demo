@@ -28,14 +28,3 @@ function slideAuto() {
 }
 
 setInterval(slideAuto, 3000);
-
-// window.onload = function () {
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const type = urlParams.get('type');
-//     const priceRange = urlParams.get('priceRange');
-//     const page = urlParams.get('page') || 1;
-//     if (type || priceRange || page) {
-//         const banner = document.getElementById('banner');
-//         banner.style.display = 'none';
-//     }
-// }
