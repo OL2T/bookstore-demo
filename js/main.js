@@ -7,7 +7,8 @@ function main() {
 	const popup_success = document.getElementById('notification');
 	const btn_login_popup = popup_success.querySelector('.btn-login');
 	const body = document.querySelector('body');
-	const btnLogout = document.getElementById('btn-logout')
+	const btnLogout = document.getElementById('btn-logout');
+	const btnManagement = document.getElementById('btn-manage-page');
 	let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
 	const header = document.querySelector('.header');
 
@@ -72,6 +73,7 @@ function main() {
 		document.getElementById('btn-login').parentElement.style.display = 'none';
 		document.getElementById('btn-register').parentElement.style.display = 'none';
 		btnLogout.parentElement.style.display = 'block';
+		btnManagement.parentElement.style.display = 'block';
 		overlay.classList.remove('is-active');
 		pop_up_login.classList.remove('is-active');
 	}
@@ -79,6 +81,10 @@ function main() {
 	btnLogout.addEventListener('click', function (e) {
 		e.preventDefault();
 		logout();
+	});
+
+	btnManagement.addEventListener('click', function () {
+		window.location.href = 'admin/admin.html';
 	});
 
 }
@@ -150,7 +156,7 @@ function mobileMenu() {
 	})
 	const btnLogin = blockNavigation.querySelector('.btn-login')
 	const btnSignup = blockNavigation.querySelector('.btn-register')
-
+	
 	btnLogin.addEventListener('click', function () {
 		pop_up_login.classList.add('is-active');
 		overlay.classList.add('is-active');
