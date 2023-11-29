@@ -51,13 +51,18 @@ function bookSort() {
   <label for="book-edit-price">Book's price:</label>
   <input type="text" id="book-edit-price" name="book-edit-price">
             <label for="book-category">Book's category:</label>
-            <select id="book-edit-type">
+            <select id="book-edit-type" onchange="addnewTypeedit()">
              <option value="" disabled selected>Choose category</option>
             <option value="Thiếu nhi">Thiếu nhi</option>
             <option value="Sách giáo khoa">Sách giáo khoa</option>
             <option value="Sách ngoại ngữ">Sách ngoại ngữ</option>
             <option value="Văn học">Văn học</option>
+             <option value="Khác">Khác</option>
             </select>
+            <div id="other-category-input-edit" style="display: none;">
+  <label for="book-edit-other-category">Other Category:</label>
+  <input type="text" id="book-edit-other-category" name="book-edit-other-category">
+</div>
    <label for="book-edit-author">Book's author:</label>
   <input type="text" id="book-edit-author" name="book-edit-author">
    <label for="book-edit-publisher">Book's publisher:</label>
@@ -123,6 +128,7 @@ function displayProducts(category) {
           <div class ="book-publisher">NXB: ${book.publishingHouse}</div>
           <div class="book-price">Giá: ${formatVND.format(book.price)}</div>
         </div>
+        <div class="book-list-btns">
         <button class="edit-book-btn" onclick="showEditForm(this)">Edit</button>
         <button class="delete-book-btn" data-productId="${book.productId}">Delete</button>
       </div>
@@ -167,6 +173,19 @@ function addnewType() {
     otherCategoryInput.style.display = "none";
   }
 }
+function addnewTypeedit() {
+  var selectElement = document.getElementById("book-edit-type");
+  var selectedValue = selectElement.value;
+
+  var otherCategoryInput = document.getElementById("other-category-input-edit");
+
+  if (selectedValue === "Khác") {
+    otherCategoryInput.style.display = "block";
+  } else {
+    otherCategoryInput.style.display = "none";
+  }
+}
+
 
 function handleImageUpload(event) {
   const uploadedImage = event.target.files[0];
@@ -289,6 +308,8 @@ function showEditForm(editButton) {
   bookPublisher.placeholder = Book.publishingHouse;
 
 
+
+
   console.log('Found Book:', Book);
 
   const editButtons = document.querySelectorAll('.saving-form');
@@ -304,6 +325,19 @@ function showEditForm(editButton) {
         var bookPublisher = document.getElementById('book-edit-publisher').value.trim();
         var imgElement = document.querySelector('.image-container img');
         var imageData = imgElement ? imgElement.src : '';
+
+        var selectedCategory = document.getElementById('book-edit-type').value.trim();
+        var otherCategoryInput = document.getElementById('book-edit-other-category');
+
+
+        if (selectedCategory === 'Khác') {
+          bookCategory = otherCategoryInput.value.trim();
+
+          if (bookCategory === '') {
+            alert('Please specify the other category');
+            return;
+          }
+        }
         if (bookTitle === '') {
           bookTitle = Book.name;
         }
@@ -338,6 +372,7 @@ function showEditForm(editButton) {
         console.log(Book);
         localStorage.setItem('List-products', JSON.stringify(arr));
         alert("Saved");
+        return;
       }
     });
   });

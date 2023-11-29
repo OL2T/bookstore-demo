@@ -641,6 +641,7 @@ option1 {
   }
 
 
+
 }
 
 @media (max-width:767px) {
@@ -670,6 +671,16 @@ option1 {
     display: block;
   }
 
+  .book-row-content {
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .book-info {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 @media (max-width:525px) {
@@ -691,4 +702,5 @@ option1 {
   .waiting-list-views-row .view-row-content .product-group {
     text-align: center;
   }
+
 }

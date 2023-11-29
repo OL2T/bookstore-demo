@@ -8,7 +8,8 @@ let perProducts = storedProducts.slice(
 	(currentPage - 1) * itemPerPage,
 	(currentPage - 1) * itemPerPage + itemPerPage,
 )
-let orders = JSON.parse(localStorage.getItem('CartArray')) || [];
+
+
 
 
 function renderProductSearch(array) {
