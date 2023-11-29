@@ -9,7 +9,7 @@ body {
   padding: 0 30px;
   background-color: #fff;
   position: fixed;
-  z-index: 100;
+  z-index: 0;
   box-shadow: 1px 1px 15px rgba(161, 182, 253, 0.825);
   display: flex;
   justify-content: space-between;
@@ -66,15 +66,15 @@ body {
 .main-container {
   display: flex;
   width: 100vw;
-  position: relative;
+  position: fixed;
   top: 70px;
-  z-index: 1;
+  z-index: 0;
 }
 
 .main {
   height: calc(100vh - 70px);
   width: 100%;
-  overflow-y: scroll;
+
   overflow-x: hidden;
   padding: 40px 30px 30px 30px;
 }
@@ -114,6 +114,7 @@ body {
 
 .navcontainer {
   height: calc(100vh - 70px);
+  position: fixed;
   width: 250px;
   position: relative;
   overflow-y: scroll;
@@ -180,7 +181,7 @@ body {
   }
 
   .navcontainer {
-    width: 100vw;
+    width: 50vw;
     position: absolute;
     transition: all 0.6s ease-in-out;
     top: 0;
@@ -258,6 +259,9 @@ option1 {
   border-radius: 30px;
   box-shadow: 3px 3px 10px rgb(188, 188, 188);
   padding: 0px 20px 20px 20px;
+  overflow-x: auto;
+  overflow-y: scroll;
+
 }
 
 .report-header {
@@ -338,19 +342,29 @@ option1 {
   display: block;
 }
 
+.book-upload {
+  overflow-y: auto;
+}
+
 .book-row-content {
   display: flex;
   flex-direction: row;
   padding: 30px;
-  row-gap: 40px;
-  column-gap: 40px;
+  align-items: center;
   justify-content: space-between;
+  box-shadow: 0 10px 10px 0 rgba(51, 62, 73, 0.1);
+  font-weight: 600;
+}
+
+.book-info {
+  width: 30%;
 }
 
 
 .book-image {
   width: 100px;
   height: 150px;
+
 }
 
 
@@ -367,8 +381,12 @@ option1 {
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 9999;
-  max-width: 400px;
-  margin-top: 40px;
+  max-width: 500px;
+  height: 600px;
+  overflow-y: auto;
+
+
+
 }
 
 .pop-up-upload-form label,
@@ -477,30 +495,200 @@ option1 {
   border-width: 20px;
   box-shadow: 0 0 10px rgba(12, 1, 1, 0.1);
   z-index: 9999;
-  width: 800px;
+  width: 50%;
   font-size: large;
   max-height: 80vh;
   overflow-y: auto;
+  overflow-x: auto;
 }
+
+
 
 .order-detail {
   position: relative;
+  overflow-x: auto;
 }
 
-.view-row-content {
+
+.detail-view-row-content {
+  width: fit-content;
+  height: min-content;
   display: flex;
   flex-direction: row;
-  padding: 80px;
-  justify-content: space-between;
-
+  gap: 50px;
+  margin-bottom: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 100px;
 }
 
-.view-row-content .view-field-image {
-  width: 200px;
+.book-order-info {
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.view-field-image {
+  width: fit-content;
+  max-width: 50%;
+}
+
+@media (max-width: 1000px) {
+  .order-detail-popup {
+    width: 100%;
+  }
+
+  .view-row-content {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .book-order-info {
+    justify-content: center;
+    align-items: center;
+  }
+
+
+
 }
 
 .book-order-info {
   display: flex;
   flex-direction: column;
   padding-top: 30px;
+}
+
+.close-btn {
+  /* Styles for the close button */
+  position: fixed;
+  top: 5px;
+  /* Adjust as needed for top spacing */
+  right: 5px;
+  /* Adjust as needed for right spacing */
+  padding: 5px 10px;
+  background-color: #ccc;
+  border: none;
+  cursor: pointer;
+  z-index: 999;
+  /* Ensure the button stays above the popup content */
+}
+
+.pop-up-edit-form {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  max-width: 500px;
+  height: 600px;
+  overflow-y: auto;
+}
+
+.this-cart-section {
+  height: 400px;
+  overflow-y: auto;
+}
+
+.waiting-cart {
+  margin-top: 50px;
+  box-shadow: 1px 1px 15px rgba(161, 182, 253, 0.825);
+  background: #ddd;
+}
+
+.cart-info {
+  display: flex;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #ccbcbc;
+  border-radius: 10px;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.other-category-input {
+  display: none;
+}
+
+@media (max-width:1000px) {
+  .waiting-list-views-row-header .view-row-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+  }
+
+  .cart-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+
+  .waiting-list-views-row .view-row-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+  }
+
+
+}
+
+@media (max-width:767px) {
+  .waiting-list-views-row-header .view-row-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-size: small;
+    align-items: baseline;
+
+  }
+
+  .waiting-list-views-row .view-row-content .view-field.view-field-sub-total {
+    display: block;
+
+  }
+
+  .waiting-list-views-row .view-row-content {
+
+    font-size: small;
+
+    align-items: baseline;
+
+  }
+
+  .waiting-list-views-row-header .view-row-content .view-field.view-field-sub-total {
+    display: block;
+  }
+
+}
+
+@media (max-width:525px) {
+  .waiting-list-views-row .view-row-content {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .waiting-list-views-row .view-row-content .view-field {
+    text-align: center;
+  }
+
+  .waiting-list-views-row-header {
+    display: none;
+  }
+
+  .waiting-list-views-row .view-row-content .product-group {
+    text-align: center;
+  }
 }

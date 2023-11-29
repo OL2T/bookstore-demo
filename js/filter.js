@@ -34,9 +34,9 @@ function renderProductItems(products, wrapDiv) {
 			const urlPath = location.href;
 			const splitPath = urlPath.split('/');
 			if (splitPath[splitPath.length - 1] !== 'index.html') {
-				productDiv.classList.add('width-33');	
+				productDiv.classList.add('width-33');
 			}
-	
+
 			productDiv.innerHTML = `
 			<div class="view-row-content" >
 				<div class="view-field-image" >
@@ -118,9 +118,35 @@ function renderProductList() {
 		} else if (category.name === "Sách ngoại ngữ") {
 			tempProducts = foreignLanguageBookProductList;
 		}
-		renderProductItems(tempProducts, categoryContent);
+
+		const startIndex = 0;
+		const endIndex = Math.min(startIndex + 4, tempProducts.length);
+		renderProductItems(tempProducts.slice(startIndex, endIndex), categoryContent);
+
+		const showMoreButton = document.createElement('button');
+		showMoreButton.classList.add('btn-show-more');
+		showMoreButton.innerText = 'Xem thêm';
+
+		let nextIndex = endIndex;
+
+		showMoreButton.addEventListener('click', function () {
+			const nextEndIndex = Math.min(nextIndex + 4, tempProducts.length);
+			renderProductItems(tempProducts.slice(nextIndex, nextEndIndex), categoryContent);
+			nextIndex = nextEndIndex;
+
+			if (nextIndex >= tempProducts.length) {
+				showMoreButton.style.display = 'none';
+			}
+		});
+
+		if (endIndex >= tempProducts.length) {
+			showMoreButton.style.display = 'none';
+		}
+
 		categorySection.appendChild(categoryContent);
+		categorySection.appendChild(showMoreButton);
 		main_content.appendChild(categorySection);
+
 	});
 }
 
@@ -409,3 +435,7 @@ function createPaginationbuttons(wrapper, productList, currentPage) {
 		wrapper.appendChild(paginationContainer);
 	}
 }
+
+// function renderMoreProduct() {
+
+// }

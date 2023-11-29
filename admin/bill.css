@@ -13,6 +13,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 10px;
+  overflow-x: auto;
 }
 
 .date-section label {
@@ -37,6 +38,8 @@ input[type="date"] {
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   padding: 20px 10px;
   margin-top: 20px;
+  overflow-x: auto;
+  overflow-x: auto;
 }
 
 .bill-header {
@@ -58,8 +61,18 @@ thead {
   text-align: center;
 }
 
-.view-btn{ 
+.view-btn {
   background-color: white !important;
   color: green !important;
   border: none !important;
+}
+
+@media (max-width: 765px) {
+  .date-section {
+    flex-direction: column;
+  }
+
+  .main-bill {
+    font-size: 10px;
+  }
 }

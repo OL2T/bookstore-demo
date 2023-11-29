@@ -1,14 +1,16 @@
-let orders = JSON.parse(localStorage.getItem('CartArray')) || [];
+
+
 
 function createBill() {
-  const report = document.getElementById('report-container');
-  report.style.display = 'none';
-  const booktype = document.getElementsByClassName('booktype')[0];
-  booktype.style.display = 'none';
-  const oldCustomerManagement = document.getElementById('customer-management');
-  if (oldCustomerManagement) {
-    oldCustomerManagement.remove();
-  }
+  const formatVND = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+  const reportContainer = document.querySelector('.report-container');
+  reportContainer.innerHTML = '';
+  const list = document.querySelector(".booktype");
+  list.innerHTML = '';
+
 
   const main = document.getElementById('main');
   const main_bill = document.createElement('div');
@@ -34,9 +36,51 @@ function createBill() {
   const button = document.createElement('button');
   button.type = 'submit';
   button.innerText = 'Lọc đơn hàng';
+
   button.addEventListener('click', function () {
-    filterOrders();
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+
+    const startDateObj = new Date(startDate);
+    const endDateObj = new Date(endDate);
+
+    // Assuming order.date is a string in the format 'yyyy-mm-dd'
+    // Convert order.date to a Date object for comparison
+
+
+    // Comparing dates
+
+    const filteredOrders = orders.filter(order => {
+      // Assuming order.date is in format 'YYYY-MM-DD'
+      const orderDate = new Date(order.date);
+      return orderDate >= startDateObj && orderDate <= endDateObj;
+    });
+    while (bill_data.firstChild) {
+      bill_data.removeChild(bill_data.firstChild);
+    }
+
+    // Populate table with filtered data
+    filteredOrders.forEach(order => {
+      const orderItem = document.createElement('tr');
+      orderItem.classList.add('order-item');
+      orderItem.setAttribute('data-order-id', order.id);
+      orderItem.innerHTML = `
+              <td>${order.id}</td>
+              <td>${order.Khách_hàng}</td>
+              <td>${order.username}</td>
+              <td>${order.địa_chỉ}</td>
+              <td>${order.phonenumber}</td>
+              <td>${formatVND.format(order.tổng_tiền)} </td>
+              <td>${order.date}</td>
+             <td class="order-status"><button class="confirm-order-status onclick="confirmDelivery(${order.id})">${order.status}</button></td>
+              <td>
+              <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
+              </td>
+              `;
+      bill_data.appendChild(orderItem);
+    });
   });
+
 
   dateSection.appendChild(label1);
   dateSection.appendChild(input1);
@@ -51,7 +95,6 @@ function createBill() {
 
   const bill_table = document.createElement('table');
   bill_table.classList.add('bill-table');
-  bill_table.id = 'table';
 
   const bill_header = document.createElement('thead');
   bill_header.innerHTML = `
@@ -71,9 +114,10 @@ function createBill() {
   bill_table.appendChild(bill_header);
 
   const bill_data = document.createElement('tbody');
-  cartArray.forEach(order => {
+  orders.forEach(order => {
     const orderItem = document.createElement('tr');
     orderItem.classList.add('order-item');
+    orderItem.setAttribute('data-order-id', order.id);
     orderItem.innerHTML = `
 
     <td>${order.id}</td>
@@ -81,9 +125,9 @@ function createBill() {
     <td>${order.username}</td>
     <td>${order.địa_chỉ}</td>
     <td>${order.phonenumber}</td>
-    <td>${order.tổng_tiền}</td>
+    <td>${formatVND.format(order.tổng_tiền)}</td>
    <td>${order.date}</td>
-    <td class="order-status">${order.status}</td>
+    <td class="order-status"><button class="confirm-order-status" onclick="confirmDelivery(${order.id})">${order.status}</button></td>
     <td>
       <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
     </td>
@@ -95,6 +139,7 @@ function createBill() {
   bill_table.appendChild(bill_data);
   billListSection.appendChild(bill_table);
   main_bill.appendChild(billListSection);
+  reportContainer.appendChild(main_bill);
 }
 
 function see_order_detail(id) {
@@ -106,12 +151,12 @@ function see_order_detail(id) {
 
   let data = ``;
 
-  const order = cartArray.find(order => order.id === id);
+  const order = orders.find(order => order.id === id);
   if (order) {
     order.products.forEach(product => {
       data += `
         <div class="views-row">
-          <div class="view-row-content">
+          <div class="detail-view-row-content">
             <div class="view-field-image"><img src="${product.img}" alt="${product.name}"></div>
            <div class="book-order-info">
             <div class="view-field-title"><a href="#">${product.name}</a></div>   
@@ -134,4 +179,23 @@ function see_order_detail(id) {
 function closeOrderDetailPopup() {
   const detail = document.querySelector(".order-detail-popup");
   detail.style.display = 'none';
+}
+
+
+
+
+function confirmDelivery(orderId) {
+
+  const order = orders.find(order => order.id === orderId);
+  console.log(order);
+
+  const confirmed = window.confirm('Are you sure to confirm the delivery. This action will delete this order.');
+  if (confirmed) {
+    const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
+    if (row) {
+      row.remove(); // Remove the row from the table
+      order.status = 'Đã xác nhận';
+      localStorage.setItem('CartArray', JSON.stringify(orders));
+    }
+  }
 }
