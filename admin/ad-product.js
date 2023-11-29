@@ -2,6 +2,7 @@ let arr = JSON.parse(localStorage.getItem('List-products'));
 let data = '';
 
 function bookSort() {
+
   let holder = document.querySelector(".report-container");
   let list = document.querySelector(".booktype");
   data = ` 
@@ -16,13 +17,19 @@ function bookSort() {
   <label for="book-upload-price">Book's price:</label>
   <input type="text" id="book-upload-price" name="book-upload-price">
             <label for="book-category">Book's category:</label>
-            <select id="book-upload-type">
-             <option value="" disabled selected>Choose category</option>
+            <select id="book-upload-type" onchange="addnewType()">
+             <option value="" disabled selected>Choose category</option>           
             <option value="Thiếu nhi">Thiếu nhi</option>
             <option value="Sách giáo khoa">Sách giáo khoa</option>
             <option value="Sách ngoại ngữ">Sách ngoại ngữ</option>
             <option value="Văn học">Văn học</option>
+            <option value="Khác">Khác</option>           
             </select>
+            <div id="other-category-input" style="display: none;">
+  <label for="book-upload-other-category">Other Category:</label>
+  <input type="text" id="book-upload-other-category" name="book-upload-other-category">
+</div>
+
    <label for="book-upload-author">Book's author:</label>
   <input type="text" id="book-upload-author" name="book-upload-author">
    <label for="book-upload-publisher">Book's publisher:</label>
@@ -66,6 +73,7 @@ function bookSort() {
     <div class="book-category">
       <select id="categoryDropdown">
       <option value="" disabled selected>Select a category</option>
+       <option value="Tất cả">Tất cả</option>
         <option value="Thiếu nhi">Thiếu nhi</option>
         <option value="Sách ngoại ngữ">Sách ngoại ngữ</option>
         <option value="Sách giáo khoa">Sách giáo khoa</option>
@@ -74,6 +82,7 @@ function bookSort() {
     </div>`;
   holder.innerHTML = ' ';
   list.innerHTML = data;
+
   let dropdown = document.getElementById('categoryDropdown');
   dropdown.addEventListener('change', function () {
     let selectedCategory = dropdown.value;
@@ -86,8 +95,12 @@ function displayProducts(category) {
     style: "currency",
     currency: "VND",
   });
+
   let selectedCategory = category;
   let categoryBooks = arr.filter(product => product.categories === selectedCategory);
+  if (category === "Tất cả") {
+    categoryBooks = arr;
+  }
 
   let categoryContainer = document.querySelector(".report-container");
   categoryContainer.innerHTML = '';
@@ -142,7 +155,18 @@ function displayProducts(category) {
     });
   });
 }
+function addnewType() {
+  var selectElement = document.getElementById("book-upload-type");
+  var selectedValue = selectElement.value;
 
+  var otherCategoryInput = document.getElementById("other-category-input");
+
+  if (selectedValue === "Khác") {
+    otherCategoryInput.style.display = "block";
+  } else {
+    otherCategoryInput.style.display = "none";
+  }
+}
 
 function handleImageUpload(event) {
   const uploadedImage = event.target.files[0];
@@ -164,8 +188,8 @@ function handleImageUpload(event) {
   reader.readAsDataURL(uploadedImage);
 }
 
-function validateAndSave() {
 
+function validateAndSave() {
   var bookId = document.getElementById('book-upload-id').value.trim();
   var bookTitle = document.getElementById('book-upload-name').value.trim();
   var bookPrice = document.getElementById('book-upload-price').value.trim();
@@ -176,8 +200,8 @@ function validateAndSave() {
   var isValidPrice = Regex.test(bookPrice);
   var isValidID = Regex.test(bookId);
 
-  if (bookId === '' || bookTitle === '' || bookPrice === '' || bookCategory === '' || bookAuthor === '' || bookPublisher === '') {
-    alert('Please fill in all fields.');
+  if (bookId === '' || bookTitle === '' || bookPrice === '' || bookAuthor === '' || bookPublisher === '') {
+    alert('Please fill in all required fields.');
     return;
   }
   if (!isValidPrice) {
@@ -188,6 +212,21 @@ function validateAndSave() {
     alert('Please enter a valid ID');
     return;
   }
+
+  // Get the value of the selected category
+  var selectedCategory = document.getElementById('book-upload-type').value.trim();
+  var otherCategoryInput = document.getElementById('book-upload-other-category');
+
+  // If "Khác" (Other) category is selected, use the value from the other category input field
+  if (selectedCategory === 'Khác') {
+    bookCategory = otherCategoryInput.value.trim();
+
+    if (bookCategory === '') {
+      alert('Please specify the other category');
+      return;
+    }
+  }
+
   const imgElement = document.querySelector('.image-container img');
   const imageData = imgElement ? imgElement.src : '';
 
@@ -195,6 +234,7 @@ function validateAndSave() {
     alert('Please upload an image');
     return;
   }
+
   const product = {
     productId: parseInt(bookId),
     categories: bookCategory,
@@ -203,14 +243,12 @@ function validateAndSave() {
     img: imageData,
     name: bookTitle,
     price: parseInt(bookPrice)
-  }
-  console.log(product)
+  };
+
+  console.log(product);
   saveProduct(product);
   alert('Product added');
-
 }
-
-
 
 function saveProduct(product) {
 

@@ -327,10 +327,9 @@ function seeWaitingList() {
         `;
 		waitingCart.appendChild(info);
 		const cartHeader = document.createElement('div');
-		cartHeader.innerHTML = ` <div class="waiting-list-views-row" >
+		cartHeader.innerHTML = ` <div class="waiting-list-views-row-header" >
                     <div class="view-row-content">
-											<div class="view-field-image"></div>
-                       
+												<div class="view-field-image"></div>                       
 											  <div class="view-field">Sách</div>
                         <div class="view-field view-field-price">Đơn giá</div>
 												<div class="view-field view-field-quantity">Số lượng</div>
@@ -351,7 +350,7 @@ function seeWaitingList() {
                             <div class="view-field-category">${book.categories}</div>
                             <div class="view-field-title"><a href="#">${book.name}</a></div>
                         </div>
-                        <div class="view-field view-field-price">${formatVND.format(book.price)}</div>
+                        <div class="view-field view-field-price"><span>${formatVND.format(book.price)}</span></div>
 												<div class="view-field view-field-quantity">${book.quantity}</div>
                         <div class="view-field view-field-sub-total">${formatVND.format(book.price * book.quantity)}</div>
                     </div>

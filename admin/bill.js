@@ -156,7 +156,7 @@ function see_order_detail(id) {
     order.products.forEach(product => {
       data += `
         <div class="views-row">
-          <div class="view-row-content">
+          <div class="detail-view-row-content">
             <div class="view-field-image"><img src="${product.img}" alt="${product.name}"></div>
            <div class="book-order-info">
             <div class="view-field-title"><a href="#">${product.name}</a></div>   
