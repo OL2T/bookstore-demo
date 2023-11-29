@@ -66,19 +66,66 @@ function displayCustomerList() {
 
 function deleteUser(index) {
   const user = listUsers[index];
-  const confirmation = confirm('Are you sure you want to delete this user?');
+  // const confirmation = confirm('Are you sure you want to delete this user?');
 
-  if (confirmation) {
-    listUsers.splice(index, 1);
-    localStorage.setItem('List-users', JSON.stringify(listUsers));
-    displayCustomerList();
+  // if (confirmation) {
+  //   listUsers.splice(index, 1);
+  //   localStorage.setItem('List-users', JSON.stringify(listUsers));
+  //   displayCustomerList();
+  // }
+
+  const deleteModal = document.createElement('div');
+  deleteModal.classList.add('modal');
+  deleteModal.id = 'deleteModal';
+  const modalContent = document.createElement('div');
+  modalContent.classList.add('modal-content');
+  modalContent.innerHTML = `
+  <div class="modal-header">
+      <div class="delete-header">Delete User</div>
+      <div class="close">X</div>
+    </div>
+    <div class="modal-body">
+      <p>Bạn có chắc muốn xóa khách hàng ${user.fullName}?</p>
+    </div>
+    <div class="modal-footer">
+      <button id="confirmDeleteButton" onclick="confirmDeleteUser(${index})">Xác nhận</button>
+      <button id="cancelDeleteButton" onclick="closeModal1()">Hủy</button>
+    </div>
+  `;
+
+  const closeButton = modalContent.querySelector('.close');
+
+  closeButton.addEventListener('click', closeModal1);
+
+  deleteModal.appendChild(modalContent);
+  document.body.appendChild(deleteModal);
+  openModal();
+}
+
+function confirmDeleteUser(index) {
+  listUsers.splice(index, 1);
+  localStorage.setItem('List-users', JSON.stringify(listUsers));
+  closeModal1();
+  displayCustomerList();
+}
+
+function closeModal1() {
+  const deleteModal = document.getElementById('deleteModal');
+  if (deleteModal) {
+    deleteModal.remove();
   }
 }
+
 
 function openModal() {
   const editUserModal = document.getElementById('editUserModal');
   if (editUserModal) {
     editUserModal.style.display = 'block';
+  }
+
+  const deleteModal = document.getElementById('deleteModal');
+  if (deleteModal) {
+    deleteModal.style.display = 'block';
   }
 }
 

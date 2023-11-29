@@ -87,7 +87,8 @@ tbody {
   text-align: center;
 }
 
-input[type="text"], input[type="email"]{
+input[type="text"],
+input[type="email"] {
   width: 100%;
   margin-bottom: 10px;
   padding: 8px;
@@ -109,4 +110,16 @@ input[type="text"], input[type="email"]{
 
 .modal-footer {
   text-align: center;
+}
+
+.delete-header {
+  font-weight: bold;
+  font-size: 30px;
+  width: calc(100% - 20px);
+  text-align: center;
+}
+
+.modal-body {
+  width: 100%;
+  height: auto;
 }
