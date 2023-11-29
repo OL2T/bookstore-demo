@@ -1,4 +1,4 @@
-
+let orders = JSON.parse(localStorage.getItem('CartArray')) || [];
 
 
 function createBill() {
@@ -105,8 +105,10 @@ function createBill() {
     <th>Địa chỉ</th>
     <th>Số điện thoại</th>
     <th>Tổng tiền</th>
-    <th>Ngày đặt</td>
+    
+    <th>Ngày đặt</td>    
     <th class="order-status">Trạng thái</th>
+    <th>Thao tác</th>
     <th class="see-order-detail" >Chi tiết đơn hàng</th>
   </tr>
  
@@ -128,6 +130,7 @@ function createBill() {
     <td>${formatVND.format(order.tổng_tiền)}</td>
    <td>${order.date}</td>
     <td class="order-status"><button class="confirm-order-status" onclick="confirmDelivery(${order.id})">${order.status}</button></td>
+    <td> <button class="delete-btn" onclick="deleteOrder(${order.id})"><i class="fa-solid fa-trash"></i></button></td>
     <td>
       <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
     </td>
@@ -180,7 +183,20 @@ function closeOrderDetailPopup() {
   const detail = document.querySelector(".order-detail-popup");
   detail.style.display = 'none';
 }
-
+function deleteOrder(orderId) {
+  const order = orders.find(order => order.id === orderId);
+  if (order) {
+    const confirmed = window.confirm('Are you sure to delete this order?');
+    if (confirmed) {
+      const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
+      if (row) {
+        row.remove();
+        orders = orders.filter(order => order.id !== orderId);
+        localStorage.setItem('CartArray', JSON.stringify(orders));
+      }
+    }
+  }
+}
 
 
 
@@ -188,14 +204,16 @@ function confirmDelivery(orderId) {
 
   const order = orders.find(order => order.id === orderId);
   console.log(order);
-
-  const confirmed = window.confirm('Are you sure to confirm the delivery. This action will delete this order.');
-  if (confirmed) {
-    const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
-    if (row) {
-      row.remove(); // Remove the row from the table
-      order.status = 'Đã xác nhận';
-      localStorage.setItem('CartArray', JSON.stringify(orders));
-    }
+  const confirmed = '';
+  if (order.status !== 'Đã xác nhận') {
+    confirmed = window.confirm('Are you sure to confirm the delivery?');
   }
+  if (confirmed) {
+
+    order.status = 'Đã xác nhận';
+    localStorage.setItem('CartArray', JSON.stringify(orders));
+
+
+  }
+
 }
