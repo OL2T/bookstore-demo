@@ -222,7 +222,9 @@ provinces.forEach(province => {
   const option = document.createElement('option');
   option.textContent = province.name;
   option.value = province.name;
-  provincesDropdown.appendChild(option);
+  if (provincesDropdown !== null) {
+	 provincesDropdown.appendChild(option);
+  }
 });
 
 function populateDistricts() {

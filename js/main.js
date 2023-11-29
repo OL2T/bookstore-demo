@@ -45,6 +45,8 @@ function main() {
 			pop_up_login.classList.remove('is-active');
 			body.classList.remove('no-scrollable');
 			// document.getElementById('popup-confirm-delete-product').classList.remove('is-active')
+		  document.getElementById('popup-product-detail').classList.remove('is-active')
+
 		}
 	}
 

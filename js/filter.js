@@ -43,8 +43,8 @@ function renderProductItems(products, wrapDiv) {
 					<a href="#"><img src="${productArray.img}" alt="${productArray.name}"></a>
 					<div class="product-buttons">
 						<div class="action quick-view">
-						<span class="tool-tip">Xem nhanh</span>
-						<button class="btn-action btn-quick-view"></button>
+						<span class="tool-tip">Xem chi tiết</span>
+						<button class="btn-action btn-quick-view" onclick="renderViewDetailProduct(${productArray.productId})"></button>
 						</div>
 						<div class="action add-to-cart">
 						<span class="tool-tip">Thêm vào giỏ hàng</span>
