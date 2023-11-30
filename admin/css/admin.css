@@ -281,3 +281,9 @@ option1 {
 input[text] {
   cursor: text;
 }
+
+.cart-choice-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

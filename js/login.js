@@ -47,6 +47,7 @@ function login() {
 				isLogin = true;
 				// console.log('UserID:', listUsers[i].userID);
 				localStorage.setItem('loggedInUsername', listUsers[i].username);
+
 				checkLogin();
 
 			} else {
@@ -81,6 +82,7 @@ function checkLogin() {
 	const loggedInUsername = localStorage.getItem('loggedInUsername');
 	const blockUser = document.querySelector('.block-user .icon-user');
 	// const blockMobile = document.querySelector('.block-navigation-mobile')
+	let users = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
 
 	if (loggedInUsername) {
 		// Người dùng đã đăng nhập, bạn có thể sử dụng `loggedInUsername` để biết người dùng là ai.
@@ -90,6 +92,8 @@ function checkLogin() {
 	} else {
 		// Người dùng chưa đăng nhập.
 		console.log('Chưa có người dùng đăng nhập.');
+		document.querySelector('.menu-item-admin').style.display = 'none';
+
 	}
 }
 

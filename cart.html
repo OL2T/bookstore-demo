@@ -12,6 +12,8 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="admin/admin.css">
   <title>Bookstore | Cart</title>
+  <link rel="icon" type="image/icon" href="images/logo.png">
+
 </head>
 
 <body class="path-cart">
@@ -129,6 +131,7 @@
       </div>
     </header>
     <main class="main-content">
+
       <div id="main-content" class="container">
         <section class="cart-btn">
           <button class="adding-section" onclick="renderProductToCart()">Đặt hàng</button>
@@ -196,8 +199,6 @@
         <input type="text" id="payment-form-username" name="payment-form-username">
         <label for="payment-form-number">Số điện thoại:</label>
         <input type="text" id="payment-form-number" name="payment-form-number">
-        <label for="payment-form-email">Email: </label>
-        <input type="text" id="payment-form-email" name="payment-form-email" placeholder="không bắt buộc">
         <label for="provinces">Chọn tỉnh thành:</label>
         <select id="provinces" onchange="populateDistricts()">
           <option value="">Chọn tỉnh thành</option>

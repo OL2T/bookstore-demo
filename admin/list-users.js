@@ -1,4 +1,5 @@
 let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
+let listrealUser = listUsers.filter(user => user.role === "Khách hàng")
 
 function displayCustomerList() {
   const report = document.getElementById('report-container');
@@ -30,7 +31,6 @@ function displayCustomerList() {
             <th>Số điện thoại</th>
             <th>Email</th>
             <th>Password</th>
-            <th>Vai trò</th>
             <th>Thao tác</th>
           </tr>
         </thead>
@@ -41,8 +41,8 @@ function displayCustomerList() {
     </div>
   `;
 
-  for (let i = 0; i < listUsers.length; i++) {
-    const user = listUsers[i];
+  for (let i = 0; i < listrealUser.length; i++) {
+    const user = listrealUser[i];
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${i + 1}</td>
@@ -51,7 +51,6 @@ function displayCustomerList() {
       <td>${user.phone}</td>
       <td>${user.email}</td>
       <td>${user.password}</td>
-      <td>${user.role}</td>
       <td>
         <button class="btn-edit" onclick="editUser(${i})">Sửa</button>
         <button class="btn-delete" onclick="deleteUser(${i})">Xóa</button>
