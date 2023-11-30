@@ -74,102 +74,101 @@ function main() {
 	 overlay.classList.remove('is-active');
 	 pop_up_login.classList.remove('is-active');
   }
-
-  btnLogout.addEventListener('click', function (e) {
-	 e.preventDefault();
-	 logout();
-  });
-
-}
-
-
-function createAdmin() {
-  let user = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
-
-  const admin = {
-	 userID: 1000,
-	 fullName: 'Lâm Tấn Tài',
-	 username: 'admin1',
-	 email: 'lamtantai200@gmail.com',
-	 phone: '0981210174',
-	 password: 'admin1',
-	 role: 'admin'
-  }
-
-  // user.push(admin);
-  // console.log(admin)
-  // console.log(user)
-  if (user == '') {
-	 user.push(admin)
-	 // console.log('them thanh cong')
-  }
-  let json = JSON.stringify(user);
-  localStorage.setItem('List-users', json);
-  // console.log(user)
-  for (let i = 0; i < user.length; i++) {
-	 // console.log(user)
-	 if (user[i].username === user[i].username) {
-		// console.log('tai khoan da ton tai')
+	btnLogout.addEventListener('click', function (e) {
+		e.preventDefault();
+		logout();
+	 });
+ 
+ }
+ 
+ 
+ function createAdmin() {
+	 let user = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
+ 
+	 const admin = {
+		userID: 1000,
+		fullName: 'Lâm Tấn Tài',
+		username: 'admin1',
+		email: 'lamtantai200@gmail.com',
+		phone: '0981210174',
+		password: 'admin1',
+		role: 'admin'
 	 }
-  }
-  // if (user.role === 'admin') {
-  //  console.log(user)
-  // }
-  for (let i = 0; i < user.length; i++) {
-	 if (user[i].role === 'admin') {
-		// console.log(user[i].username)
-		const blockUser = document.querySelector('.block-user .menu');
-		console.log(blockUser)
-		if (blockUser){
-		  let li = document.createElement('li');
-		  let a = document.createElement('a');
-		  let btn = document.createElement('button')
-		  a.setAttribute('href','admin/admin.html');
-		  a.innerHTML = 'Trang quản lý'
-		  li.classList.add('menu-item')
-		  li.classList.add('menu-item-admin')
-		  btn.appendChild(a)
-		  li.appendChild(btn);
-		  blockUser.appendChild(li);
+ 
+	 // user.push(admin);
+	 // console.log(admin)
+	 // console.log(user)
+	 if (user == '') {
+		user.push(admin)
+		// console.log('them thanh cong')
+	 }
+	 let json = JSON.stringify(user);
+	 localStorage.setItem('List-users', json);
+	 // console.log(user)
+	 for (let i = 0; i < user.length; i++) {
+		// console.log(user)
+		if (user[i].username === user[i].username) {
+		 // console.log('tai khoan da ton tai')
 		}
 	 }
-  }
-}
-
-function mobileMenu() {
-  const overlay = document.getElementById('overlay');
-  const pop_up = document.querySelector(".pop-up-form-register");
-  const pop_up_login = document.querySelector(".pop-up-form-login");
-  const popup_success = document.getElementById('notification');
-  const btn_login_popup = popup_success.querySelector('.btn-login');
-  const body = document.querySelector('body');
-  const btnLogout = document.querySelector('.block-navigation-mobile .btn-logout')
-  let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
-  const header = document.querySelector('header');
-  const toggle = document.getElementById('toggle-navigation');
-  toggle.addEventListener('click', function () {
-	 header.classList.toggle('is-active');
-  })
-  const blockNavigation = document.querySelector('.block-navigation-mobile ')
-  const ul = blockNavigation.querySelector('.menu.mobile')
-  ul.addEventListener('click', function (e) {
-	 e.preventDefault();
-	 let target = e.target;
-	 while (target && target.parentNode !== ul) {
-		target = target.parentNode; // If the clicked element isn't a direct child
-		if (!target) {
-		  return;
-		} // If element doesn't exist
+	 // if (user.role === 'admin') {
+	 //  console.log(user)
+	 // }
+	 for (let i = 0; i < user.length; i++) {
+		if (user[i].role === 'admin') {
+		 // console.log(user[i].username)
+		 const blockUser = document.querySelector('.block-user .menu');
+		 console.log(blockUser)
+		 if (blockUser){
+			 let li = document.createElement('li');
+			 let a = document.createElement('a');
+			 let btn = document.createElement('button')
+			 a.setAttribute('href','admin/admin.html');
+			 a.innerHTML = 'Trang quản lý'
+			 li.classList.add('menu-item')
+			 li.classList.add('menu-item-admin')
+			 btn.appendChild(a)
+			 li.appendChild(btn);
+			 blockUser.appendChild(li);
+		 }
+		}
 	 }
-	 if (target.className === 'menu-item menu-item-expanded') {
-		target.classList.add('is-active');
-		console.log(target)
-	 } else {
-		target.classList.remove('is-active');
-	 }
-  })
-  const btnLogin = blockNavigation.querySelector('.btn-login')
-  const btnSignup = blockNavigation.querySelector('.btn-register')
+ }
+ 
+ function mobileMenu() {
+	 const overlay = document.getElementById('overlay');
+	 const pop_up = document.querySelector(".pop-up-form-register");
+	 const pop_up_login = document.querySelector(".pop-up-form-login");
+	 const popup_success = document.getElementById('notification');
+	 const btn_login_popup = popup_success.querySelector('.btn-login');
+	 const body = document.querySelector('body');
+	 const btnLogout = document.querySelector('.block-navigation-mobile .btn-logout')
+	 let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
+	 const header = document.querySelector('header');
+	 const toggle = document.getElementById('toggle-navigation');
+	 toggle.addEventListener('click', function () {
+		header.classList.toggle('is-active');
+	 })
+	 const blockNavigation = document.querySelector('.block-navigation-mobile ')
+	 const ul = blockNavigation.querySelector('.menu.mobile')
+	 ul.addEventListener('click', function (e) {
+		e.preventDefault();
+		let target = e.target;
+		while (target && target.parentNode !== ul) {
+		 target = target.parentNode; // If the clicked element isn't a direct child
+		 if (!target) {
+			 return;
+		 } // If element doesn't exist
+		}
+		if (target.className === 'menu-item menu-item-expanded') {
+		 target.classList.add('is-active');
+		 console.log(target)
+		} else {
+		 target.classList.remove('is-active');
+		}
+	 })
+	 const btnLogin = blockNavigation.querySelector('.btn-login')
+	 const btnSignup = blockNavigation.querySelector('.btn-register')
 
   btnLogin.addEventListener('click', function () {
 	 pop_up_login.classList.add('is-active');
@@ -247,18 +246,3 @@ window.onload = function () {
   checkLogin();
   main();
 }
-
-// function indexLoadPage(){
-//   createProduct();
-//   createAdmin();
-//   renderProductList();
-//   calculatorQuantity()
-//   // indexLoadPage();
-//   validateRegisterForm();
-//   renderListUser();
-//   login();
-//   logout()
-//   main();
-//   checkLogin();
-//   // checkUserAddToCart()
-// }

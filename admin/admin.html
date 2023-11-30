@@ -21,7 +21,11 @@
 <body class="ad-body">
   <header class="ad-header">
     <div class="ad-logo">
-      <div class="ad-logo-img"> <img src="../images/logo.png" alt=" logo"></div>
+      <div class="ad-logo-img">
+      <a href="../index.html">
+             <img src="../images/logo.png" alt=" logo">
+        </a>
+      </div>
       <div class="menu-icn"><i class="fa-solid fa-bars fa-2xl "></i></div>
     </div>
 
@@ -33,8 +37,8 @@
     </div>
 
     <div class="ad-profile">
-      <div class="admin-name">Admin</div>
       <div class="ad-icon"><i class="fa-solid fa-circle-user fa-2xl"></i></div>
+      <div class="admin-name">admin1</div>
     </div>
   </header>
   <div class="main-container">
@@ -59,7 +63,7 @@
             <i class="fa-solid fa-book"></i>
             <span>Sách</span>
           </div>
-          <div class="nav-option option5">
+          <div class="nav-option option5" onclick="logoutAdmin()">
             <i class="fa-solid fa-user-gear"></i>
             <span>Thiết lập</span>
           </div>
@@ -100,15 +104,16 @@
 
 </script>
 <script src="../js/init.js"></script>
-<script src="../js/main.js"></script>
-<script src="../js/validateFormRegister.js"></script>
-<script src="../js/login.js"></script>
+ <!-- <script src="../js/main.js"></script> -->
+ <script src="../js/login.js"></script>
+ <!--<script src="../js/validateFormRegister.js"></script>
 <script src="../js/cart.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/filter.js"></script>
+<script src="../js/search.js"></script> -->
+<script src="../js/filter.js"></script> 
 
 <script src="ad-product.js"></script>
 <script src="bill.js"></script>
 <script src="list-users.js"></script>
+<script src="logout.js"></script>
 
 </html>

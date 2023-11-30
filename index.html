@@ -76,6 +76,9 @@
                     Đăng xuất
                   </button>
                 </li>
+                <li class="menu-item menu-item-user-manage" style="display: none">
+                  <button id="btn-manage-page" class="btn-manage-page">Quản lý trang</button>
+                </li>
               </ul>
             </div>
           </div>
@@ -182,10 +185,10 @@
         <div class="footer-section">
           <div class="footer-section-text">Danh mục</div>
           <div>
-            <a href="">Văn học</a>
-            <a href="">Thiếu nhi</a>
-            <a href="">Giáo khoa</a>
-            <a href="">Ngoại ngữ</a>
+            <a href="" onclick="changeCategory('literature')">Văn học</a>
+            <a href="" onclick="changeCategory('children-book')">Thiếu nhi</a>
+            <a href="" onclick="changeCategory('textbook')">Giáo khoa</a>
+            <a href="" onclick="changeCategory('foreign-language-book')">Ngoại ngữ</a>
           </div>
         </div>
 

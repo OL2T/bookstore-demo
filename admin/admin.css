@@ -260,7 +260,7 @@ option1 {
   box-shadow: 3px 3px 10px rgb(188, 188, 188);
   padding: 0px 20px 20px 20px;
   overflow-x: auto;
-  overflow-y: scroll;
+  overflow-y: auto;
 
 }
 
