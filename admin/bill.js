@@ -46,8 +46,6 @@ function createBill() {
 
     // Assuming order.date is a string in the format 'yyyy-mm-dd'
     // Convert order.date to a Date object for comparison
-
-
     // Comparing dates
 
     const filteredOrders = orders.filter(order => {

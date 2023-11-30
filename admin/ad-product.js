@@ -275,6 +275,7 @@ function validateAndSave() {
 
   const product = {
     productId: parseInt(bookId),
+    productId: parseInt(bookId),
     categories: bookCategory,
     author: bookAuthor,
     publishingHouse: bookPublisher,
