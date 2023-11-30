@@ -201,32 +201,19 @@ function deleteOrder(orderId) {
 
 
 function confirmDelivery(orderId) {
-  let sold_arr = JSON.parse(localStorage.getItem('Sold')) || [];
+
   const order = orders.find(order => order.id === orderId);
   console.log(order);
-  var confirmed = '';
+  const confirmed = '';
   if (order.status !== 'Đã xác nhận') {
     confirmed = window.confirm('Are you sure to confirm the delivery?');
   }
-
   if (confirmed) {
 
     order.status = 'Đã xác nhận';
-    let sold;
-    order.products.forEach(book => {
-      sold = {
-        date: order.date,
-        sold_id: book.productId,
-        quantity: book.quantity,
-        category: book.categories
-      }
-      sold_arr.push(sold);
-    }
-    )
-
-    localStorage.setItem('Sold', JSON.stringify(sold_arr));
-    console.log(sold_arr);
     localStorage.setItem('CartArray', JSON.stringify(orders));
+
+
   }
 
 }
