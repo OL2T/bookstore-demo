@@ -681,6 +681,10 @@ option1 {
     width: 100%;
     text-align: center;
   }
+
+  .pop-up-payment-form {
+    width: 80%;
+  }
 }
 
 @media (max-width:525px) {

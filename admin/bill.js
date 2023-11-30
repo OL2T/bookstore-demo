@@ -219,6 +219,7 @@ function confirmDelivery(orderId) {
         category: book.categories
       }
       sold_arr.push(sold);
+      createBill();
     }
     )
 
