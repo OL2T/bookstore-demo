@@ -42,12 +42,11 @@ function logoutAdmin(index) {
 
 function confirmLogout(index) {
   closeModal();
-  displayCustomerList();
+  // displayCustomerList();
   window.location.href = '../index.html';
   let user = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
   user.logout = true;
-  // user.loggedInUsername = undefined;
-  // user.loggedInUserID = undefined;
-  localStorage.clear();
+  localStorage.setItem('isLoggedIn', 'false');
+  localStorage.removeItem("loggedInUsername");
   localStorage.setItem('List-users', JSON.stringify(user));
 }

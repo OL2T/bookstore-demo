@@ -48,8 +48,7 @@ function renderProductItems(products, wrapDiv) {
 						</div>
 						<div class="action add-to-cart">
 						<span class="tool-tip">Thêm vào giỏ hàng</span>
-						<button class="btn-action btn-add-to-cart" onclick="addTocCart(${productArray.productId
-				})"></button>
+						<button class="btn-action btn-add-to-cart" onclick="addTocCart(${productArray.productId})"></button>
 						</div>
 					</div>
 				</div>
