@@ -261,10 +261,42 @@ function renderFilterLeft(type, price) {
 			<div id="catePrice" class="dropdown-content catePrice"></div>
 		</div>
 	`;
-	
+
 	const catePriceDiv = document.createElement('div');
 	catePriceDiv.classList.add('catePrice');
 	catePriceDiv.id = 'catePrice';
+
+	const categoryDiv = document.createElement('div');
+	categoryDiv.classList.add('filter-item');
+	const allCheckbox = document.createElement('input');
+	allCheckbox.type = 'checkbox';
+	allCheckbox.id = 'allCategories';
+	allCheckbox.name = 'allCategories';
+	allCheckbox.value = 'allCategories';
+	allCheckbox.checked = type === 'allCategories'; // Kiểm tra nếu type là 'allCategories' thì checkbox được chọn
+	allCheckbox.addEventListener('change', function () {
+		if (allCheckbox.checked) {
+			changeCategory('allCategories');
+		} else {
+			changeCategory('');
+		}
+
+		// Uncheck other checkboxes
+		const checkboxes = catePriceDiv.querySelectorAll('input[type="checkbox"]');
+		checkboxes.forEach((checkbox) => {
+			if (checkbox !== allCheckbox) {
+				checkbox.checked = false;
+			}
+		});
+	});
+
+	const allLabel = document.createElement('label');
+	allLabel.htmlFor = 'allCategories';
+	allLabel.innerText = 'Tất cả';
+
+	categoryDiv.appendChild(allCheckbox);
+	categoryDiv.appendChild(allLabel);
+	catePriceDiv.appendChild(categoryDiv);
 
 	categories.forEach(category => {
 		const categoryDiv = document.createElement('div');
@@ -294,9 +326,9 @@ function renderFilterLeft(type, price) {
 		categoryDiv.appendChild(label);
 		catePriceDiv.appendChild(categoryDiv);
 	});
-
+	filterDiv.appendChild(catePriceDiv);
 	accordionDiv.appendChild(filterDiv);
-	accordionDiv.appendChild(catePriceDiv);
+	// accordionDiv.appendChild(catePriceDiv);
 	leftDiv.appendChild(accordionDiv);
 	contentDiv.appendChild(leftDiv);
 
@@ -355,8 +387,9 @@ function renderFilterLeft(type, price) {
 		priceRangeDiv.appendChild(priceDiv);
 	});
 
+	priceDiv.appendChild(priceRangeDiv);
 	accordionDiv.appendChild(priceDiv);
-	accordionDiv.appendChild(priceRangeDiv);
+	// accordionDiv.appendChild(priceRangeDiv);
 	leftDiv.appendChild(accordionDiv);
 	contentDiv.appendChild(leftDiv);
 
