@@ -1,8 +1,11 @@
-h1#heading {
+.heading {
+  font-size: 15px;
+  margin: -14px 0;
+  height: 30px;
   text-align: center;
   font-weight: bold;
   text-transform: uppercase;
-  color: rgb(4, 105, 4);
+  color: rgba(241, 142, 125, 0.7);
 }
 
 #left {
@@ -36,13 +39,19 @@ h1#heading {
 }
 
 #accordion .filter {
-  padding: 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 200px;
+  height: 50px;
+  padding: 0 5px;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 15px;
   background-color: white;
-  color: rgb(4, 105, 4);
+  color: rgba(241, 142, 125, 0.7);
   box-shadow: 0px 15px 25px -4px rgba(150, 150, 150, 0.24);
+  border-radius: 10px;
 }
 
 #accordion .catePrice {
@@ -286,11 +295,9 @@ h1#heading {
 }
 
 .section .header-content {
-  background-color: rgb(30, 112, 30);
+  background-color: rgba(241, 142, 125, 0.7);
   color: white;
   padding: 10px 0 10px 30px;
-  // border-top-right-radius: 100px;
-  // border-bottom-right-radius: 100px;
   border-radius: 100px;
 }
 
@@ -298,7 +305,7 @@ h1#heading {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
-  background-color: gray !important;
+  background-color: rgba(241, 142, 125, 0.7) !important;
   color: white !important;
   border: none !important;
   border-radius: 4px;
@@ -308,7 +315,12 @@ h1#heading {
 
 .btn-show-more:hover {
   background-color: white !important;
-  color: black !important;
+  color: rgba(241, 142, 125, 0.7) !important;
   border: none !important;
 }
 
+.dropbtn{
+  background-color: white !important;
+  color: rgba(241, 142, 125, 0.7) !important;
+  border: none !important;
+}

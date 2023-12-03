@@ -129,18 +129,10 @@ function renderProductList() {
 		let nextIndex = endIndex;
 
 		showMoreButton.addEventListener('click', function () {
-			const nextEndIndex = Math.min(nextIndex + 4, tempProducts.length);
-			renderProductItems(tempProducts.slice(nextIndex, nextEndIndex), categoryContent);
-			nextIndex = nextEndIndex;
-
-			if (nextIndex >= tempProducts.length) {
-				showMoreButton.style.display = 'none';
-			}
-		});
-
-		if (endIndex >= tempProducts.length) {
+			const remainingProducts = tempProducts.slice(nextIndex);
+			renderProductItems(remainingProducts, categoryContent);
 			showMoreButton.style.display = 'none';
-		}
+		});
 
 		categorySection.appendChild(categoryContent);
 		categorySection.appendChild(showMoreButton);
@@ -191,9 +183,7 @@ function renderProductByType(type, currentPage, priceRange) {
 	}
 
 
-	if (priceRange === null) {
-		// products = storedProducts;
-	} else {
+	if (priceRange !== null) {
 		const tempPrice = priceRange.split('-');
 		const minPrice = parseInt(tempPrice[0] + '000');
 		const maxPrice = parseInt(tempPrice[1] + '000');
@@ -264,9 +254,17 @@ function renderFilterLeft(type, price) {
 	// nhóm sản phẩm
 	const filterDiv = document.createElement('div');
 	filterDiv.classList.add('filter');
-	filterDiv.innerText = 'Nhóm sản phẩm';
+	filterDiv.innerHTML = `
+		<div class="heading">Nhóm sản phẩm</div>
+		<div class="dropdown">
+			<button onclick="toggleDropdown('catePrice')" class="dropbtn"><i class="fa-solid fa-angle-down"></i></button>
+			<div id="catePrice" class="dropdown-content catePrice"></div>
+		</div>
+	`;
+	
 	const catePriceDiv = document.createElement('div');
 	catePriceDiv.classList.add('catePrice');
+	catePriceDiv.id = 'catePrice';
 
 	categories.forEach(category => {
 		const categoryDiv = document.createElement('div');
@@ -305,7 +303,14 @@ function renderFilterLeft(type, price) {
 	//Giá
 	const priceDiv = document.createElement('div');
 	priceDiv.classList.add('filter');
-	priceDiv.innerText = 'Giá';
+	priceDiv.innerHTML = `
+		<div class="heading">Giá</div>
+		<div class="dropdown">
+			<button onclick="toggleDropdown('catePrice')" class="dropbtn"><i class="fa-solid fa-angle-down"></i></button>
+			<div id="catePrice" class="dropdown-content catePrice"></div>
+		</div>
+	`;
+
 	const priceRangeDiv = document.createElement('div');
 	priceRangeDiv.classList.add('catePrice');
 
@@ -434,4 +439,3 @@ function createPaginationbuttons(wrapper, productList, currentPage) {
 		wrapper.appendChild(paginationContainer);
 	}
 }
-

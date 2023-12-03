@@ -1,11 +1,11 @@
-function openModal() {
+function open() {
   const logoutModal = document.getElementById('logoutModal');
   if (logoutModal) {
     logoutModal.style.display = 'block';
   }
 }
 
-function closeModal() {
+function close() {
   const logoutModal = document.getElementById('logoutModal');
   if (logoutModal) {
     logoutModal.style.display = 'none';
@@ -33,15 +33,15 @@ function logoutAdmin(index) {
   `;
   const closeButton = modalContent.querySelector('.close');
 
-  closeButton.addEventListener('click', closeModal);
+  closeButton.addEventListener('click', close);
 
   logoutModal.appendChild(modalContent);
   document.body.appendChild(logoutModal);
-  openModal();
+  open();
 }
 
 function confirmLogout(index) {
-  closeModal();
+  close();
   // displayCustomerList();
   window.location.href = '../index.html';
   let user = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
