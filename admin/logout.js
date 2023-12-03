@@ -42,7 +42,6 @@ function logoutAdmin(index) {
 
 function confirmLogout(index) {
   close();
-  // displayCustomerList();
   window.location.href = '../index.html';
   let user = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
   user.logout = true;
