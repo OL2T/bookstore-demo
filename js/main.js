@@ -37,6 +37,13 @@ function main() {
 	 });
   }
 
+  document.getElementById('btn-register-form-action').addEventListener('click', function () {
+	 pop_up.classList.add('is-active');
+	 pop_up_login.classList.remove('is-active');
+	 overlay.classList.add('is-active');
+	 body.classList.add('no-scrollable');
+  })
+
   document.onclick = function (e) {
 	 if (e.target.id === 'overlay') {
 		pop_up.classList.remove('is-active');
@@ -45,7 +52,9 @@ function main() {
 		body.classList.remove('no-scrollable');
 		// document.getElementById('popup-confirm-delete-product').classList.remove('is-active')
 		document.getElementById('popup-product-detail').classList.remove('is-active')
-
+		document.querySelector('.notification').classList.remove('is-active')
+		document.querySelector('.form-register').reset()
+		document.querySelector('.form-login').reset()
 	 }
   }
 
@@ -84,7 +93,7 @@ function main() {
 
 
 function createAdmin() {
-  let user = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
+  let users = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
 
   const admin = {
 	 userID: 1000,
@@ -96,42 +105,17 @@ function createAdmin() {
 	 role: 'admin'
   }
 
-  // user.push(admin);
-  // console.log(admin)
-  // console.log(user)
-  if (user == '') {
-	 user.push(admin)
+  if (users == '') {
+	 users.push(admin)
 	 // console.log('them thanh cong')
   }
-  let json = JSON.stringify(user);
+  let json = JSON.stringify(users);
   localStorage.setItem('List-users', json);
   // console.log(user)
-  for (let i = 0; i < user.length; i++) {
+  for (let i = 0; i < users.length; i++) {
 	 // console.log(user)
-	 if (user[i].username === user[i].username) {
+	 if (users[i].username === users[i].username) {
 		// console.log('tai khoan da ton tai')
-	 }
-  }
-  // if (user.role === 'admin') {
-  //  console.log(user)
-  // }
-  for (let i = 0; i < user.length; i++) {
-	 if (user[i].role === 'admin') {
-		// console.log(user[i].username)
-		const blockUser = document.querySelector('.block-user .menu');
-		console.log(blockUser)
-		if (blockUser){
-		  let li = document.createElement('li');
-		  let a = document.createElement('a');
-		  let btn = document.createElement('button')
-		  a.setAttribute('href','admin/admin.html');
-		  a.innerHTML = 'Trang quản lý'
-		  li.classList.add('menu-item')
-		  li.classList.add('menu-item-admin')
-		  btn.appendChild(a)
-		  li.appendChild(btn);
-		  blockUser.appendChild(li);
-		}
 	 }
   }
 }
@@ -201,6 +185,7 @@ function changeToFilter(params) {
   window.location.href = `./index.html?type=${params}`;
 }
 
+
 window.addEventListener('scroll', function () {
   const body = document.querySelector('body');
   const header = document.querySelector('.header');
@@ -247,18 +232,3 @@ window.onload = function () {
   checkLogin();
   main();
 }
-
-// function indexLoadPage(){
-//   createProduct();
-//   createAdmin();
-//   renderProductList();
-//   calculatorQuantity()
-//   // indexLoadPage();
-//   validateRegisterForm();
-//   renderListUser();
-//   login();
-//   logout()
-//   main();
-//   checkLogin();
-//   // checkUserAddToCart()
-// }

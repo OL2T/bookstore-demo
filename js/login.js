@@ -47,6 +47,7 @@ function login() {
 		  isLogin = true;
 		  // console.log('UserID:', listUsers[i].userID);
 		  localStorage.setItem('loggedInUsername', listUsers[i].username);
+		  localStorage.setItem('loggedInUserRole', listUsers[i].role);
 		  checkLogin();
 
 		} else {
@@ -60,6 +61,7 @@ function login() {
 		body.classList.remove('no-scrollable');
 
 		const btnLogout = document.getElementById('btn-logout')
+
 		document.querySelector('body').classList.add('user-logged-in');
 		document.getElementById('btn-login').parentElement.style.display = 'none';
 		document.getElementById('btn-register').parentElement.style.display = 'none';
@@ -69,9 +71,11 @@ function login() {
 		document.querySelector('.block-navigation-mobile .btn-logout').parentElement.style.display = 'block';
 		overlay.classList.remove('is-active');
 		pop_up_login.classList.remove('is-active');
+
 		location.reload();
 
 	 } else {
+		console.log('false')
 		blockUser.innerText = '';
 	 }
   })
@@ -79,8 +83,10 @@ function login() {
 
 function checkLogin() {
   const loggedInUsername = localStorage.getItem('loggedInUsername');
+  const loggedInUserRole = localStorage.getItem('loggedInUserRole');
   const blockUser = document.querySelector('.block-user .icon-user');
-  // const blockMobile = document.querySelector('.block-navigation-mobile')
+  const blockUserMenu = document.querySelector('.block-user .menu');
+
   let users = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
 
   if (loggedInUsername) {
@@ -91,8 +97,21 @@ function checkLogin() {
   } else {
 	 // Người dùng chưa đăng nhập.
 	 console.log('Chưa có người dùng đăng nhập.');
-	 document.querySelector('.menu-item-admin').style.display = 'none';
+  }
 
+  if (loggedInUsername && loggedInUserRole === 'admin') {
+	 if (blockUserMenu) {
+		let li = document.createElement('li');
+		let a = document.createElement('a');
+		let btn = document.createElement('button')
+		a.setAttribute('href', 'admin/admin.html');
+		a.innerHTML = 'Trang quản lý'
+		li.classList.add('menu-item')
+		li.classList.add('menu-item-admin')
+		btn.appendChild(a)
+		li.appendChild(btn);
+		blockUserMenu.appendChild(li);
+	 }
   }
 }
 
@@ -100,6 +119,8 @@ function logout() {
   let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
   let productInCart = localStorage.getItem("Carts") ? JSON.parse(localStorage.getItem("Carts")) : [];
   const blockUser = document.querySelector('.block-user .icon-user');
+  const menuItemAdmin = document.querySelector('.block-user .menu .menu-item-admin');
+
 
   localStorage.setItem('isLoggedIn', 'false');
   document.querySelector('body').classList.remove('user-logged-in');
@@ -116,12 +137,16 @@ function logout() {
 	 localStorage.setItem('loggedInUsername', '');
   }
 
-  productInCart = [];
+  if (menuItemAdmin !== null) {
+	 menuItemAdmin.style.display = 'none';
+  }
 
-
-  localStorage.setItem('Carts', JSON.stringify(productInCart));
-  calculatorQuantity();
-  renderProductToCart();
-  location.reload();
+  if (productInCart !== null) {
+	 productInCart = [];
+	 localStorage.setItem('Carts', JSON.stringify(productInCart));
+	 calculatorQuantity();
+	 // renderProductToCart();
+	 location.reload();
+  }
 }
 

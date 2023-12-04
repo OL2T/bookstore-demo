@@ -1,8 +1,6 @@
 @media(max-width: 991px) {
   .header {
     .block-wrapper {
-      flex: 0;
-
       .block-categories, .block-user {
         display: none;
       }

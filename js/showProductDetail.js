@@ -49,6 +49,21 @@ function closePopupDetailProduct() {
   document.querySelector('.view-field-quantity-inner .quantity-number').innerHTML = quantity;
 }
 
+function showPopup() {
+  closePopupDetailProduct()
+  const popup_success = document.querySelector('.notification-add-to-cart');
+  const btnClose = document.querySelector('.notification-add-to-cart .pop-up-content .btn-close')
+
+  popup_success.classList.add('is-active');
+  overlay.classList.add('is-active');
+  document.querySelector('body').classList.add('no-scrollable');
+
+  btnClose.addEventListener('click', function () {
+	 popup_success.classList.remove('is-active');
+	 overlay.classList.remove('is-active');
+	 document.querySelector('body').classList.remove('no-scrollable');
+  })
+}
 
 function plusQuantityProductDetail(index) {
   let toolTip = document.querySelector('.tool-tip-product-detail')
@@ -60,24 +75,6 @@ function plusQuantityProductDetail(index) {
 }
 
 function minusQuantityProductDetail(index) {
-  // // let checkProduct = productInCart.some(
-  // //  (value) => value.productId === productId
-  // // );
-  // // quantity = productInCart[index].quantity;
-  // console.log(quantity)
-  // if (quantity > 1) {
-  //  productInCart[index] = {
-  // 	...productInCart[index],
-  // 	quantity: --productInCart[index].quantity,
-  //  }
-  //  console.log(productInCart[index])
-  //  document.querySelector('.view-field-quantity-inner .quantity-number').innerHTML = productInCart[index].quantity;
-  //  localStorage.setItem("Carts", JSON.stringify(productInCart));
-  //  // toolTip[index].classList.remove('is-active')
-  // } else {
-  //  let toolTip = document.querySelectorAll('.tool-tip-product-detail')
-  //  toolTip[index].classList.add('is-active');
-  // }
   if (quantity > 1) {
 	 --quantity
 	 // console.log(quantity)
@@ -92,9 +89,7 @@ function minusQuantityProductDetail(index) {
 function addTocCartProductDetail(index, productId) {
   let user = localStorage.getItem('isLoggedIn')
   if (user === 'true') {
-	 let storedProducts = localStorage.getItem("List-products")
-		? JSON.parse(localStorage.getItem("List-products"))
-		: [];
+	 let storedProducts = localStorage.getItem("List-products") ? JSON.parse(localStorage.getItem("List-products")) : [];
 	 let checkProduct = productInCart.some(
 		(value) => value.productId === productId
 	 );
@@ -118,6 +113,9 @@ function addTocCartProductDetail(index, productId) {
 		}
 		localStorage.setItem("Carts", JSON.stringify(productInCart));
 	 }
+
+	 showPopup()
+
   } else {
 	 overlay.classList.add('is-active');
 	 pop_up_login.classList.add('is-active');

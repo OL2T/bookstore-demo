@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="admin/admin.css">
+<!--  <link rel="stylesheet" href="admin/admin.css">-->
   <title>Bookstore | Cart</title>
 </head>
 
@@ -28,32 +28,41 @@
         </div>
       </div>
     </div>
+    <div class="notification notification-add-to-cart">
+      <div class="content-wrapper">
+        <span class="icon-close"></span>
+        <div class="heading">Thêm sản phẩm vào giỏ hàng thành công</div>
+        <div class="pop-up-content">
+          <button class="btn-close">Đóng</button>
+        </div>
+      </div>
+    </div>
     <header class="header">
       <div class="container">
         <div class="row">
           <div class="block block-logo">
             <a href="index.html" class="logo">
-              <img src="images/logo.png" alt="logo" ;>
+              <img src="images/logo.png" alt="logo">
             </a>
-          </div>
-          <div class="block block-search">
-            <div class="block-search-inner">
-              <label for="search-desktop" class="visually-hidden">Search</label>
-              <input id="search-desktop" type="text" placeholder="Tìm kiếm sản phẩm mong muốn">
-              <span id="btn-search" class="button-search">Search button</span>
-            </div>
           </div>
           <div class="block block-wrapper">
             <div class="block-categories">
               <h6>Thể loại</h6>
               <ul class="menu">
-                <li class="menu-item menu-item-literature" onclick="changeToFilter('literature')">Sách Văn học</li>
-                <li class="menu-item menu-item-children" onclick="changeToFilter('children-book')">Sách thiếu nhi</li>
-                <li class="menu-item menu-item-textbook" onclick="changeToFilter('textbook')">Sách giáo khoa</li>
-                <li class="menu-item menu-item-foreign-language-book" onclick="changeToFilter('foreign-language-book')">
+                <li class="menu-item menu-item-literature" onclick="changeCategory('literature')">Sách Văn học</li>
+                <li class="menu-item menu-item-children" onclick="changeCategory('children-book')">Sách thiếu nhi</li>
+                <li class="menu-item menu-item-textbook" onclick="changeCategory('textbook')">Sách giáo khoa</li>
+                <li class="menu-item menu-item-foreign-language-book" onclick="changeCategory('foreign-language-book')">
                   Sách Ngoại ngữ
                 </li>
               </ul>
+            </div>
+            <div class="block block-search">
+              <div class="block-search-inner">
+                <label for="search-desktop" class="visually-hidden">Search</label>
+                <input id="search-desktop" type="text" placeholder="Tìm kiếm sản phẩm mong muốn" />
+                <span id="btn-search" class="button-search">Search button</span>
+              </div>
             </div>
             <div class="block-cart">
               <a href="./cart.html" class="icon-cart" target="">
@@ -70,7 +79,9 @@
                   <button id="btn-register" class="register">Đăng kí</button>
                 </li>
                 <li class="menu-item menu-item-user-logout" style="display: none">
-                  <button id="btn-logout" class="btn-logout">Đăng xuất</button>
+                  <button id="btn-logout" class="btn-logout">
+                    Đăng xuất
+                  </button>
                 </li>
               </ul>
             </div>
@@ -88,14 +99,14 @@
                 <span>Thể loại</span>
                 <div class="menu sub-menu">
                   <ul class="menu">
-                    <li class="menu-item menu-item-literature" onclick="changeToFilter('literature')"><span>Sách Văn
+                    <li class="menu-item menu-item-literature" onclick="changeCategory('literature')"><span>Sách Văn
                         học</span></li>
-                    <li class="menu-item menu-item-children" onclick="changeToFilter('children-book')"><span>Sách thiếu
+                    <li class="menu-item menu-item-children" onclick="changeCategory('children-book')"><span>Sách thiếu
                         nhi</span></li>
-                    <li class="menu-item menu-item-textbook" onclick="changeToFilter('textbook')"><span>Sách giáo
+                    <li class="menu-item menu-item-textbook" onclick="changeCategory('textbook')"><span>Sách giáo
                         khoa</span></li>
                     <li class="menu-item menu-item-foreign-language-book"
-                      onclick="changeToFilter('foreign-language-book')"><span>Sách Ngoại ngữ</span></li>
+                        onclick="changeCategory('foreign-language-book')"><span>Sách Ngoại ngữ</span></li>
                   </ul>
                 </div>
               </li>
@@ -128,6 +139,7 @@
         </div>
       </div>
     </header>
+
     <main class="main-content">
       <div id="main-content" class="container">
         <section class="cart-btn">
