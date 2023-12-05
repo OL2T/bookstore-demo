@@ -80,27 +80,44 @@ function login() {
 
 function checkLogin() {
 	const loggedInUsername = localStorage.getItem('loggedInUsername');
-	const blockUser = document.querySelector('.block-user .icon-user');
-	// const blockMobile = document.querySelector('.block-navigation-mobile')
-	let users = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
+  const loggedInUserRole = localStorage.getItem('loggedInUserRole');
+  const blockUser = document.querySelector('.block-user .icon-user');
+  const blockUserMenu = document.querySelector('.block-user .menu');
 
-	if (loggedInUsername) {
-		// Người dùng đã đăng nhập, bạn có thể sử dụng `loggedInUsername` để biết người dùng là ai.
-		console.log('Người đã đăng nhập:', loggedInUsername);
-		// Hiển thị tên đăng nhập hoặc thông tin người dùng trên giao diện.
-		blockUser.innerText = loggedInUsername;
-	} else {
-		// Người dùng chưa đăng nhập.
-		console.log('Chưa có người dùng đăng nhập.');
-		document.querySelector('.menu-item-admin').style.display = 'none';
+  let users = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
 
-	}
+  if (loggedInUsername) {
+	 // Người dùng đã đăng nhập, bạn có thể sử dụng `loggedInUsername` để biết người dùng là ai.
+	 console.log('Người đã đăng nhập:', loggedInUsername);
+	 // Hiển thị tên đăng nhập hoặc thông tin người dùng trên giao diện.
+	 blockUser.innerText = loggedInUsername;
+  } else {
+	 // Người dùng chưa đăng nhập.
+	 console.log('Chưa có người dùng đăng nhập.');
+  }
+
+  if (loggedInUsername && loggedInUserRole === 'admin') {
+	 if (blockUserMenu) {
+		let li = document.createElement('li');
+		let a = document.createElement('a');
+		let btn = document.createElement('button')
+		a.setAttribute('href', 'admin/admin.html');
+		a.innerHTML = 'Trang quản lý'
+		li.classList.add('menu-item')
+		li.classList.add('menu-item-admin')
+		btn.appendChild(a)
+		li.appendChild(btn);
+		blockUserMenu.appendChild(li);
+	 }
+  }
 }
 
 function logout() {
-	let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
-	let productInCart = localStorage.getItem("Carts") ? JSON.parse(localStorage.getItem("Carts")) : [];
-	const blockUser = document.querySelector('.block-user .icon-user');
+  let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
+  let productInCart = localStorage.getItem("Carts") ? JSON.parse(localStorage.getItem("Carts")) : [];
+  const blockUser = document.querySelector('.block-user .icon-user');
+  const menuItemAdmin = document.querySelector('.block-user .menu .menu-item-admin');
+
 
 	localStorage.setItem('isLoggedIn', 'false');
 	document.querySelector('body').classList.remove('user-logged-in');
@@ -117,12 +134,16 @@ function logout() {
 		localStorage.setItem('loggedInUsername', '');
 	}
 
-	productInCart = [];
+  if (menuItemAdmin !== null) {
+	 menuItemAdmin.style.display = 'none';
+  }
 
-
-	localStorage.setItem('Carts', JSON.stringify(productInCart));
-	calculatorQuantity();
-	renderProductToCart();
-	location.reload();
+  if (productInCart !== null) {
+	 productInCart = [];
+	 localStorage.setItem('Carts', JSON.stringify(productInCart));
+	 calculatorQuantity();
+	 // renderProductToCart();
+	 location.reload();
+  }
 }
 

@@ -200,6 +200,7 @@ function changeToFilter(params) {
 	window.location.href = `./index.html?type=${params}`;
 }
 
+
 window.addEventListener('scroll', function () {
 	const body = document.querySelector('body');
 	const header = document.querySelector('.header');
@@ -248,12 +249,12 @@ window.onload = function () {
 		cartLoadPage();
 	}
 
-	searchLoadPage()
-	calculatorQuantity()
-	validateRegisterForm();
-	// renderListUser();
-	mobileMenu();
-	login();
-	checkLogin();
-	main();
+  searchLoadPage()
+  calculatorQuantity()
+  validateRegisterForm();
+  // renderListUser();
+  mobileMenu();
+  login();
+  checkLogin();
+  main();
 }

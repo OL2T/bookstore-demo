@@ -33,10 +33,15 @@
 
     &-wrapper {
       display: flex;
+      align-items: center;
       margin-right: 16px;
       gap: 16px;
       justify-content: flex-end;
       flex: 1;
+
+      .block-search {
+        padding: 0;
+      }
     }
   }
 }
@@ -470,7 +475,7 @@
     .total-price {
       @include font-bold(20px, 28px, #121212);
 
-      &>span {
+      & > span {
         font-weight: 600;
         color: $primary-color;
       }
