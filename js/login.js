@@ -99,7 +99,7 @@ function checkLogin() {
 		console.log('Chưa có người dùng đăng nhập.');
 	}
 
-	if (loggedInUserRole === 'admin') {
+	if ((loggedInUsername) && loggedInUserRole === 'admin') {
 		if (blockUserMenu) {
 			let li = document.createElement('li');
 			let a = document.createElement('a');
@@ -115,16 +115,16 @@ function checkLogin() {
 
 
 	}
-	else if (loggedInUserRole === 'Khách hàng') {
+	else if ((loggedInUsername) && loggedInUserRole === 'Khách hàng') {
 		if (blockUserMenu) {
 			let li = document.createElement('li');
 			let a = document.createElement('a');
 			let btn = document.createElement('button')
-			a.href = 'cart.html';
+
 			btn.addEventListener('click', seeWaitingList);
 			a.innerHTML = 'Lịch sử đặt hàng';
 			li.classList.add('menu-item')
-			li.classList.add('menu-item-admin')
+			li.classList.add('menu-item-user')
 			btn.appendChild(a)
 			li.appendChild(btn);
 			blockUserMenu.appendChild(li);
