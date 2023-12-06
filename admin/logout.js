@@ -1,11 +1,11 @@
-function open() {
+function openModal() {
   const logoutModal = document.getElementById('logoutModal');
   if (logoutModal) {
     logoutModal.style.display = 'block';
   }
 }
 
-function close() {
+function closeModal() {
   const logoutModal = document.getElementById('logoutModal');
   if (logoutModal) {
     logoutModal.style.display = 'none';
@@ -33,19 +33,21 @@ function logoutAdmin(index) {
   `;
   const closeButton = modalContent.querySelector('.close');
 
-  closeButton.addEventListener('click', close);
+  closeButton.addEventListener('click', closeModal);
 
   logoutModal.appendChild(modalContent);
   document.body.appendChild(logoutModal);
-  open();
+  openModal();
 }
 
 function confirmLogout(index) {
-  close();
+  closeModal();
+  displayCustomerList();
   window.location.href = '../index.html';
   let user = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
   user.logout = true;
-  localStorage.setItem('isLoggedIn', 'false');
-  localStorage.removeItem("loggedInUsername");
+  // user.loggedInUsername = undefined;
+  // user.loggedInUserID = undefined;
+  localStorage.clear();
   localStorage.setItem('List-users', JSON.stringify(user));
 }

@@ -1,6 +1,7 @@
 .block {
   &-search {
-    flex: 0 0 400px;
+    flex: 1;
+    margin-right: 16px;
 
     &-inner {
       position: relative;
@@ -67,8 +68,7 @@
     .menu {
       position: absolute;
       top: 50px;
-      left: 50%;
-      transform: translateX(-50%);
+      right: 0;
       visibility: hidden;
       opacity: 0;
       min-width: 300px;
@@ -144,7 +144,6 @@
       align-items: center;
       gap: 8px;
       font-weight: 600;
-      margin-bottom: 4px;
 
       &:before {
         content: "";

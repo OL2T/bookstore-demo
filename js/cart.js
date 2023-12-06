@@ -51,55 +51,40 @@ function addTocCart(productId) {
 	}
 }
 
-function showPopupCart() {
-  const popup_success = document.querySelector('.notification-add-to-cart');
-  const btnClose = document.querySelector('.notification-add-to-cart .pop-up-content .btn-close')
-
-  popup_success.classList.add('is-active');
-  overlay.classList.add('is-active');
-  document.querySelector('body').classList.add('no-scrollable');
-
-  btnClose.addEventListener('click', function () {
-	 popup_success.classList.remove('is-active');
-	 overlay.classList.remove('is-active');
-	 document.querySelector('body').classList.remove('no-scrollable');
-  })
-}
-
 function calculatorQuantity() {
 	// let productInCart = localStorage.getItem("Carts") ? JSON.parse(localStorage.getItem("Carts")) : [];
 	document.querySelector(".block-cart .quantity").innerHTML = productInCart.length;
 }
 
 function renderProductToCart() {
-  // const holder = document.querySelector(".section-product-in-cart");
-  // let data1 = ` <section id="product-in-cart" class="section section-product-in-cart">
-  //         <div class="cart-heading">
-  //           <div class="heading-product heading-product-title">Sản phẩm</div>
-  //           <div class="heading-product product-price">Đơn giá</div>
-  //           <div class="heading-product product-quantity">Số lượng</div>
-  //           <div class="heading-product product-sub-total">Thành tiền</div>
-  //           <div class="heading-product product-actions">Thao tác</div>
-  //         </div>
-  //         <div class="product-content-wrapper"></div>
-  //         <!--        <div class="product-content-wrapper mobile"></div>-->
-  //         <div class="footer-product">
-  //           <div class="footer-product-inner">
-  //             <div class="total-price">Tổng số tiền: <span></span></div>
-  //             <button onclick="showPaymentForm() ">Thanh Toán</button>
-  //           </div>
-  //         </div>
-  //       </section>`
-  // holder.innerHTML = '';
-  // holder.innerHTML = data1;
-  let products = document.getElementById('product-in-cart');
-  const formatVND = new Intl.NumberFormat("vi-VN", {
-	 style: "currency",
-	 currency: "VND",
-  });
-  let data = ``;
-  productInCart.map((productArray, index) => {
-	 data += `
+	const holder = document.querySelector(".section-product-in-cart");
+	let data1 = ` <section id="product-in-cart" class="section section-product-in-cart">
+          <div class="cart-heading">
+            <div class="heading-product heading-product-title">Sản phẩm</div>
+            <div class="heading-product product-price">Đơn giá</div>
+            <div class="heading-product product-quantity">Số lượng</div>
+            <div class="heading-product product-sub-total">Thành tiền</div>
+            <div class="heading-product product-actions">Thao tác</div>
+          </div>
+          <div class="product-content-wrapper"></div>
+          <!--        <div class="product-content-wrapper mobile"></div>-->
+          <div class="footer-product">
+            <div class="footer-product-inner">
+              <div class="total-price">Tổng số tiền: <span></span></div>
+              <button onclick="showPaymentForm() ">Thanh Toán</button>
+            </div>
+          </div>
+        </section>`
+	holder.innerHTML = '';
+	holder.innerHTML = data1;
+	let products = document.getElementById('product-in-cart');
+	const formatVND = new Intl.NumberFormat("vi-VN", {
+		style: "currency",
+		currency: "VND",
+	});
+	let data = ``;
+	productInCart.map((productArray, index) => {
+		data += `
 	 	<div class="views-row">
 		  <div class="view-row-content">
 				 <div class="view-field-image"><img src="${productArray.img}" alt="${productArray.name}"></div>
@@ -167,12 +152,12 @@ function totalMoney() {
 	let total = 0;
 	if (productInCart !== null) {
 
-	 for (let i = 0; i < productInCart.length; i++) {
-		total += productInCart[i].quantity * productInCart[i].price
-	 }
-	 // document.querySelector('.total-price > span').innerHTML = formatVND.format(total)
-  }
-  return total;
+		for (let i = 0; i < productInCart.length; i++) {
+			total += productInCart[i].quantity * productInCart[i].price
+		}
+		document.querySelector('.total-price > span').innerHTML = formatVND.format(total)
+	}
+	return total;
 }
 
 function cartLoadPage() {
@@ -277,16 +262,18 @@ const year = currentDate.getFullYear();
 const formattedDate = `${month}-${day}-${year}`;
 
 function createSuccessPopup() {
-  if (validatePaymentForm() == true) {
-	 const customername = document.getElementById('payment-form-username').value.trim();
-	 const phoneNumber = document.getElementById('payment-form-number').value.trim();
-	 const provinces = document.getElementById('provinces').value;
-	 const districts = document.getElementById('districts').value;
-	 const ward = document.getElementById('payment-form-ward').value.trim();
-	 const street = document.getElementById('payment-form-street').value.trim();
-	 var Form = document.querySelector('.payment-success-pop-up');
-	 Form.style.display = 'block';
-	 document.getElementById('cart-overlay').style.display = 'block';
+
+
+	if (validatePaymentForm() == true) {
+		const customername = document.getElementById('payment-form-username').value.trim();
+		const phoneNumber = document.getElementById('payment-form-number').value.trim();
+		const provinces = document.getElementById('provinces').value;
+		const districts = document.getElementById('districts').value;
+		const ward = document.getElementById('payment-form-ward').value.trim();
+		const street = document.getElementById('payment-form-street').value.trim();
+		var Form = document.querySelector('.payment-success-pop-up');
+		Form.style.display = 'block';
+		document.getElementById('cart-overlay').style.display = 'block';
 
 		let modifiedList = {
 			id: generateRandomID(),
