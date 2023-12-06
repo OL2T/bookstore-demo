@@ -15,7 +15,7 @@ function renderViewDetailProduct(productId) {
 				<div class="view-field-title">${productArray.name}</div>
 				<div class="view-field-author"><span>Tác giả: </span><span class="author-title">${productArray.author}</span></div>
 				<div class="view-field-price">${formatVND.format(productArray.price)}</div>
-				<div class="view-field-description">${productArray.description}</div>
+				<div class="view-field-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
 				<div class="view-field view-field-quantity">
 				 <div class="view-field-quantity-inner">
 				 <button class="btn-quantity btn-quantity-minus" onclick="minusQuantityProductDetail(${index})"></button>

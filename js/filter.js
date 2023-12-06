@@ -436,3 +436,6 @@ function createPaginationbuttons(wrapper, productList, currentPage) {
 	}
 }
 
+// function renderMoreProduct() {
+
+// }

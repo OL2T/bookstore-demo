@@ -105,9 +105,9 @@ function createBill() {
     <th>Tổng tiền</th>
     
     <th>Ngày đặt</td>    
-    <th class="see-order-detail" >Chi tiết đơn hàng</th>
     <th class="order-status">Trạng thái</th>
     <th>Thao tác</th>
+    <th class="see-order-detail" >Chi tiết đơn hàng</th>
   </tr>
  
 `;
@@ -127,11 +127,11 @@ function createBill() {
     <td>${order.phonenumber}</td>
     <td>${formatVND.format(order.tổng_tiền)}</td>
    <td>${order.date}</td>
-   <td>
-   <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
-   </td>
-   <td class="order-status"><button class="confirm-order-status" onclick="confirmDelivery(${order.id})">${order.status}</button></td>
+    <td class="order-status"><button class="confirm-order-status" onclick="confirmDelivery(${order.id})">${order.status}</button></td>
     <td> <button class="delete-btn" onclick="deleteOrder(${order.id})"><i class="fa-solid fa-trash"></i></button></td>
+    <td>
+      <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
+    </td>
      
   `;
     bill_data.appendChild(orderItem);

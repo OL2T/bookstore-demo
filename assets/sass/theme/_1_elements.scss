@@ -100,7 +100,6 @@ table {
         padding: 15px;
         border: 1px solid #ddd;
         font-weight: 700;
-        white-space: nowrap;
       }
     }
   }
@@ -111,8 +110,7 @@ table {
         vertical-align: middle;
         padding: 15px;
         border: 1px solid #ddd;
-        white-space: nowrap;
-        
+
         &.btn-action {
           white-space: nowrap;
         }
