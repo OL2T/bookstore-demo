@@ -726,13 +726,15 @@ option1 {
   color: #041d10;
 }
 
-.total-sold {
+.total-sold,
+.total-sold-money {
   text-align: center;
   margin-bottom: 40px;
   color: green;
 }
 
-.total-count {
+.total-count,
+.total-count-money {
 
   font-size: 50px;
 
@@ -743,4 +745,16 @@ option1 {
   text-decoration: underline;
   text-align: center;
 
+}
+
+.customer-address {
+  min-width: 300px;
+}
+
+.customer-date {
+  min-width: 150px;
+}
+
+.order-status {
+  min-width: 200px;
 }

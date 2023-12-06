@@ -66,10 +66,10 @@ function createBill() {
               <td>${order.id}</td>
     <td>${order.Khách_hàng}</td>
     <td>${order.username}</td>
-    <td>${order.địa_chỉ}</td>
+    <td class="customer-address">${order.địa_chỉ}</td>
     <td>${order.phonenumber}</td>
     <td>${formatVND.format(order.tổng_tiền)}</td>
-   <td>${order.date}</td>
+   <td class="customer-date">${order.date}</td>
    <td>
    <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
    </td>
@@ -124,10 +124,10 @@ function createBill() {
     <td>${order.id}</td>
     <td>${order.Khách_hàng}</td>
     <td>${order.username}</td>
-    <td>${order.địa_chỉ}</td>
+     <td class="customer-address">${order.địa_chỉ}</td>
     <td>${order.phonenumber}</td>
     <td>${formatVND.format(order.tổng_tiền)}</td>
-   <td>${order.date}</td>
+   <td class="customer-date">${order.date}</td>
    <td>
    <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
    </td>
@@ -217,9 +217,11 @@ function confirmDelivery(orderId) {
         date: order.date,
         sold_id: book.productId,
         quantity: book.quantity,
-        category: book.categories
+        category: book.categories,
+        total: book.quantity * book.price
       }
       sold_arr.push(sold);
+      createBill();
     }
     )
 

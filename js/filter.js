@@ -254,7 +254,7 @@ function toggleDropdown(id, btnId) {
 		dropdownContent.style.display = 'block';
 		dropdownBtn.innerHTML = '<i class="fa-solid fa-angle-down"></i>';
 	}
-	
+
 }
 
 function renderFilterLeft(type, price) {

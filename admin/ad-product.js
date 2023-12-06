@@ -17,7 +17,7 @@ function bookSort() {
   data = ` 
   <div class="book-upload">
 
-  <div class="upload-btn"><button class="upload-btn" onclick="showUploadForm()">Upload</button></div>
+  <div class="upload-btn"><button class="upload-btn" onclick="showUploadForm()">Thêm sách mới</button></div>
   <div class="pop-up-upload-form">
   <label for="book-upload-id">Book's ID:</label>
   <input type="text" id="book-upload-id" name="book-upload-id">
@@ -26,13 +26,13 @@ function bookSort() {
   <label for="book-upload-price">Book's price:</label>
   <input type="text" id="book-upload-price" name="book-upload-price">
             <label for="book-category">Book's category:</label>
-            <select id="book-upload-type" onchange="addnewType()">
+            <select id="book-upload-type" >
              <option value="" disabled selected>Choose category</option>           
             <option value="Thiếu nhi">Thiếu nhi</option>
             <option value="Sách giáo khoa">Sách giáo khoa</option>
             <option value="Sách ngoại ngữ">Sách ngoại ngữ</option>
             <option value="Văn học">Văn học</option>
-            <option value="Khác">Khác</option>           
+                   
             </select>
             <div id="other-category-input" style="display: none;">
   <label for="book-upload-other-category">Other Category:</label>
@@ -60,13 +60,13 @@ function bookSort() {
   <label for="book-edit-price">Book's price:</label>
   <input type="text" id="book-edit-price" name="book-edit-price">
             <label for="book-category">Book's category:</label>
-            <select id="book-edit-type" onchange="addnewTypeedit()">
+            <select id="book-edit-type" >
              <option value="" disabled selected>Choose category</option>
             <option value="Thiếu nhi">Thiếu nhi</option>
             <option value="Sách giáo khoa">Sách giáo khoa</option>
             <option value="Sách ngoại ngữ">Sách ngoại ngữ</option>
             <option value="Văn học">Văn học</option>
-             <option value="Khác">Khác</option>
+           
             </select>
             <div id="other-category-input-edit" style="display: none;">
   <label for="book-edit-other-category">Other Category:</label>
@@ -96,6 +96,7 @@ function bookSort() {
     </div>`;
   holder.innerHTML = ' ';
   list.innerHTML = data;
+  displayProducts("Tất cả");
 
   let dropdown = document.getElementById('categoryDropdown');
   dropdown.addEventListener('change', function () {
@@ -170,30 +171,7 @@ function displayProducts(category) {
     });
   });
 }
-function addnewType() {
-  var selectElement = document.getElementById("book-upload-type");
-  var selectedValue = selectElement.value;
 
-  var otherCategoryInput = document.getElementById("other-category-input");
-
-  if (selectedValue === "Khác") {
-    otherCategoryInput.style.display = "block";
-  } else {
-    otherCategoryInput.style.display = "none";
-  }
-}
-function addnewTypeedit() {
-  var selectElement = document.getElementById("book-edit-type");
-  var selectedValue = selectElement.value;
-
-  var otherCategoryInput = document.getElementById("other-category-input-edit");
-
-  if (selectedValue === "Khác") {
-    otherCategoryInput.style.display = "block";
-  } else {
-    otherCategoryInput.style.display = "none";
-  }
-}
 
 
 function handleImageUpload(event) {
@@ -251,19 +229,10 @@ function validateAndSave() {
   }
 
 
-  // Get the value of the selected category
-  var selectedCategory = document.getElementById('book-upload-type').value.trim();
-  var otherCategoryInput = document.getElementById('book-upload-other-category');
 
-  // If "Khác" (Other) category is selected, use the value from the other category input field
-  if (selectedCategory === 'Khác') {
-    bookCategory = otherCategoryInput.value.trim();
 
-    if (bookCategory === '') {
-      alert('Please specify the other category');
-      return;
-    }
-  }
+
+
 
   const imgElement = document.querySelector('.image-container img');
   const imageData = imgElement ? imgElement.src : '';
@@ -350,14 +319,7 @@ function showEditForm(editButton) {
         var otherCategoryInput = document.getElementById('book-edit-other-category');
 
 
-        if (selectedCategory === 'Khác') {
-          bookCategory = otherCategoryInput.value.trim();
 
-          if (bookCategory === '') {
-            alert('Please specify the other category');
-            return;
-          }
-        }
         if (bookTitle === '') {
           bookTitle = Book.name;
         }
@@ -455,22 +417,25 @@ function overviewLoading() {
   const data = document.createElement('div');
   data.innerHTML = `
     <div class="total-sold"><h3>Đã bán</h3><span class="total-count"></span></div>
+     <div class="total-sold-money"><h3>Doanh thu</h3><span class="total-count-money"></span></div>
    <div class="overview-container">
 
-      <div class="van-hoc"><h4>Văn học</h4><span class="van-hoc-count"></span></div>
-      <div class="ngoai-ngu"><h4>Ngoại ngữ</h4><span class="ngoai-ngu-count"></span></div>
-      <div class="thieu-nhi"><h4>Thiếu nhi</h4><span class="thieu-nhi-count"></span></div>
-      <div class="giao-khoa"><h4>Giáo khoa</h4><span class="giao-khoa-count"></span></div>
+      <div class="van-hoc"><h4>Văn học</h4><span class="van-hoc-count"></span><div class="van-hoc-money"></div></div>
+      <div class="ngoai-ngu"><h4>Ngoại ngữ</h4><span class="ngoai-ngu-count"></span><div class="ngoai-ngu-money"></div></div>
+      <div class="thieu-nhi"><h4>Thiếu nhi</h4><span class="thieu-nhi-count"></span><div class="thieu-nhi-money"></div></div>
+      <div class="giao-khoa"><h4>Giáo khoa</h4><span class="giao-khoa-count"></span><div class="giao-khoa-money"></div></div>
     </div>
   `;
   reportContainer.appendChild(data);
-  const arr = JSON.parse(localStorage.getItem('Sold'));
+  const arr = localStorage.getItem("Sold") ? JSON.parse(localStorage.getItem('Sold')) : [];
+
   console.log(arr);
 
   let van_hoc = [];
   let ngoai_ngu = [];
   let giao_khoa = [];
   let thieu_nhi = [];
+  let money1 = 0; let money2 = 0; let money3 = 0; let money4 = 0;
 
   van_hoc = arr.filter(sold => sold.category === "Văn học");
   ngoai_ngu = arr.filter(sold => sold.category === "Sách ngoại ngữ");
@@ -482,18 +447,22 @@ function overviewLoading() {
   let all_van_hoc = 0; let all_ngoai_ngu = 0; let all_giao_khoa = 0; let all_thieu_nhi = 0;
   van_hoc.forEach(book => {
     all_van_hoc += book.quantity;
+    money1 += book.total;
   }
   )
   ngoai_ngu.forEach(book => {
     all_ngoai_ngu += book.quantity;
+    money2 += book.total;
   }
   )
   giao_khoa.forEach(book => {
     all_giao_khoa += book.quantity;
+    money3 += book.total;
   }
   )
   thieu_nhi.forEach(book => {
     all_thieu_nhi += book.quantity;
+    money4 += book.total;
   }
   )
   let vh = document.querySelector('.van-hoc .van-hoc-count');
@@ -504,8 +473,20 @@ function overviewLoading() {
   gk.textContent = all_giao_khoa.toString();
   let tn = document.querySelector('.thieu-nhi .thieu-nhi-count');
   tn.textContent = all_thieu_nhi.toString();
+  let vhmoney = document.querySelector('.van-hoc .van-hoc-money');
+  vhmoney.textContent = formatVND.format(money1);
+  let nnmoney = document.querySelector('.ngoai-ngu .ngoai-ngu-money');
+  nnmoney.textContent = formatVND.format(money2);
+  let gkmoney = document.querySelector('.giao-khoa .giao-khoa-money');
+  gkmoney.textContent = formatVND.format(money3);
+  let tnmoney = document.querySelector('.thieu-nhi .thieu-nhi-money');
+  tnmoney.textContent = formatVND.format(money4);
+
+
   let total = document.querySelector('.total-sold .total-count');
+  let totalMoney = document.querySelector('.total-sold-money .total-count-money');
   total.textContent = (all_giao_khoa + all_ngoai_ngu + all_van_hoc + all_thieu_nhi).toString();
+  totalMoney.textContent = formatVND.format(money1 + money2 + money3 + money4);
   console.log(all_van_hoc);
 
   button.addEventListener('click', function () {
@@ -520,11 +501,13 @@ function overviewLoading() {
       return bookDate >= startDateObj && bookDate <= endDateObj;
     })
     let total_in_days_count = 0;
+    let totalMoneyindays = 0;
     total_in_days.forEach(book => {
       total_in_days_count += book.quantity;
+      totalMoneyindays += book.total;
     })
     total.textContent = total_in_days_count.toString();
-    //
+    totalMoney.textContent = formatVND.format(totalMoneyindays);
     const filtered_van_hoc = van_hoc.filter(book => {
 
       const bookDate = new Date(book.date);
@@ -532,13 +515,16 @@ function overviewLoading() {
 
     });
     let x = 0;
+    let xMoney = 0;
     console.log(filtered_van_hoc);
     filtered_van_hoc.forEach(book => {
       x += book.quantity;
+      xMoney += book.total;
 
     })
     vh.textContent = x.toString();
-    //
+    vhmoney.textContent = formatVND.format(xMoney);
+
 
     const filtered_ngoai_ngu = ngoai_ngu.filter(book => {
 
@@ -547,12 +533,14 @@ function overviewLoading() {
 
     });
     let y = 0;
-
+    let yMoney = 0;
     filtered_ngoai_ngu.forEach(book => {
       y += book.quantity;
+      yMoney += book.total;
 
     })
     nn.textContent = y.toString();
+    nnmoney.textContent = formatVND.format(yMoney);
     //
     const filtered_thieu_nhi = thieu_nhi.filter(book => {
 
@@ -561,14 +549,17 @@ function overviewLoading() {
 
     });
     let z = 0;
+    let zMoney = 0;
 
     filtered_thieu_nhi.forEach(book => {
       z += book.quantity;
+      zMoney += book.total;
 
     })
     console.log(z);
-    //
+
     tn.textContent = z.toString();
+    tnmoney.textContent = formatVND.format(zMoney);
     const filtered_giao_khoa = giao_khoa.filter(book => {
 
       const bookDate = new Date(book.date);
@@ -576,11 +567,14 @@ function overviewLoading() {
 
     });
     let v = 0;
+    let vMoney = 0;
 
     filtered_giao_khoa.forEach(book => {
       v += book.quantity;
+      vMoney += book.total;
 
     })
     gk.textContent = v.toString();
+    gkmoney.textContent = formatVND.format(vMoney);
   });
 }
