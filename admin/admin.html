@@ -21,29 +21,28 @@
 <body class="ad-body">
   <header class="ad-header">
     <div class="ad-logo">
-      <div class="ad-logo-img"> <img src="../images/logo.png" alt=" logo"></div>
+      <div class="ad-logo-img">
+        <a href="../index.html">
+          <img src="../images/logo.png" alt=" logo">
+        </a>
+      </div>
       <div class="menu-icn"><i class="fa-solid fa-bars fa-2xl "></i></div>
     </div>
 
-    <div class="ad-searchbar">
-      <input type="text" placeholder="Tìm kiếm">
-      <div class="searchbtn">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div>
-    </div>
+
 
     <div class="ad-profile">
-      <div class="admin-name">nbvjhvhjvhj</div>
       <div class="ad-icon"><i class="fa-solid fa-circle-user fa-2xl"></i></div>
+      <div class="admin-name">admin1</div>
     </div>
   </header>
   <div class="main-container">
     <div class="navcontainer">
       <nav class="nav">
         <div class="nav-upper-options">
-          <div class="nav-option option1">
+          <div class="nav-option option1" onclick="overviewLoading()">
             <i class="fa-solid fa-table-cells"></i>
-            <span>Dashboard</span></a>
+            <span>Thống kê</span></a>
           </div>
 
           <div class="nav-option option2" onclick="displayCustomerList()">
@@ -59,48 +58,22 @@
             <i class="fa-solid fa-book"></i>
             <span>Sách</span>
           </div>
-          <div class="nav-option option5">
+          <div class="nav-option option5" onclick="logoutAdmin()">
             <i class="fa-solid fa-user-gear"></i>
-            <span>Thiết lập</span>
+            <span>Đăng xuất</span>
           </div>
         </div>
       </nav>
     </div>
     <div class="main" id="main">
-      <div class="searchbar2">
-        <input type="text" name="" id="" placeholder="Search">
-        <div class="searchbtn">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-      </div>
+
       <div class="booktype"></div>
       <!-- display:none -->
       <div class="report-container" id="report-container">
-        <div class="report-header">
-          <h1 class="recent-Articles">Recent orders</h1>
-
-        </div>
-        <div class="report-body">
-          <div class="report-topic-heading">
-            <h3 class="t-op">Mã đơn</h3>
-            <h3 class="t-op">Khách hàng</h3>
-            <h3 class="t-op">Tổng thanh toán</h3>
-            <h3 class="t-op">Trạng thái</h3>
-          </div>
-
-          <div class="items">
-            <div class="item1">
-              <h3 class="t-op-nextlvl">111</h3>
-              <h3 class="t-op-nextlvl">111</h3>
-              <h3 class="t-op-nextlvl">111</h3>
-              <h3 class="t-op-nextlvl label-tag">111</h3>
-            </div>
-
-
-          </div>
-        </div>
       </div>
     </div>
+  </div>
+  </div>
   </div>
   <div class="order-detail-popup">
     <button class="close-btn" onclick="closeOrderDetailPopup() ">X</button>
@@ -109,6 +82,7 @@
     </div>
   </div>
   <div class="confirm-delivery-popup"></div>
+
 </body>
 <script>
   let menuicn = document.querySelector(".menu-icn");
@@ -120,13 +94,16 @@
 
 </script>
 <script src="../js/init.js"></script>
-<!--<script src="../js/main.js"></script>-->
-<!--<script src="../js/validateFormRegister.js"></script>-->
+<!-- <script src="../js/main.js"></script> -->
 <script src="../js/login.js"></script>
-<!--<script src="../js/filter.js"></script>-->
+<!--<script src="../js/validateFormRegister.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/search.js"></script> -->
+<script src="../js/filter.js"></script>
 
 <script src="ad-product.js"></script>
 <script src="bill.js"></script>
 <script src="list-users.js"></script>
+<script src="logout.js"></script>
 
 </html>
