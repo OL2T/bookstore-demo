@@ -1,9 +1,8 @@
 .customer-management h3 {
   text-align: center;
-  color: green;
+  color: rgba(241, 142, 125, 0.7);
+  padding-top: 20px;
 }
-
-
 
 .users-list {
   border-radius: 8px;
@@ -20,9 +19,9 @@ tbody {
 }
 
 .btn-edit {
-  background-color: yellow !important;
-  color: black !important;
-  font-size: small;
+  background-color: white !important;
+  color: #a4c6eb !important;
+  border: none !important;
 }
 
 .btn-edit:hover {
@@ -31,7 +30,9 @@ tbody {
 
 .btn-delete {
   margin-top: 8px;
-  font-size: small;
+  background-color: white !important;
+  color: red !important;
+  border: none !important;
 }
 
 /* Modal Styles */
@@ -84,7 +85,9 @@ tbody {
   background-color: white;
 }
 
-.edit-header {
+.edit-header,
+.delete-header,
+.modal-title {
   font-weight: bold;
   font-size: 30px;
   width: calc(100% - 20px);
@@ -113,13 +116,6 @@ input[type="email"] {
 }
 
 .modal-footer {
-  text-align: center;
-}
-
-.delete-header {
-  font-weight: bold;
-  font-size: 30px;
-  width: calc(100% - 20px);
   text-align: center;
 }
 

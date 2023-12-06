@@ -260,7 +260,7 @@ option1 {
   box-shadow: 3px 3px 10px rgb(188, 188, 188);
   padding: 0px 20px 20px 20px;
   overflow-x: auto;
-  overflow-y: scroll;
+  overflow-y: auto;
 
 }
 
@@ -702,5 +702,45 @@ option1 {
   .waiting-list-views-row .view-row-content .product-group {
     text-align: center;
   }
+
+}
+
+.overview-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  grid-template-rows: auto auto;
+
+  gap: 20px;
+}
+
+/* Styling for individual grid items */
+.van-hoc,
+.ngoai-ngu,
+.thieu-nhi,
+.giao-khoa {
+  border: 1px solid #ccc;
+
+  padding: 10px;
+  text-align: center;
+  color: #041d10;
+}
+
+.total-sold {
+  text-align: center;
+  margin-bottom: 40px;
+  color: green;
+}
+
+.total-count {
+
+  font-size: 50px;
+
+  color: rgb(19, 19, 22);
+
+  font-weight: bold;
+
+  text-decoration: underline;
+  text-align: center;
 
 }

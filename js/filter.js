@@ -48,8 +48,7 @@ function renderProductItems(products, wrapDiv) {
 						</div>
 						<div class="action add-to-cart">
 						<span class="tool-tip">Thêm vào giỏ hàng</span>
-						<button class="btn-action btn-add-to-cart" onclick="addTocCart(${productArray.productId
-				})"></button>
+						<button class="btn-action btn-add-to-cart" onclick="addTocCart(${productArray.productId})"></button>
 						</div>
 					</div>
 				</div>
@@ -130,18 +129,11 @@ function renderProductList() {
 		let nextIndex = endIndex;
 
 		showMoreButton.addEventListener('click', function () {
-			const nextEndIndex = Math.min(nextIndex + 4, tempProducts.length);
-			renderProductItems(tempProducts.slice(nextIndex, nextEndIndex), categoryContent);
-			nextIndex = nextEndIndex;
-
-			if (nextIndex >= tempProducts.length) {
-				showMoreButton.style.display = 'none';
-			}
+			// const remainingProducts = tempProducts.slice(nextIndex);
+			// renderProductItems(remainingProducts, categoryContent);
+			// showMoreButton.style.display = 'none';
+			changeCategory(category.id);
 		});
-
-		if (endIndex >= tempProducts.length) {
-			showMoreButton.style.display = 'none';
-		}
 
 		categorySection.appendChild(categoryContent);
 		categorySection.appendChild(showMoreButton);
@@ -192,9 +184,7 @@ function renderProductByType(type, currentPage, priceRange) {
 	}
 
 
-	if (priceRange === null) {
-		// products = storedProducts;
-	} else {
+	if (priceRange !== null) {
 		const tempPrice = priceRange.split('-');
 		const minPrice = parseInt(tempPrice[0] + '000');
 		const maxPrice = parseInt(tempPrice[1] + '000');
@@ -254,6 +244,19 @@ function changePriceRange(priceRange) {
 	window.location.search = urlParams;
 }
 
+function toggleDropdown(id, btnId) {
+	const dropdownContent = document.getElementById(id);
+	const dropdownBtn = document.getElementById(btnId);
+	if (dropdownContent.style.display === 'block') {
+		dropdownContent.style.display = 'none';
+		dropdownBtn.innerHTML = '<i class="fa-solid fa-angle-right"></i>';
+	} else {
+		dropdownContent.style.display = 'block';
+		dropdownBtn.innerHTML = '<i class="fa-solid fa-angle-down"></i>';
+	}
+	
+}
+
 function renderFilterLeft(type, price) {
 	const contentDiv = document.createElement('div');
 	contentDiv.id = 'contentDiv';
@@ -262,12 +265,58 @@ function renderFilterLeft(type, price) {
 	const accordionDiv = document.createElement('div');
 	accordionDiv.id = 'accordion';
 
+	const filterWrapDiv = document.createElement('div');
+	filterWrapDiv.classList.add('filter-wrap');
+
 	// nhóm sản phẩm
-	const filterDiv = document.createElement('div');
-	filterDiv.classList.add('filter');
-	filterDiv.innerText = 'Nhóm sản phẩm';
+	const filterTopDiv = document.createElement('div');
+	filterTopDiv.classList.add('filter', "filter-heading");
+	filterTopDiv.innerHTML = `
+		<div class="heading">Nhóm sản phẩm</div>
+		<div class="dropdown">
+			<button onclick="toggleDropdown('filter-cate', 'dropcate-btn')" id="dropcate-btn" class="dropbtn"><i class="fa-solid fa-angle-down"></i></button>
+			<div id="catePrice" class="dropdown-content catePrice"></div>
+		</div>
+	`;
+
+	const filterBottomDiv = document.createElement('div');
+	filterBottomDiv.classList.add('filter', 'filter-cate');
+	filterBottomDiv.id = 'filter-cate';
+	filterBottomDiv.style.display = 'block';
 	const catePriceDiv = document.createElement('div');
 	catePriceDiv.classList.add('catePrice');
+	catePriceDiv.id = 'catePrice';
+
+	const categoryDiv = document.createElement('div');
+	categoryDiv.classList.add('filter-item');
+	const allCheckbox = document.createElement('input');
+	allCheckbox.type = 'checkbox';
+	allCheckbox.id = 'allCategories';
+	allCheckbox.name = 'allCategories';
+	allCheckbox.value = 'allCategories';
+	allCheckbox.checked = type === 'allCategories';
+	allCheckbox.addEventListener('change', function () {
+		if (allCheckbox.checked) {
+			changeCategory('allCategories');
+		} else {
+			changeCategory('');
+		}
+
+		const checkboxes = catePriceDiv.querySelectorAll('input[type="checkbox"]');
+		checkboxes.forEach((checkbox) => {
+			if (checkbox !== allCheckbox) {
+				checkbox.checked = false;
+			}
+		});
+	});
+
+	const allLabel = document.createElement('label');
+	allLabel.htmlFor = 'allCategories';
+	allLabel.innerText = 'Tất cả';
+
+	categoryDiv.appendChild(allCheckbox);
+	categoryDiv.appendChild(allLabel);
+	catePriceDiv.appendChild(categoryDiv);
 
 	categories.forEach(category => {
 		const categoryDiv = document.createElement('div');
@@ -297,18 +346,41 @@ function renderFilterLeft(type, price) {
 		categoryDiv.appendChild(label);
 		catePriceDiv.appendChild(categoryDiv);
 	});
-
-	accordionDiv.appendChild(filterDiv);
-	accordionDiv.appendChild(catePriceDiv);
+	filterBottomDiv.appendChild(catePriceDiv);
+	filterWrapDiv.appendChild(filterTopDiv);
+	filterWrapDiv.appendChild(filterBottomDiv);
+	accordionDiv.appendChild(filterWrapDiv);
 	leftDiv.appendChild(accordionDiv);
 	contentDiv.appendChild(leftDiv);
 
 	//Giá
+	const priceTopDiv = document.createElement('div');
+	priceTopDiv.classList.add('filter-wrap');
 	const priceDiv = document.createElement('div');
-	priceDiv.classList.add('filter');
-	priceDiv.innerText = 'Giá';
+	priceDiv.classList.add('filter', "filter-heading");
+	priceDiv.innerHTML = `
+		<div class="heading">Giá</div>
+		<div class="dropdown">
+			<button onclick="toggleDropdown('cate-price', 'dropprice-btn')" id="dropprice-btn" class="dropbtn"><i class="fa-solid fa-angle-down"></i></button>
+			<div id="catePrice" class="dropdown-content catePrice"></div>
+		</div>
+	`;
+
+	priceTopDiv.appendChild(priceDiv);
+	accordionDiv.appendChild(priceTopDiv);
+
+	const priceBottomDiv = document.createElement('div');
+	priceBottomDiv.classList.add('filter', 'filter-cate');
+	priceBottomDiv.id = 'cate-price';
+	priceBottomDiv.style.display = 'block';
 	const priceRangeDiv = document.createElement('div');
 	priceRangeDiv.classList.add('catePrice');
+	priceRangeDiv.id = 'catePrice';
+
+	priceTopDiv.appendChild(priceBottomDiv);
+	priceBottomDiv.appendChild(priceRangeDiv);
+	accordionDiv.appendChild(priceTopDiv);
+
 
 	const priceRanges = [
 		{ id: 'under-100', name: 'Dưới 100.000', min: 0, max: 100.000 },
@@ -351,8 +423,7 @@ function renderFilterLeft(type, price) {
 		priceRangeDiv.appendChild(priceDiv);
 	});
 
-	accordionDiv.appendChild(priceDiv);
-	accordionDiv.appendChild(priceRangeDiv);
+	priceBottomDiv.appendChild(priceRangeDiv);
 	leftDiv.appendChild(accordionDiv);
 	contentDiv.appendChild(leftDiv);
 
@@ -435,7 +506,3 @@ function createPaginationbuttons(wrapper, productList, currentPage) {
 		wrapper.appendChild(paginationContainer);
 	}
 }
-
-// function renderMoreProduct() {
-
-// }

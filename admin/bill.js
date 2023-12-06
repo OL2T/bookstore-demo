@@ -46,8 +46,6 @@ function createBill() {
 
     // Assuming order.date is a string in the format 'yyyy-mm-dd'
     // Convert order.date to a Date object for comparison
-
-
     // Comparing dates
 
     const filteredOrders = orders.filter(order => {
@@ -66,16 +64,17 @@ function createBill() {
       orderItem.setAttribute('data-order-id', order.id);
       orderItem.innerHTML = `
               <td>${order.id}</td>
-              <td>${order.Khách_hàng}</td>
-              <td>${order.username}</td>
-              <td>${order.địa_chỉ}</td>
-              <td>${order.phonenumber}</td>
-              <td>${formatVND.format(order.tổng_tiền)} </td>
-              <td>${order.date}</td>
-             <td class="order-status"><button class="confirm-order-status onclick="confirmDelivery(${order.id})">${order.status}</button></td>
-              <td>
-              <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
-              </td>
+    <td>${order.Khách_hàng}</td>
+    <td>${order.username}</td>
+    <td>${order.địa_chỉ}</td>
+    <td>${order.phonenumber}</td>
+    <td>${formatVND.format(order.tổng_tiền)}</td>
+   <td>${order.date}</td>
+   <td>
+   <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
+   </td>
+   <td class="order-status"><button class="confirm-order-status" onclick="confirmDelivery(${order.id})">${order.status}</button></td>
+    <td> <button class="delete-btn" onclick="deleteOrder(${order.id})"><i class="fa-solid fa-trash"></i></button></td>
               `;
       bill_data.appendChild(orderItem);
     });
@@ -107,9 +106,9 @@ function createBill() {
     <th>Tổng tiền</th>
     
     <th>Ngày đặt</td>    
+    <th class="see-order-detail" >Chi tiết đơn hàng</th>
     <th class="order-status">Trạng thái</th>
     <th>Thao tác</th>
-    <th class="see-order-detail" >Chi tiết đơn hàng</th>
   </tr>
  
 `;
@@ -129,11 +128,11 @@ function createBill() {
     <td>${order.phonenumber}</td>
     <td>${formatVND.format(order.tổng_tiền)}</td>
    <td>${order.date}</td>
-    <td class="order-status"><button class="confirm-order-status" onclick="confirmDelivery(${order.id})">${order.status}</button></td>
+   <td>
+   <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
+   </td>
+   <td class="order-status"><button class="confirm-order-status" onclick="confirmDelivery(${order.id})">${order.status}</button></td>
     <td> <button class="delete-btn" onclick="deleteOrder(${order.id})"><i class="fa-solid fa-trash"></i></button></td>
-    <td>
-      <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
-    </td>
      
   `;
     bill_data.appendChild(orderItem);
@@ -201,19 +200,32 @@ function deleteOrder(orderId) {
 
 
 function confirmDelivery(orderId) {
-
+  let sold_arr = JSON.parse(localStorage.getItem('Sold')) || [];
   const order = orders.find(order => order.id === orderId);
   console.log(order);
-  const confirmed = '';
+  var confirmed = '';
   if (order.status !== 'Đã xác nhận') {
     confirmed = window.confirm('Are you sure to confirm the delivery?');
   }
+
   if (confirmed) {
 
     order.status = 'Đã xác nhận';
+    let sold;
+    order.products.forEach(book => {
+      sold = {
+        date: order.date,
+        sold_id: book.productId,
+        quantity: book.quantity,
+        category: book.categories
+      }
+      sold_arr.push(sold);
+    }
+    )
+
+    localStorage.setItem('Sold', JSON.stringify(sold_arr));
+    console.log(sold_arr);
     localStorage.setItem('CartArray', JSON.stringify(orders));
-
-
   }
 
 }

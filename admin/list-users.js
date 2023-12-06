@@ -1,4 +1,5 @@
 let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
+let listrealUser = listUsers.filter(user => user.role === "Khách hàng")
 
 function displayCustomerList() {
   const report = document.getElementById('report-container');
@@ -19,7 +20,7 @@ function displayCustomerList() {
   customerManagement.classList.add('customer-management');
   customerManagement.id = 'customer-management';
   customerManagement.innerHTML = `
-    <h3>Danh sách khách hàng</h3>
+    <h3>Danh sách người dùng</h3>
     <div class="users-list">
       <table>
         <thead>
@@ -30,7 +31,7 @@ function displayCustomerList() {
             <th>Số điện thoại</th>
             <th>Email</th>
             <th>Password</th>
-            <th>Vai trò</th>
+            <th>Quyền</th>
             <th>Thao tác</th>
           </tr>
         </thead>
@@ -41,8 +42,8 @@ function displayCustomerList() {
     </div>
   `;
 
-  for (let i = 0; i < listUsers.length; i++) {
-    const user = listUsers[i];
+  for (let i = 0; i < listrealUser.length; i++) {
+    const user = listrealUser[i];
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${i + 1}</td>
@@ -53,8 +54,8 @@ function displayCustomerList() {
       <td>${user.password}</td>
       <td>${user.role}</td>
       <td>
-        <button class="btn-edit" onclick="editUser(${i})">Sửa</button>
-        <button class="btn-delete" onclick="deleteUser(${i})">Xóa</button>
+        <button class="btn-edit" onclick="editUser(${i})"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button class="btn-delete" onclick="deleteUser(${i})"><i class="fa-solid fa-trash"></i></button>
       </td>
     `;
     customerManagement.querySelector('tbody').appendChild(row);

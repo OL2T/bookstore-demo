@@ -1,6 +1,9 @@
 .block {
   &-search {
     flex: 0 0 400px;
+    @media (max-width: 991px) {
+      flex: unset;
+    }
 
     &-inner {
       position: relative;

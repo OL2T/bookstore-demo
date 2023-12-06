@@ -171,7 +171,7 @@ function totalMoney() {
 	 for (let i = 0; i < productInCart.length; i++) {
 		total += productInCart[i].quantity * productInCart[i].price
 	 }
-	 // document.querySelector('.total-price > span').innerHTML = formatVND.format(total)
+	 document.querySelector('.total-price > span').innerHTML = formatVND.format(total)
   }
   return total;
 }

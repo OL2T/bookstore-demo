@@ -80,7 +80,7 @@ input:not([type="checkbox"]) {
   @include input();
 
   &[type="checkbox"] {
-    @include checkbox(24px,icon-checkbox);
+    @include checkbox(24px, icon-checkbox);
   }
 }
 
@@ -129,7 +129,8 @@ img {
   height: 100%;
   object-fit: cover;
 }
-select{
+
+select {
   @include select(icon-select);
 }
 
@@ -243,5 +244,13 @@ select{
       background-color: $primary-color;
       color: #fff;
     }
+  }
+}
+
+#btn-register-form-action {
+  font-weight: 600;
+
+  &:hover {
+    cursor: pointer;
   }
 }
