@@ -10,12 +10,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-<<<<<<< Updated upstream
   <link rel="stylesheet" href="admin/admin.css">
-=======
 
->>>>>>> Stashed changes
+
   <title>Bookstore | Cart</title>
+  <link rel="icon" type="image/icon" href="images/logo.png">
+
 </head>
 
 <body class="path-cart">
@@ -98,272 +98,272 @@
                         nhi</span></li>
                     <li class="menu-item menu-item-textbook" onclick="changeToFilter('textbook')"><span>Sách giáo
                         khoa</span></li>
-                    <li class="menu-item menu-item-foreign-language-book"
-<<<<<<< Updated upstream
+                    <li class="menu-item menu-item-foreign-language-book" <<<<<<< Updated upstream
                       onclick="changeToFilter('foreign-language-book')"><span>Sách Ngoại ngữ</span></li>
-=======
-                      onclick="changeCategory('foreign-language-book')"><span>Sách Ngoại ngữ</span></li>
->>>>>>> Stashed changes
-                  </ul>
-                </div>
+                    =======
+                    onclick="changeCategory('foreign-language-book')"><span>Sách Ngoại ngữ</span>
               </li>
-              <li class="menu-item menu-item-expanded">
-                <span>Tài khoản</span>
-                <div class="menu sub-menu">
-                  <ul class="menu">
-                    <li class="menu-item menu-item-name"><span></span></li>
-                    <!--                  <li class="menu-item"><span></span></li>-->
-                  </ul>
-                </div>
-              </li>
-              <li class="menu-item"><span>Blog</span></li>
-              <li class="menu-item"><span>Contact</span></li>
+              >>>>>>> Stashed changes
             </ul>
-            <div class="block-account">
+          </div>
+          </li>
+          <li class="menu-item menu-item-expanded">
+            <span>Tài khoản</span>
+            <div class="menu sub-menu">
               <ul class="menu">
-                <li class="menu-item menu-item-user-login">
-                  <button class="btn-login">Đăng nhập</button>
-                </li>
-                <li class="menu-item menu-item-user-register">
-                  <button class="btn-register">Đăng kí</button>
-                </li>
-                <li class="menu-item menu-item-user-logout" style="display: none">
-                  <button class="btn-logout">Đăng xuất</button>
-                </li>
+                <li class="menu-item menu-item-name"><span></span></li>
+                <!--                  <li class="menu-item"><span></span></li>-->
               </ul>
             </div>
+          </li>
+          <li class="menu-item"><span>Blog</span></li>
+          <li class="menu-item"><span>Contact</span></li>
+          </ul>
+          <div class="block-account">
+            <ul class="menu">
+              <li class="menu-item menu-item-user-login">
+                <button class="btn-login">Đăng nhập</button>
+              </li>
+              <li class="menu-item menu-item-user-register">
+                <button class="btn-register">Đăng kí</button>
+              </li>
+              <li class="menu-item menu-item-user-logout" style="display: none">
+                <button class="btn-logout">Đăng xuất</button>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    </header>
-    <main class="main-content">
+  </div>
+  </header>
+  <main class="main-content">
 
-      <div id="main-content" class="container">
-        <section class="cart-btn">
-          <button class="adding-section" onclick="renderProductToCart()">Đặt hàng</button>
+    <div id="main-content" class="container">
+      <section class="cart-btn">
+        <button class="adding-section" onclick="renderProductToCart()">Đặt hàng</button>
 
-          <button class="waiting-list " onclick="seeWaitingList()">Xem các đơn đã đặt</button>
-        </section>
+        <button class="waiting-list " onclick="seeWaitingList()">Xem các đơn đã đặt</button>
+      </section>
 
-        <section id="product-in-cart" class="section section-product-in-cart">
-          <div class="cart-heading">
-            <div class="heading-product heading-product-title">Sản phẩm</div>
-            <div class="heading-product product-price">Đơn giá</div>
-            <div class="heading-product product-quantity">Số lượng</div>
-            <div class="heading-product product-sub-total">Thành tiền</div>
-            <div class="heading-product product-actions">Thao tác</div>
+      <section id="product-in-cart" class="section section-product-in-cart">
+        <div class="cart-heading">
+          <div class="heading-product heading-product-title">Sản phẩm</div>
+          <div class="heading-product product-price">Đơn giá</div>
+          <div class="heading-product product-quantity">Số lượng</div>
+          <div class="heading-product product-sub-total">Thành tiền</div>
+          <div class="heading-product product-actions">Thao tác</div>
+        </div>
+        <div class="product-content-wrapper"></div>
+        <!--        <div class="product-content-wrapper mobile"></div>-->
+        <div class="footer-product">
+          <div class="footer-product-inner">
+            <div class="total-price">Tổng số tiền: <span></span></div>
+            <button onclick="showPaymentForm() ">Thanh Toán</button>
           </div>
-          <div class="product-content-wrapper"></div>
-          <!--        <div class="product-content-wrapper mobile"></div>-->
-          <div class="footer-product">
-            <div class="footer-product-inner">
-              <div class="total-price">Tổng số tiền: <span></span></div>
-              <button onclick="showPaymentForm() ">Thanh Toán</button>
-            </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <!--      </section>-->
-        <!--      <section-->
-        <!--        id="literature-product-list"-->
-        <!--        class="section section-product-list"-->
-        <!--      >-->
-        <!--        <div class="header-content">Sách văn học</div>-->
-        <!--        <div class="view-content-wrapper"></div>-->
-        <!--      </section>-->
-        <!--      <section-->
-        <!--        id="children-book-product-list"-->
-        <!--        class="section section-product-list"-->
-        <!--      >-->
-        <!--        <div class="header-content">Sách thiếu nhi</div>-->
-        <!--        <div class="view-content-wrapper"></div>-->
-        <!--      </section>-->
+      <!--      </section>-->
+      <!--      <section-->
+      <!--        id="literature-product-list"-->
+      <!--        class="section section-product-list"-->
+      <!--      >-->
+      <!--        <div class="header-content">Sách văn học</div>-->
+      <!--        <div class="view-content-wrapper"></div>-->
+      <!--      </section>-->
+      <!--      <section-->
+      <!--        id="children-book-product-list"-->
+      <!--        class="section section-product-list"-->
+      <!--      >-->
+      <!--        <div class="header-content">Sách thiếu nhi</div>-->
+      <!--        <div class="view-content-wrapper"></div>-->
+      <!--      </section>-->
 
-        <!--      <section-->
-        <!--        id="textbook-product-list"-->
-        <!--        class="section section-product-list"-->
-        <!--      >-->
-        <!--        <div class="header-content">Sách giáo khoa</div>-->
-        <!--        <div class="view-content-wrapper"></div>-->
-        <!--      </section>-->
+      <!--      <section-->
+      <!--        id="textbook-product-list"-->
+      <!--        class="section section-product-list"-->
+      <!--      >-->
+      <!--        <div class="header-content">Sách giáo khoa</div>-->
+      <!--        <div class="view-content-wrapper"></div>-->
+      <!--      </section>-->
 
-        <!--      <section-->
-        <!--        id="foreign-language-book-product-list"-->
-        <!--        class="section section-product-list"-->
-        <!--      >-->
-        <!--        <div class="header-content">Sách ngoại ngữ</div>-->
-        <!--        <div class="view-content-wrapper"></div>-->
-        <!--      </section>-->
+      <!--      <section-->
+      <!--        id="foreign-language-book-product-list"-->
+      <!--        class="section section-product-list"-->
+      <!--      >-->
+      <!--        <div class="header-content">Sách ngoại ngữ</div>-->
+      <!--        <div class="view-content-wrapper"></div>-->
+      <!--      </section>-->
 
-        <!--      <section class="section section-list-users">-->
-        <!--        <div class="header-content">Danh Sách Users</div>-->
-        <!--        <table id="table-list-users"></table>-->
-        <!--      </section>-->
+      <!--      <section class="section section-list-users">-->
+      <!--        <div class="header-content">Danh Sách Users</div>-->
+      <!--        <table id="table-list-users"></table>-->
+      <!--      </section>-->
+    </div>
+    <div class="pop-up-payment-form">
+      <label for="payment-form-username">Họ và tên:</label>
+      <input type="text" id="payment-form-username" name="payment-form-username">
+      <label for="payment-form-number">Số điện thoại:</label>
+      <input type="text" id="payment-form-number" name="payment-form-number">
+      <label for="provinces">Chọn tỉnh thành:</label>
+      <select id="provinces" onchange="populateDistricts()">
+        <option value="">Chọn tỉnh thành</option>
+      </select>
+      <label for="districts">Chọn quận/huyện:</label>
+      <select id="districts">
+        <option value="">Chọn quận huyện</option>
+      </select>
+
+      <label for="payment-form-ward">Phường/xã:</label>
+      <input type="text" id="payment-form-ward" name="payment-form-ward">
+      <label for="payment-form-street">Số nhà và đường:</label>
+      <input type="text" id="payment-form-street" name="payment-form-street" placeholder="ví dụ: 273 An Dương Vương">
+
+      <div class="payment-form-btn">
+        <button class="total-confirm" onclick="  createSuccessPopup()">Xác nhận</button>
+        <button class=" cancel-payment-form" onclick="closePaymentForm()">Cancel</button>
       </div>
-      <div class="pop-up-payment-form">
-        <label for="payment-form-username">Họ và tên:</label>
-        <input type="text" id="payment-form-username" name="payment-form-username">
-        <label for="payment-form-number">Số điện thoại:</label>
-        <input type="text" id="payment-form-number" name="payment-form-number">
-        <label for="provinces">Chọn tỉnh thành:</label>
-        <select id="provinces" onchange="populateDistricts()">
-          <option value="">Chọn tỉnh thành</option>
-        </select>
-        <label for="districts">Chọn quận/huyện:</label>
-        <select id="districts">
-          <option value="">Chọn quận huyện</option>
-        </select>
-
-        <label for="payment-form-ward">Phường/xã:</label>
-        <input type="text" id="payment-form-ward" name="payment-form-ward">
-        <label for="payment-form-street">Số nhà và đường:</label>
-        <input type="text" id="payment-form-street" name="payment-form-street" placeholder="ví dụ: 273 An Dương Vương">
-
-        <div class="payment-form-btn">
-          <button class="total-confirm" onclick="  createSuccessPopup()">Xác nhận</button>
-          <button class=" cancel-payment-form" onclick="closePaymentForm()">Cancel</button>
-        </div>
-      </div>
-
-      <div class="payment-success-pop-up">
-        <div class="payment-success-pop-up-container">
-          <div class="payment-success-text">Đặt hàng thành công</div>
-          <div class="icon-container">
-            <i class="fa-solid fa-check fa-bounce"></i>
-          </div>
-          <button class=" cancel-payment-success" onclick="closeSuccessPopup()">Trở về</button>
-        </div>
-      </div>
-    </main>
-    <footer>
-      <div class="footer-content">
-        <div class="footer-section">
-          <div class="logo"><img src="images/logo1.png" alt="">
-          </div>
-          <div class="info">
-            <span><i class="fa-solid fa-map-location-dot"></i> <span>273 An Dương Vương, phường 3, quận 5,
-                TPHCM</span></span>
-          </div>
-          <div class="info">
-            <span><i class="fa-solid fa-phone"></i> <span>012345678</span></span>
-          </div>
-        </div>
-        <div class="footer-section">
-          <div class="footer-section-text">Danh mục</div>
-          <div>
-            <a href="">Văn học</a>
-            <a href="">Thiếu nhi</a>
-            <a href="">Giáo khoa</a>
-            <a href="">Ngoại ngữ</a>
-          </div>
-        </div>
-
-        <div class="footer-section">
-          <div class="footer-section-text">Lối tắt</div>
-          <div>
-            <a href="">Về chúng tôi</a>
-            <a href="">FAQ</a>
-            <a href="">Hướng dẫn mua hàng</a>
-            <a href="">Chính sách đổi trả</a>
-            <a href="">Các ưu đãi</a>
-          </div>
-        </div>
-
-        <div class="footer-section">
-          <div class="footer-section-text">Đăng ký theo dõi</div>
-          <p>Cập nhật những chính sách ưu đãi và sự kiện mới nhất</p>
-          <input type="text" placeholder="Email của bạn:  ">
-        </div>
-
-      </div>
-      <div class="copyright">
-        Copyright © 2023
-      </div>
-    </footer>
-
-    <div class="pop-up-form-register">
-      <form action="" method="POST" class="form form-register" id="form-register">
-        <h3 class="heading">Đăng ký</h3>
-        <div class="spacer"></div>
-
-        <div class="form-group">
-          <label for="fullname" class="form-label">Họ và tên</label>
-          <input id="fullname" name="fullname" type="text" placeholder="VD: Lâm Tài" class="form-control">
-          <span class="form-message"></span>
-        </div>
-
-        <div class="form-group">
-          <label for="username" class="form-label">Tên đăng nhập</label>
-          <input id="username" name="username" type="text" placeholder="VD: user123" class="form-control">
-          <span class="form-message"></span>
-        </div>
-
-        <div class="form-group">
-          <label for="email" class="form-label">Email</label>
-          <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control">
-          <span class="form-message"></span>
-        </div>
-
-        <div class="form-group">
-          <label for="phone-number" class="form-label">Số điện thoại</label>
-          <input id="phone-number" name="phone-number" type="text" placeholder="VD: 0937695210" class="form-control">
-          <span class="form-message"></span>
-        </div>
-
-        <div class="form-group">
-          <label for="password" class="form-label">Mật khẩu</label>
-          <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
-          <span class="icon-show-password"></span>
-          <span class="form-message"></span>
-        </div>
-
-        <div class="form-group">
-          <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
-          <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" type="password"
-            class="form-control">
-          <span class="icon-show-password"></span>
-          <span class="form-message"></span>
-        </div>
-
-        <button class="form-submit">Đăng ký</button>
-      </form>
     </div>
 
-    <div class="pop-up-form-login">
-      <form action="" method="POST" class="form form-login" id="form-login">
-        <h3 class="heading">Đăng nhập</h3>
-        <div class="spacer"></div>
-
-        <div class="form-group">
-          <label for="username-login" class="form-label">Tên đăng nhập</label>
-          <input id="username-login" name="username" type="text" placeholder="VD: Lâm Tài" class="form-control">
-          <span class="form-message"></span>
+    <div class="payment-success-pop-up">
+      <div class="payment-success-pop-up-container">
+        <div class="payment-success-text">Đặt hàng thành công</div>
+        <div class="icon-container">
+          <i class="fa-solid fa-check fa-bounce"></i>
         </div>
-
-        <div class="form-group">
-          <label for="password-login" class="form-label">Mật khẩu</label>
-          <input id="password-login" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
-          <span class="icon-show-password"></span>
-          <span class="form-message"></span>
-        </div>
-
-        <div class="form-content">
-          <p>Bạn chưa có tài khoản?<a href="#" id="btn-register-form-action"> Đăng ký ngay</a></p>
-        </div>
-
-        <button class="form-submit">Đăng nhập</button>
-      </form>
+        <button class=" cancel-payment-success" onclick="closeSuccessPopup()">Trở về</button>
+      </div>
     </div>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="logo"><img src="images/logo1.png" alt="">
+        </div>
+        <div class="info">
+          <span><i class="fa-solid fa-map-location-dot"></i> <span>273 An Dương Vương, phường 3, quận 5,
+              TPHCM</span></span>
+        </div>
+        <div class="info">
+          <span><i class="fa-solid fa-phone"></i> <span>012345678</span></span>
+        </div>
+      </div>
+      <div class="footer-section">
+        <div class="footer-section-text">Danh mục</div>
+        <div>
+          <a href="">Văn học</a>
+          <a href="">Thiếu nhi</a>
+          <a href="">Giáo khoa</a>
+          <a href="">Ngoại ngữ</a>
+        </div>
+      </div>
 
-    <!--  <div id="popup-confirm-delete-product" class="popup-confirm-delete-product">-->
-    <!--    <div class="content-wrapper">-->
-    <!--      <div class="text">Bạn chắc chắn muốn bỏ sản phẩm này?</div>-->
-    <!--      <div class="btn-action">-->
-    <!--        <button class="btn btn-reject">Không</button>-->
-    <!--        <button class="btn btn-agree" onclick="deleteProductInCart(index)">Đồng ý</button>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--  </div>-->
+      <div class="footer-section">
+        <div class="footer-section-text">Lối tắt</div>
+        <div>
+          <a href="">Về chúng tôi</a>
+          <a href="">FAQ</a>
+          <a href="">Hướng dẫn mua hàng</a>
+          <a href="">Chính sách đổi trả</a>
+          <a href="">Các ưu đãi</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <div class="footer-section-text">Đăng ký theo dõi</div>
+        <p>Cập nhật những chính sách ưu đãi và sự kiện mới nhất</p>
+        <input type="text" placeholder="Email của bạn:  ">
+      </div>
+
+    </div>
+    <div class="copyright">
+      Copyright © 2023
+    </div>
+  </footer>
+
+  <div class="pop-up-form-register">
+    <form action="" method="POST" class="form form-register" id="form-register">
+      <h3 class="heading">Đăng ký</h3>
+      <div class="spacer"></div>
+
+      <div class="form-group">
+        <label for="fullname" class="form-label">Họ và tên</label>
+        <input id="fullname" name="fullname" type="text" placeholder="VD: Lâm Tài" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="username" class="form-label">Tên đăng nhập</label>
+        <input id="username" name="username" type="text" placeholder="VD: user123" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="phone-number" class="form-label">Số điện thoại</label>
+        <input id="phone-number" name="phone-number" type="text" placeholder="VD: 0937695210" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Mật khẩu</label>
+        <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+        <span class="icon-show-password"></span>
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+        <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" type="password"
+          class="form-control">
+        <span class="icon-show-password"></span>
+        <span class="form-message"></span>
+      </div>
+
+      <button class="form-submit">Đăng ký</button>
+    </form>
+  </div>
+
+  <div class="pop-up-form-login">
+    <form action="" method="POST" class="form form-login" id="form-login">
+      <h3 class="heading">Đăng nhập</h3>
+      <div class="spacer"></div>
+
+      <div class="form-group">
+        <label for="username-login" class="form-label">Tên đăng nhập</label>
+        <input id="username-login" name="username" type="text" placeholder="VD: Lâm Tài" class="form-control">
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password-login" class="form-label">Mật khẩu</label>
+        <input id="password-login" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+        <span class="icon-show-password"></span>
+        <span class="form-message"></span>
+      </div>
+
+      <div class="form-content">
+        <p>Bạn chưa có tài khoản?<a href="#" id="btn-register-form-action"> Đăng ký ngay</a></p>
+      </div>
+
+      <button class="form-submit">Đăng nhập</button>
+    </form>
+  </div>
+
+  <!--  <div id="popup-confirm-delete-product" class="popup-confirm-delete-product">-->
+  <!--    <div class="content-wrapper">-->
+  <!--      <div class="text">Bạn chắc chắn muốn bỏ sản phẩm này?</div>-->
+  <!--      <div class="btn-action">-->
+  <!--        <button class="btn btn-reject">Không</button>-->
+  <!--        <button class="btn btn-agree" onclick="deleteProductInCart(index)">Đồng ý</button>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
 
   </div>
 </body>

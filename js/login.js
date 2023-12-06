@@ -125,4 +125,3 @@ function logout() {
 	renderProductToCart();
 	location.reload();
 }
-
