@@ -170,7 +170,7 @@ function totalMoney() {
     for (let i = 0; i < productInCart.length; i++) {
       total += productInCart[i].quantity * productInCart[i].price
     }
-    // document.querySelector('.total-price > span').innerHTML = formatVND.format(total)
+    document.querySelector('.total-price > span').innerHTML = formatVND.format(total)
   }
   return total;
 }
@@ -274,7 +274,7 @@ const day = currentDate.getDate().toString().padStart(2, '0');
 const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
 const year = currentDate.getFullYear();
 
-const formattedDate = `${day}-${month}-${year}`;
+const formattedDate = `${month}-${day}-${year}`;
 
 function createSuccessPopup() {
   if (validatePaymentForm() == true) {

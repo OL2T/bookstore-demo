@@ -49,7 +49,7 @@ function createBill() {
     // Comparing dates
 
     const filteredOrders = orders.filter(order => {
-
+      // Assuming order.date is in format 'YYYY-MM-DD'
       const orderDate = new Date(order.date);
       return orderDate >= startDateObj && orderDate <= endDateObj;
     });
@@ -64,16 +64,17 @@ function createBill() {
       orderItem.setAttribute('data-order-id', order.id);
       orderItem.innerHTML = `
               <td>${order.id}</td>
-              <td>${order.Khách_hàng}</td>
-              <td>${order.username}</td>
-              <td>${order.địa_chỉ}</td>
-              <td>${order.phonenumber}</td>
-              <td>${formatVND.format(order.tổng_tiền)} </td>
-              <td>${order.date}</td>
-             <td class="order-status"><button class="confirm-order-status onclick="confirmDelivery(${order.id})">${order.status}</button></td>
-              <td>
-              <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
-              </td>
+    <td>${order.Khách_hàng}</td>
+    <td>${order.username}</td>
+    <td>${order.địa_chỉ}</td>
+    <td>${order.phonenumber}</td>
+    <td>${formatVND.format(order.tổng_tiền)}</td>
+   <td>${order.date}</td>
+   <td>
+   <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
+   </td>
+   <td class="order-status"><button class="confirm-order-status" onclick="confirmDelivery(${order.id})">${order.status}</button></td>
+    <td> <button class="delete-btn" onclick="deleteOrder(${order.id})"><i class="fa-solid fa-trash"></i></button></td>
               `;
       bill_data.appendChild(orderItem);
     });

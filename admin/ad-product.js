@@ -464,7 +464,8 @@ function overviewLoading() {
     </div>
   `;
   reportContainer.appendChild(data);
-  const arr = JSON.parse(localStorage.getItem('Sold'));
+  const arr = localStorage.getItem("Sold") ? JSON.parse(localStorage.getItem('Sold')) : [];
+
   console.log(arr);
 
   let van_hoc = [];
