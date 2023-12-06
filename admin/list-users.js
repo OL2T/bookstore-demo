@@ -1,5 +1,5 @@
 let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
-let listrealUser = listUsers.filter(user => user.role === "Khách hàng")
+let listrealUser = listUsers.filter(user => user.role === "Khách hàng" || user.role === "admin");
 
 function displayCustomerList() {
   const report = document.getElementById('report-container');
