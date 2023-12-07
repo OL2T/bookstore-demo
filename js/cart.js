@@ -342,17 +342,30 @@ function seeWaitingList() {
     style: "currency",
     currency: "VND",
   });
-  const holder = document.querySelector(".section-product-in-cart");
+  const holder = document.querySelector('.see-cart-history');
+  holder.style.display = 'block';
   holder.innerHTML = '';
+  overlay.classList.add('is-active');
 
   const thisUserCarts = cartArray.filter(cart => cart.username === currentUser);
   console.log(thisUserCarts);
   thisUserCarts.sort((a, b) => {
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);
+    console.log(dateA);
     return dateB - dateA;
   });
 
+  const btn = document.createElement('button');
+  btn.classList.add('see-history-button');
+  btn.textContent = 'X';
+  holder.appendChild(btn);
+  btn.addEventListener('click', function () {
+    holder.style.display = 'none';
+    overlay.classList.remove('is-active');
+  });
+  const boughtBookcontainer = document.createElement('div');
+  boughtBookcontainer.classList.add('bought-book');
 
   thisUserCarts.forEach(cart => {
     const waitingCart = document.createElement('div');
@@ -368,35 +381,36 @@ function seeWaitingList() {
 						</div>
         `;
     waitingCart.appendChild(info);
-    const cartHeader = document.createElement('div');
-    cartHeader.innerHTML = ` <div class="waiting-list-views-row-header" >
-                    <div class="view-row-content">
-												<div class="view-field-image"></div>                       
-											  <div class="view-field">Sách</div>
-                        <div class="view-field view-field-price">Đơn giá</div>
-												<div class="view-field view-field-quantity">Số lượng</div>
-                        <div class="view-field view-field-sub-total">Thành tiền</div>
-                    </div>
-                </div>
-            `;
-    waitingCart.appendChild(cartHeader);
+
     const productSection = document.createElement('div');
     productSection.classList.add('this-cart-section');
     cart.products.forEach(book => {
       const product = document.createElement('div');
       product.innerHTML = `
-                <div class="waiting-list-views-row" >
-                    <div class="view-row-content">
-                        <div class="view-field-image"><img src="${book.img}" alt="${book.name}"></div>
-                        <div class="product-group">
-                            <div class="view-field-category">${book.categories}</div>
-                            <div class="view-field-title"><a href="#">${book.name}</a></div>
-                        </div>
-                        <div class="view-field view-field-price"><span>${formatVND.format(book.price)}</span></div>
-												<div class="view-field view-field-quantity">${book.quantity}</div>
-                        <div class="view-field view-field-sub-total">${formatVND.format(book.price * book.quantity)}</div>
-                    </div>
-                </div>
+        <div class="waiting-list-views-row">
+          <div class="view-row-content">
+            <div class="view-field-image"><img src="${book.img}" alt="${book.name}">
+              <div class="view-field view-field-quantity">X <span>${book.quantity}</span>
+              </div>
+            </div>
+
+
+            <div class="info-container">
+              <div class="this-book-info">
+                <div class="view-field-category">${book.categories}</div>
+                <div class="view-field-title">${book.name}</div>
+                <div class="view-field-author">${book.author}</div>
+                <div class="view-field-publisher">${book.publishingHouse}</div>
+              </div>
+
+              <div class="price">
+                <div class="view-field view-field-price"><span>${formatVND.format(book.price)}</span></div>
+
+                <div class="view-field view-field-sub-total">${formatVND.format(book.price * book.quantity)}</div>
+              </div>
+            </div>
+          </div>
+        </div>
             `;
       productSection.appendChild(product);
     });
@@ -404,13 +418,14 @@ function seeWaitingList() {
     const total = document.createElement('div');
     total.classList.add('cart-footer');
     total.innerHTML = `<div class="footer-product" >
-            <div class="footer-product-inner">
-              <div class="total-price">Tổng số tiền: ${formatVND.format(cart.tổng_tiền)}</div>
+            <div class="footer-product-inner">Tổng:
+              <div class="total-price">${formatVND.format(cart.tổng_tiền)}</div>
              
             </div>
           </div>`
     waitingCart.appendChild(total);
 
-    holder.appendChild(waitingCart);
+    boughtBookcontainer.appendChild(waitingCart);
   });
+  holder.append(boughtBookcontainer);
 }

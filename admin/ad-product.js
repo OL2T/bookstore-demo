@@ -155,10 +155,9 @@ function displayProducts(category) {
       if (confirmed) {
 
         const bookRow = event.target.closest('.book-row');
-        const bookId = bookRow.querySelector('.book-id').textContent.split(':')[1].trim(); // Get the book ID and remove extra whitespace
-        console.log(bookId)// Get the productId from the data attribute
+        const bookId = bookRow.querySelector('.book-id').textContent.split(':')[1].trim();
+        console.log(bookId)
 
-        // Use productId to remove the corresponding book
         const indexToRemove = arr.findIndex(product => product.productId.toString() === bookId);
         console.log(indexToRemove);
         if (indexToRemove !== -1) {
@@ -256,6 +255,7 @@ function validateAndSave() {
   console.log(product);
   saveProduct(product);
   alert('Product added');
+
 }
 
 function saveProduct(product) {
