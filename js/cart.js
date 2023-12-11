@@ -13,42 +13,42 @@ function saveToCartLocalStorage() {
 function addTocCart(productId) {
   let user = localStorage.getItem('isLoggedIn')
   if (user === 'true') {
-	 let storedProducts = localStorage.getItem("List-products")
-		? JSON.parse(localStorage.getItem("List-products"))
-		: [];
-	 // let productInCart = localStorage.getItem("Carts")
-	 //  ? JSON.parse(localStorage.getItem("Carts"))
-	 //  : [];
-	 let checkProduct = productInCart.some(
-		(value) => value.productId === productId
-	 );
-	 // console.log(checkProduct)
-	 if (!checkProduct) {
-		// console.log(checkProduct)
-		let product = storedProducts.find((value) => value.productId === productId);
-		productInCart.unshift({
-		  ...product,
-		  quantity: 1,
-		});
-		//  lưu lại vào local storage
-		localStorage.setItem("Carts", JSON.stringify(productInCart));
-		calculatorQuantity();
-	 } else {
-		let getIndex = productInCart.findIndex(
-		  (value) => value.productId === productId
-		);
-		let product = productInCart.find((value) => value.productId === productId);
-		productInCart[getIndex] = {
-		  ...product,
-		  quantity: ++product.quantity,
-		};
-		// console.log(getIndex)
-		localStorage.setItem("Carts", JSON.stringify(productInCart));
-	 }
-	 showPopupCart()
+    let storedProducts = localStorage.getItem("List-products")
+      ? JSON.parse(localStorage.getItem("List-products"))
+      : [];
+    // let productInCart = localStorage.getItem("Carts")
+    //  ? JSON.parse(localStorage.getItem("Carts"))
+    //  : [];
+    let checkProduct = productInCart.some(
+      (value) => value.productId === productId
+    );
+    // console.log(checkProduct)
+    if (!checkProduct) {
+      // console.log(checkProduct)
+      let product = storedProducts.find((value) => value.productId === productId);
+      productInCart.unshift({
+        ...product,
+        quantity: 1,
+      });
+      //  lưu lại vào local storage
+      localStorage.setItem("Carts", JSON.stringify(productInCart));
+      calculatorQuantity();
+    } else {
+      let getIndex = productInCart.findIndex(
+        (value) => value.productId === productId
+      );
+      let product = productInCart.find((value) => value.productId === productId);
+      productInCart[getIndex] = {
+        ...product,
+        quantity: ++product.quantity,
+      };
+      // console.log(getIndex)
+      localStorage.setItem("Carts", JSON.stringify(productInCart));
+    }
+    showPopupCart()
   } else {
-	 overlay.classList.add('is-active');
-	 pop_up_login.classList.add('is-active');
+    overlay.classList.add('is-active');
+    pop_up_login.classList.add('is-active');
   }
 }
 
@@ -61,9 +61,9 @@ function showPopupCart() {
   document.querySelector('body').classList.add('no-scrollable');
 
   btnClose.addEventListener('click', function () {
-	 popup_success.classList.remove('is-active');
-	 overlay.classList.remove('is-active');
-	 document.querySelector('body').classList.remove('no-scrollable');
+    popup_success.classList.remove('is-active');
+    overlay.classList.remove('is-active');
+    document.querySelector('body').classList.remove('no-scrollable');
   })
 }
 
@@ -95,12 +95,12 @@ function renderProductToCart() {
   // holder.innerHTML = data1;
   let products = document.getElementById('product-in-cart');
   const formatVND = new Intl.NumberFormat("vi-VN", {
-	 style: "currency",
-	 currency: "VND",
+    style: "currency",
+    currency: "VND",
   });
   let data = ``;
   productInCart.map((productArray, index) => {
-	 data += `
+    data += `
 	 	<div class="views-row">
 		  <div class="view-row-content">
 				 <div class="view-field-image"><img src="${productArray.img}" alt="${productArray.name}"></div>
@@ -123,8 +123,8 @@ function renderProductToCart() {
 
 function plusQuantity(index) {
   productInCart[index] = {
-	 ...productInCart[index],
-	 quantity: ++productInCart[index].quantity,
+    ...productInCart[index],
+    quantity: ++productInCart[index].quantity,
   }
   localStorage.setItem("Carts", JSON.stringify(productInCart));
   renderProductToCart();
@@ -133,21 +133,21 @@ function plusQuantity(index) {
 
 function minusQuantity(index, quantity) {
   if (quantity > 1) {
-	 productInCart[index] = {
-		...productInCart[index],
-		quantity: --productInCart[index].quantity,
-	 }
+    productInCart[index] = {
+      ...productInCart[index],
+      quantity: --productInCart[index].quantity,
+    }
 
-	 localStorage.setItem("Carts", JSON.stringify(productInCart));
-	 renderProductToCart();
-	 totalMoney()
+    localStorage.setItem("Carts", JSON.stringify(productInCart));
+    renderProductToCart();
+    totalMoney()
 
   } else {
-	 const toolTip = document.querySelectorAll('.tool-tip')
-	 if (toolTip[index]) {
-		toolTip[index].classList.add('is-active');
-		// console.log(toolTip[index])
-	 }
+    const toolTip = document.querySelectorAll('.tool-tip')
+    if (toolTip[index]) {
+      toolTip[index].classList.add('is-active');
+      // console.log(toolTip[index])
+    }
   }
 }
 
@@ -162,16 +162,16 @@ function deleteProductInCart(index) {
 
 function totalMoney() {
   const formatVND = new Intl.NumberFormat("vi-VN", {
-	 style: "currency",
-	 currency: "VND",
+    style: "currency",
+    currency: "VND",
   });
   let total = 0;
   if (productInCart !== null) {
 
-	 for (let i = 0; i < productInCart.length; i++) {
-		total += productInCart[i].quantity * productInCart[i].price
-	 }
-	 document.querySelector('.total-price > span').innerHTML = formatVND.format(total)
+    for (let i = 0; i < productInCart.length; i++) {
+      total += productInCart[i].quantity * productInCart[i].price
+    }
+    document.querySelector('.total-price > span').innerHTML = formatVND.format(total)
   }
   return total;
 }
@@ -191,7 +191,7 @@ function generateRandomID() {
   let randomID;
 
   do {
-	 randomID = Math.floor(Math.random() * (max - min + 1)) + min;
+    randomID = Math.floor(Math.random() * (max - min + 1)) + min;
   } while (existingIDs.includes(randomID)); // Check if the ID already exists
 
   existingIDs.push(randomID); // Add the generated ID to the list
@@ -209,15 +209,15 @@ function validatePaymentForm() {
 
   // Basic validation (you can extend this according to your requirements)
   if (username === '' || phoneNumber === '' || provinces === '' || districts === '' || ward === '' || street === '') {
-	 alert('Please fill in all required fields.');
-	 return false; // Prevent form submission
+    alert('Please fill in all required fields.');
+    return false; // Prevent form submission
   }
 
   // Validation for phone number (you can customize as needed)
   const phoneRegex = /^[0-9]{10}$/; // Validates 10-digit numbers
   if (!phoneRegex.test(phoneNumber)) {
-	 alert('Please enter a valid phone number (10 digits).');
-	 return false; // Prevent form submission
+    alert('Please enter a valid phone number (10 digits).');
+    return false; // Prevent form submission
   }
 
   // You can add more specific validations for email, provinces, etc. as needed
@@ -226,8 +226,8 @@ function validatePaymentForm() {
 }
 
 const provinces = [
-  {name: 'Hà Nội', districts: ['Ba Đình', 'Hoàn Kiếm', 'Hai Bà Trưng']},
-  {name: 'Hồ Chí Minh City', districts: ['Quận 1', 'Quận 2', 'Quận 3', 'Quận 4', 'Quận 5', 'Quận 6', 'Quận 7', 'Quận 8', 'Quận 9', 'Quận 10', 'Quận Phú Nhuận', 'Quận Tân Bình', 'Quận Tân Phú', 'Quận Thủ Đức']}
+  { name: 'Hà Nội', districts: ['Ba Đình', 'Hoàn Kiếm', 'Hai Bà Trưng'] },
+  { name: 'Hồ Chí Minh City', districts: ['Quận 1', 'Quận 2', 'Quận 3', 'Quận 4', 'Quận 5', 'Quận 6', 'Quận 7', 'Quận 8', 'Quận 9', 'Quận 10', 'Quận Phú Nhuận', 'Quận Tân Bình', 'Quận Tân Phú', 'Quận Thủ Đức'] }
 
 ];
 
@@ -239,7 +239,7 @@ provinces.forEach(province => {
   option.textContent = province.name;
   option.value = province.name;
   if (provincesDropdown !== null) {
-	 provincesDropdown.appendChild(option);
+    provincesDropdown.appendChild(option);
   }
 });
 
@@ -249,21 +249,21 @@ function populateDistricts() {
   districtsDropdown.innerHTML = '<option value="">Chọn quận huyện</option>';
 
   if (selectedProvinceData) {
-	 selectedProvinceData.districts.forEach(district => {
-		const option = document.createElement('option');
-		option.textContent = district;
-		option.value = district;
-		districtsDropdown.appendChild(option);
-	 });
+    selectedProvinceData.districts.forEach(district => {
+      const option = document.createElement('option');
+      option.textContent = district;
+      option.value = district;
+      districtsDropdown.appendChild(option);
+    });
   }
 }
 
 function showPaymentForm() {
   if ((loggedin === true)) {
 
-	 var Form = document.querySelector('.pop-up-payment-form');
-	 Form.style.display = 'block';
-	 document.getElementById('cart-overlay').style.display = 'block';
+    var Form = document.querySelector('.pop-up-payment-form');
+    Form.style.display = 'block';
+    document.getElementById('cart-overlay').style.display = 'block';
 
   }
 }
@@ -286,30 +286,30 @@ const formattedDate = `${month}-${day}-${year}`;
 
 function createSuccessPopup() {
   if (validatePaymentForm() == true) {
-	 const customername = document.getElementById('payment-form-username').value.trim();
-	 const phoneNumber = document.getElementById('payment-form-number').value.trim();
-	 const provinces = document.getElementById('provinces').value;
-	 const districts = document.getElementById('districts').value;
-	 const ward = document.getElementById('payment-form-ward').value.trim();
-	 const street = document.getElementById('payment-form-street').value.trim();
-	 var Form = document.querySelector('.payment-success-pop-up');
-	 Form.style.display = 'block';
-	 document.getElementById('cart-overlay').style.display = 'block';
+    const customername = document.getElementById('payment-form-username').value.trim();
+    const phoneNumber = document.getElementById('payment-form-number').value.trim();
+    const provinces = document.getElementById('provinces').value;
+    const districts = document.getElementById('districts').value;
+    const ward = document.getElementById('payment-form-ward').value.trim();
+    const street = document.getElementById('payment-form-street').value.trim();
+    var Form = document.querySelector('.payment-success-pop-up');
+    Form.style.display = 'block';
+    document.getElementById('cart-overlay').style.display = 'block';
 
-	 let modifiedList = {
-		id: generateRandomID(),
-		Khách_hàng: customername,
-		username: currentUser,
-		địa_chỉ: street + ', ' + ward + ', ' + districts + ', ' + provinces,
-		phonenumber: phoneNumber,
-		products: productInCart,
-		date: formattedDate,
-		tổng_tiền: totalMoney(),
-		status: 'Chưa xác nhận',
-	 };
-	 cartArray.push(modifiedList);
+    let modifiedList = {
+      id: generateRandomID(),
+      Khách_hàng: customername,
+      username: currentUser,
+      địa_chỉ: street + ', ' + ward + ', ' + districts + ', ' + provinces,
+      phonenumber: phoneNumber,
+      products: productInCart,
+      date: formattedDate,
+      tổng_tiền: totalMoney(),
+      status: 'Chưa xác nhận',
+    };
+    cartArray.push(modifiedList);
 
-	 localStorage.setItem('CartArray', JSON.stringify(cartArray));
+    localStorage.setItem('CartArray', JSON.stringify(cartArray));
 
   }
 }
@@ -322,32 +322,54 @@ function closeSuccessPopup() {
 
 }
 
+
+function closeSuccessPopup() {
+  var Form = document.querySelector('.payment-success-pop-up');
+  Form.style.display = 'none';
+  localStorage.setItem("Carts", JSON.stringify([]));
+  location.reload();
+
+}
+
+function formatToDDMMYYYY(dateString) {
+  const [month, day, year] = dateString.split('-');
+
+  const formattedDate = `${day}-${month}-${year}`;
+  return formattedDate;
+}
 function seeWaitingList() {
   const formatVND = new Intl.NumberFormat("vi-VN", {
-	 style: "currency",
-	 currency: "VND",
+    style: "currency",
+    currency: "VND",
   });
   const holder = document.querySelector(".section-product-in-cart");
-  holder.innerHTML = ''; // Clear the content of the holder
+  holder.innerHTML = '';
 
   const thisUserCarts = cartArray.filter(cart => cart.username === currentUser);
   console.log(thisUserCarts);
+  thisUserCarts.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateB - dateA;
+  });
+
 
   thisUserCarts.forEach(cart => {
-	 const waitingCart = document.createElement('div');
-	 waitingCart.classList.add('waiting-cart');
+    const waitingCart = document.createElement('div');
+    waitingCart.classList.add('waiting-cart');
 
-	 const info = document.createElement('div');
-	 info.innerHTML = `
+    const info = document.createElement('div');
+
+    info.innerHTML = `
 						<div class="cart-info">
             <span>Mã đơn hàng: ${cart.id}</span>
-            <span>Ngày đặt: ${cart.date}</span>
+            <span>Ngày đặt: ${formatToDDMMYYYY(cart.date)}</span>
             <span>Trạng thái: ${cart.status}</span>
 						</div>
         `;
-	 waitingCart.appendChild(info);
-	 const cartHeader = document.createElement('div');
-	 cartHeader.innerHTML = ` <div class="waiting-list-views-row-header" >
+    waitingCart.appendChild(info);
+    const cartHeader = document.createElement('div');
+    cartHeader.innerHTML = ` <div class="waiting-list-views-row-header" >
                     <div class="view-row-content">
 												<div class="view-field-image"></div>                       
 											  <div class="view-field">Sách</div>
@@ -357,12 +379,12 @@ function seeWaitingList() {
                     </div>
                 </div>
             `;
-	 waitingCart.appendChild(cartHeader);
-	 const productSection = document.createElement('div');
-	 productSection.classList.add('this-cart-section');
-	 cart.products.forEach(book => {
-		const product = document.createElement('div');
-		product.innerHTML = `
+    waitingCart.appendChild(cartHeader);
+    const productSection = document.createElement('div');
+    productSection.classList.add('this-cart-section');
+    cart.products.forEach(book => {
+      const product = document.createElement('div');
+      product.innerHTML = `
                 <div class="waiting-list-views-row" >
                     <div class="view-row-content">
                         <div class="view-field-image"><img src="${book.img}" alt="${book.name}"></div>
@@ -376,19 +398,19 @@ function seeWaitingList() {
                     </div>
                 </div>
             `;
-		productSection.appendChild(product);
-	 });
-	 waitingCart.appendChild(productSection);
-	 const total = document.createElement('div');
-	 total.classList.add('cart-footer');
-	 total.innerHTML = `<div class="footer-product" >
+      productSection.appendChild(product);
+    });
+    waitingCart.appendChild(productSection);
+    const total = document.createElement('div');
+    total.classList.add('cart-footer');
+    total.innerHTML = `<div class="footer-product" >
             <div class="footer-product-inner">
               <div class="total-price">Tổng số tiền: ${formatVND.format(cart.tổng_tiền)}</div>
              
             </div>
           </div>`
-	 waitingCart.appendChild(total);
+    waitingCart.appendChild(total);
 
-	 holder.appendChild(waitingCart); // Append each waitingCart to the holder
+    holder.appendChild(waitingCart);
   });
 }
