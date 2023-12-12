@@ -322,21 +322,6 @@ function closeSuccessPopup() {
 
 }
 
-
-function closeSuccessPopup() {
-  var Form = document.querySelector('.payment-success-pop-up');
-  Form.style.display = 'none';
-  localStorage.setItem("Carts", JSON.stringify([]));
-  location.reload();
-
-}
-
-function formatToDDMMYYYY(dateString) {
-  const [month, day, year] = dateString.split('-');
-
-  const formattedDate = `${day}-${month}-${year}`;
-  return formattedDate;
-}
 function seeWaitingList() {
   const formatVND = new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -372,11 +357,10 @@ function seeWaitingList() {
     waitingCart.classList.add('waiting-cart');
 
     const info = document.createElement('div');
-
     info.innerHTML = `
 						<div class="cart-info">
             <span>Mã đơn hàng: ${cart.id}</span>
-            <span>Ngày đặt: ${formatToDDMMYYYY(cart.date)}</span>
+            <span>Ngày đặt: ${cart.date}</span>
             <span>Trạng thái: ${cart.status}</span>
 						</div>
         `;

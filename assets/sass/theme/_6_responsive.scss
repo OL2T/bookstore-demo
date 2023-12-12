@@ -71,6 +71,21 @@
 
     }
   }
+  .popup-product-detail {
+    min-width: unset;
+    &.is-active{
+      max-height: 96vh;
+    }
+  }
+
+  .popup-product-detail-inner {
+    display: block;
+
+    .view-field-image img {
+      max-width: 250px;
+      max-height: 250px;
+    }
+  }
 }
 
 @media (max-width: 767px) {
