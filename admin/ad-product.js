@@ -1,13 +1,13 @@
-let arr = JSON.parse(localStorage.getItem('List-products'));
+// let arr = JSON.parse(localStorage.getItem('List-products'));
 
-let data = '';
-let IDarr = [];
+// let data = '';
+// let IDarr = [];
 
-arr.forEach(book => {
-  IDarr.push(book.productId);
-});
+// arr.forEach(book => {
+//   IDarr.push(book.productId);
+// });
 
-console.log(IDarr);
+// console.log(IDarr);
 
 
 function bookSort() {
@@ -110,7 +110,7 @@ function displayProducts(category) {
     style: "currency",
     currency: "VND",
   });
-
+  let arr = JSON.parse(localStorage.getItem('List-products'));
   let selectedCategory = category;
   let categoryBooks = arr.filter(product => product.categories === selectedCategory);
   if (category === "Tất cả") {
@@ -195,6 +195,7 @@ function handleImageUpload(event) {
 
 
 function validateAndSave() {
+
   var bookId = document.getElementById('book-upload-id').value.trim();
   var bookTitle = document.getElementById('book-upload-name').value.trim();
   var bookPrice = document.getElementById('book-upload-price').value.trim();
@@ -260,6 +261,7 @@ function validateAndSave() {
 
 function saveProduct(product) {
 
+
   let products = JSON.parse(localStorage.getItem('List-products')) || [];
   products.push(product);
   localStorage.setItem('List-products', JSON.stringify(products));
@@ -296,68 +298,74 @@ function showEditForm(editButton) {
   var bookPublisher = document.getElementById('book-edit-publisher');
   bookPublisher.placeholder = Book.publishingHouse;
 
-
+  var lastCategory = Book.categories;
 
 
   console.log('Found Book:', Book);
 
   const editButtons = document.querySelectorAll('.saving-form');
-  editButtons.forEach(button => {
-    button.addEventListener('click', function (event) {
-      const confirmed = window.confirm('Are you sure you want to save the editing to this book?');
-      if (confirmed) {
-        var bookTitle = document.getElementById('book-edit-name').value.trim();
 
-        var bookPrice = document.getElementById('book-edit-price').value.trim();
-        var bookCategory = document.getElementById('book-edit-type').value.trim();
-        var bookAuthor = document.getElementById('book-edit-author').value.trim();
-        var bookPublisher = document.getElementById('book-edit-publisher').value.trim();
-        var imgElement = document.querySelector('.image-container img');
-        var imageData = imgElement ? imgElement.src : '';
+  function saveEdit(event) {
+    const confirmed = window.confirm('Are you sure you want to save the editing to this book?');
+    if (confirmed) {
+      var bookTitle = document.getElementById('book-edit-name').value.trim();
 
-        var selectedCategory = document.getElementById('book-edit-type').value.trim();
-        var otherCategoryInput = document.getElementById('book-edit-other-category');
+      var bookPrice = document.getElementById('book-edit-price').value.trim();
+      var bookCategory = document.getElementById('book-edit-type').value.trim();
+      var bookAuthor = document.getElementById('book-edit-author').value.trim();
+      var bookPublisher = document.getElementById('book-edit-publisher').value.trim();
+      var imgElement = document.querySelector('.image-container img');
+      var imageData = imgElement ? imgElement.src : '';
 
 
 
-        if (bookTitle === '') {
-          bookTitle = Book.name;
-        }
-        if (bookPrice.toString() === '') {
-          bookPrice = Book.price.toString();
-        }
-        if (bookCategory === '') {
-          bookCategory = Book.categories;
-        } if (bookAuthor === '') {
-          bookAuthor = Book.author;
-        }
-        if (bookPublisher === '') {
-          bookPublisher = Book.publishingHouse;
-        }
-        if (imageData === '') {
-          imageData = Book.img;
-        }
-        var Regex = /^\d+$/; // 
-        var isValidPrice = Regex.test(bookPrice);
-        if (!isValidPrice) {
-          alert('Please enter a valid price');
-          return;
-        }
 
-        Book.name = Book.price = Book.categories = Book.author = Book.publishingHouse = Book.img = '';
-        Book.name = bookTitle;
-        Book.price = parseInt(bookPrice);
-        Book.categories = bookCategory;
-        Book.author = bookAuthor;
-        Book.publishingHouse = bookPublisher;
-        Book.img = imageData;
-        console.log(Book);
-        localStorage.setItem('List-products', JSON.stringify(arr));
-        alert("Saved");
+      if (bookTitle === '') {
+        bookTitle = Book.name;
+      }
+      if (bookPrice.toString() === '') {
+        bookPrice = Book.price.toString();
+      }
+      if (bookCategory === '') {
+        bookCategory = Book.categories;
+      } if (bookAuthor === '') {
+        bookAuthor = Book.author;
+      }
+      if (bookPublisher === '') {
+        bookPublisher = Book.publishingHouse;
+      }
+      if (imageData === '') {
+        imageData = Book.img;
+      }
+      var Regex = /^\d+$/; // 
+      var isValidPrice = Regex.test(bookPrice);
+      if (!isValidPrice) {
+        alert('Please enter a valid price');
         return;
       }
-    });
+
+      Book.name = Book.price = Book.categories = Book.author = Book.publishingHouse = Book.img = '';
+      Book.name = bookTitle;
+      Book.price = parseInt(bookPrice);
+      Book.categories = bookCategory;
+      Book.author = bookAuthor;
+      Book.publishingHouse = bookPublisher;
+      Book.img = imageData;
+      console.log(Book);
+      localStorage.setItem('List-products', JSON.stringify(arr));
+
+      alert("Saved");
+
+      event.currentTarget.removeEventListener('click', saveEdit);
+
+    }
+
+  };
+  editButtons.forEach(button => {
+
+    button.addEventListener('click', saveEdit);
   });
+
 }
 
 

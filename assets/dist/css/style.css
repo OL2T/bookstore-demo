@@ -823,6 +823,8 @@ select:invalid {
   transform: translateX(-50%);
   top: -23px;
   background-image: url("../../images/icon-success.png");
+
+
   background-repeat: no-repeat;
   background-size: 50px;
   width: 50px;
@@ -2494,10 +2496,11 @@ footer {
 
 .payment-success-pop-up {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transition: transform 0.3s ease-in-out;
   background-color: #fff;
   padding: 20px;
   border: 1px solid #ccc;
@@ -2507,6 +2510,7 @@ footer {
   width: 400px;
   font-size: large;
   font-weight: bolder;
+  text-align: center;
 }
 
 .payment-success-pop-up-container {
@@ -3146,4 +3150,8 @@ h1#heading {
   top: 0;
   right: 0;
   color: #fff;
+}
+
+.pop-up-payment-form input:hover {
+  cursor: text;
 }

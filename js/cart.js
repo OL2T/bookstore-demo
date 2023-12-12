@@ -206,23 +206,27 @@ function validatePaymentForm() {
   const districts = document.getElementById('districts').value;
   const ward = document.getElementById('payment-form-ward').value.trim();
   const street = document.getElementById('payment-form-street').value.trim();
+  const email = document.getElementById('payment-form-email').value.trim();
 
-  // Basic validation (you can extend this according to your requirements)
-  if (username === '' || phoneNumber === '' || provinces === '' || districts === '' || ward === '' || street === '') {
+
+  if (username === '' || phoneNumber === '' || provinces === '' || districts === '' || ward === '' || street === '' || email === '') {
     alert('Please fill in all required fields.');
-    return false; // Prevent form submission
+    return false;
   }
 
-  // Validation for phone number (you can customize as needed)
-  const phoneRegex = /^[0-9]{10}$/; // Validates 10-digit numbers
+  const phoneRegex = /^[0-9]{10}$/;
   if (!phoneRegex.test(phoneNumber)) {
     alert('Please enter a valid phone number (10 digits).');
-    return false; // Prevent form submission
+    return false;
+  }
+  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!pattern.test(email)) {
+    alert('Please enter a valid email address.');
+    return false;
   }
 
-  // You can add more specific validations for email, provinces, etc. as needed
-
-  return true; // Allow form submission if all validations pass
+  return true;
 }
 
 const provinces = [
@@ -259,12 +263,21 @@ function populateDistricts() {
 }
 
 function showPaymentForm() {
-  if ((loggedin === true)) {
+  let storedProducts = localStorage.getItem("Carts")
+    ? JSON.parse(localStorage.getItem("Carts"))
+    : [];
+  if ((loggedin === true && storedProducts.length !== 0)) {
 
     var Form = document.querySelector('.pop-up-payment-form');
     Form.style.display = 'block';
     document.getElementById('cart-overlay').style.display = 'block';
 
+  }
+  else if ((loggedin === true && storedProducts.length === 0)) {
+    alert('Giỏ hàng trống!');
+  }
+  else if (((loggedin === false))) {
+    alert('Hãy đăng nhập để mua hàng!');
   }
 }
 
@@ -285,31 +298,38 @@ const year = currentDate.getFullYear(); // Get the full year
 const formattedDate = `${month}-${day}-${year}`;
 
 function createSuccessPopup() {
+
+
   if (validatePaymentForm() == true) {
-    const customername = document.getElementById('payment-form-username').value.trim();
-    const phoneNumber = document.getElementById('payment-form-number').value.trim();
-    const provinces = document.getElementById('provinces').value;
-    const districts = document.getElementById('districts').value;
-    const ward = document.getElementById('payment-form-ward').value.trim();
-    const street = document.getElementById('payment-form-street').value.trim();
-    var Form = document.querySelector('.payment-success-pop-up');
-    Form.style.display = 'block';
-    document.getElementById('cart-overlay').style.display = 'block';
+    const confirmed = window.confirm('Bạn chắc chắn muốn đặt hàng?');
+    if (confirmed) {
+      const customername = document.getElementById('payment-form-username').value.trim();
+      const phoneNumber = document.getElementById('payment-form-number').value.trim();
+      const provinces = document.getElementById('provinces').value;
+      const districts = document.getElementById('districts').value;
+      const ward = document.getElementById('payment-form-ward').value.trim();
+      const street = document.getElementById('payment-form-street').value.trim();
+      var Form = document.querySelector('.payment-success-pop-up');
+      Form.style.display = 'block';
+      document.getElementById('cart-overlay').style.display = 'block';
+      document.querySelector('.pop-up-payment-form').style.display = 'none';
 
-    let modifiedList = {
-      id: generateRandomID(),
-      Khách_hàng: customername,
-      username: currentUser,
-      địa_chỉ: street + ', ' + ward + ', ' + districts + ', ' + provinces,
-      phonenumber: phoneNumber,
-      products: productInCart,
-      date: formattedDate,
-      tổng_tiền: totalMoney(),
-      status: 'Chưa xác nhận',
-    };
-    cartArray.push(modifiedList);
 
-    localStorage.setItem('CartArray', JSON.stringify(cartArray));
+      let modifiedList = {
+        id: generateRandomID(),
+        Khách_hàng: customername,
+        username: currentUser,
+        địa_chỉ: street + ', ' + ward + ', ' + districts + ', ' + provinces,
+        phonenumber: phoneNumber,
+        products: productInCart,
+        date: formattedDate,
+        tổng_tiền: totalMoney(),
+        status: 'Chưa xác nhận',
+      };
+      cartArray.push(modifiedList);
+
+      localStorage.setItem('CartArray', JSON.stringify(cartArray));
+    }
 
   }
 }

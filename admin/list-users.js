@@ -1,6 +1,11 @@
 let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
+let loggedin = localStorage.getItem('isLoggedIn');
+let adminName = localStorage.getItem('fullname');
+if (loggedin === 'true') {
+  const adminNameElement = document.querySelector('.admin-name');
 
-
+  adminNameElement.textContent = adminName;
+}
 function displayCustomerList() {
   const report = document.getElementById('report-container');
   report.innerHTML = '';
@@ -26,7 +31,7 @@ function displayCustomerList() {
         <thead>
           <tr>
             <th>STT</th>
-            <th>Tên khách hàng</th>
+            <th>Họ tên</th>
             <th>Tên tài khoản</th>
             <th>Số điện thoại</th>
             <th>Email</th>
@@ -148,8 +153,10 @@ function updateUser(event, index) {
 
   localStorage.setItem('List-users', JSON.stringify(listUsers));
 
+
   closeModal();
   displayCustomerList();
+
 }
 
 function handleChangeValue(event, inputId) {

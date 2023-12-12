@@ -44,12 +44,8 @@ function createBill() {
     const startDateObj = new Date(startDate);
     const endDateObj = new Date(endDate);
 
-    // Assuming order.date is a string in the format 'yyyy-mm-dd'
-    // Convert order.date to a Date object for comparison
-    // Comparing dates
-
     const filteredOrders = orders.filter(order => {
-      // Assuming order.date is in format 'YYYY-MM-DD'
+
       const orderDate = new Date(order.date);
       return orderDate >= startDateObj && orderDate <= endDateObj;
     });
@@ -57,7 +53,6 @@ function createBill() {
       bill_data.removeChild(bill_data.firstChild);
     }
 
-    // Populate table with filtered data
     filteredOrders.forEach(order => {
       const orderItem = document.createElement('tr');
       orderItem.classList.add('order-item');
@@ -115,6 +110,12 @@ function createBill() {
   bill_table.appendChild(bill_header);
 
   const bill_data = document.createElement('tbody');
+  orders.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    return dateB - dateA;
+  });
   orders.forEach(order => {
     const orderItem = document.createElement('tr');
     orderItem.classList.add('order-item');

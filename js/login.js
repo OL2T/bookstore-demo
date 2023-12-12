@@ -48,6 +48,7 @@ function login() {
 				// console.log('UserID:', listUsers[i].userID);
 				localStorage.setItem('loggedInUsername', listUsers[i].username);
 				localStorage.setItem('loggedInUserRole', listUsers[i].role);
+				localStorage.setItem('fullname', listUsers[i].fullName);
 				checkLogin();
 
 			} else {
@@ -85,6 +86,7 @@ function login() {
 function checkLogin() {
 	const loggedInUsername = localStorage.getItem('loggedInUsername');
 	const loggedInUserRole = localStorage.getItem('loggedInUserRole');
+	const name = localStorage.getItem('fullname');
 	const blockUser = document.querySelector('.block-user .icon-user');
 	const blockUserMenu = document.querySelector('.block-user .menu');
 
@@ -101,18 +103,9 @@ function checkLogin() {
 	}
 
 	if ((loggedInUsername) && loggedInUserRole === 'admin') {
-		if (blockUserMenu) {
-			let li = document.createElement('li');
-			let a = document.createElement('a');
-			let btn = document.createElement('button')
-			a.setAttribute('href', 'admin/admin.html');
-			a.innerHTML = 'Trang quản lý'
-			li.classList.add('menu-item')
-			li.classList.add('menu-item-admin')
-			btn.appendChild(a)
-			li.appendChild(btn);
-			blockUserMenu.appendChild(li);
-		}
+
+		window.location.href = 'admin/admin.html';
+
 	}
 	else if ((loggedInUsername) && loggedInUserRole === 'Khách hàng') {
 		if (blockUserMenu) {
