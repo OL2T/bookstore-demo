@@ -210,19 +210,19 @@ function validatePaymentForm() {
 
 
   if (username === '' || phoneNumber === '' || provinces === '' || districts === '' || ward === '' || street === '' || email === '') {
-    alert('Please fill in all required fields.');
+    alert('Vui lòng điền những trường còn trống.');
     return false;
   }
 
   const phoneRegex = /^[0-9]{10}$/;
   if (!phoneRegex.test(phoneNumber)) {
-    alert('Please enter a valid phone number (10 digits).');
+    alert('Vui lòng nhập số điện thoại hợp lệ.');
     return false;
   }
   const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!pattern.test(email)) {
-    alert('Please enter a valid email address.');
+    alert('Vui lòng nhập email hợp lệ.');
     return false;
   }
 
@@ -277,6 +277,9 @@ function showPaymentForm() {
     alert('Giỏ hàng trống!');
   }
   else if (((loggedin === false))) {
+    alert('Hãy đăng nhập để mua hàng!');
+  }
+  else {
     alert('Hãy đăng nhập để mua hàng!');
   }
 }
@@ -343,54 +346,70 @@ function closeSuccessPopup() {
 }
 
 function seeWaitingList() {
-  const formatVND = new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-  });
-  const holder = document.querySelector('.see-cart-history');
-  holder.style.display = 'block';
-  holder.innerHTML = '';
-  overlay.classList.add('is-active');
+  function formatDate(inputDate) {
+    const parts = inputDate.split('-');
+
+    const formattedDate = `${parts[1]}-${parts[0]}-${parts[2]}`;
+
+    return formattedDate;
+  }
 
   const thisUserCarts = cartArray.filter(cart => cart.username === currentUser);
-  console.log(thisUserCarts);
-  thisUserCarts.sort((a, b) => {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
-    console.log(dateA);
-    return dateB - dateA;
-  });
+  if (thisUserCarts.length === 0 && !currentUser) {
+    alert('Bạn chưa đăng nhập');
+    return;
+  }
+  else if (thisUserCarts.length === 0) {
+    alert('Bạn chưa có đơn hàng nào');
+    return;
+  }
+  else {
+    const formatVND = new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+    const holder = document.querySelector('.see-cart-history');
+    holder.style.display = 'block';
+    holder.innerHTML = '';
+    overlay.classList.add('is-active');
+    console.log(thisUserCarts);
+    thisUserCarts.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      console.log(dateA);
+      return dateB - dateA;
+    });
 
-  const btn = document.createElement('button');
-  btn.classList.add('see-history-button');
-  btn.textContent = 'X';
-  holder.appendChild(btn);
-  btn.addEventListener('click', function () {
-    holder.style.display = 'none';
-    overlay.classList.remove('is-active');
-  });
-  const boughtBookcontainer = document.createElement('div');
-  boughtBookcontainer.classList.add('bought-book');
+    const btn = document.createElement('button');
+    btn.classList.add('see-history-button');
+    btn.textContent = 'X';
+    holder.appendChild(btn);
+    btn.addEventListener('click', function () {
+      holder.style.display = 'none';
+      overlay.classList.remove('is-active');
+    });
+    const boughtBookcontainer = document.createElement('div');
+    boughtBookcontainer.classList.add('bought-book');
 
-  thisUserCarts.forEach(cart => {
-    const waitingCart = document.createElement('div');
-    waitingCart.classList.add('waiting-cart');
+    thisUserCarts.forEach(cart => {
+      const waitingCart = document.createElement('div');
+      waitingCart.classList.add('waiting-cart');
 
-    const info = document.createElement('div');
-    info.innerHTML = `
+      const info = document.createElement('div');
+      info.innerHTML = `
 						<div class="cart-info">
             <span>Mã đơn hàng: ${cart.id}</span>
-            <span>Ngày đặt: ${cart.date}</span>
+            <span>Ngày đặt: ${formatDate(cart.date)}</span>
             <span>Trạng thái: ${cart.status}</span>
 						</div>
         `;
-    waitingCart.appendChild(info);
+      waitingCart.appendChild(info);
 
-    const productSection = document.createElement('div');
-    productSection.classList.add('this-cart-section');
-    cart.products.forEach(book => {
-      const product = document.createElement('div');
-      product.innerHTML = `
+      const productSection = document.createElement('div');
+      productSection.classList.add('this-cart-section');
+      cart.products.forEach(book => {
+        const product = document.createElement('div');
+        product.innerHTML = `
         <div class="waiting-list-views-row">
           <div class="view-row-content">
             <div class="view-field-image"><img src="${book.img}" alt="${book.name}">
@@ -416,20 +435,21 @@ function seeWaitingList() {
           </div>
         </div>
             `;
-      productSection.appendChild(product);
-    });
-    waitingCart.appendChild(productSection);
-    const total = document.createElement('div');
-    total.classList.add('cart-footer');
-    total.innerHTML = `<div class="footer-product" >
+        productSection.appendChild(product);
+      });
+      waitingCart.appendChild(productSection);
+      const total = document.createElement('div');
+      total.classList.add('cart-footer');
+      total.innerHTML = `<div class="footer-product" >
             <div class="footer-product-inner">Tổng:
               <div class="total-price">${formatVND.format(cart.tổng_tiền)}</div>
              
             </div>
           </div>`
-    waitingCart.appendChild(total);
+      waitingCart.appendChild(total);
 
-    boughtBookcontainer.appendChild(waitingCart);
-  });
-  holder.append(boughtBookcontainer);
+      boughtBookcontainer.appendChild(waitingCart);
+    });
+    holder.append(boughtBookcontainer);
+  }
 }

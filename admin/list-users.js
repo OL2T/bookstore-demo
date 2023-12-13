@@ -1,6 +1,7 @@
 let listUsers = localStorage.getItem('List-users') ? JSON.parse(localStorage.getItem('List-users')) : [];
 let loggedin = localStorage.getItem('isLoggedIn');
 let adminName = localStorage.getItem('fullname');
+let cartArray = JSON.parse(localStorage.getItem('CartArray')) || [];
 if (loggedin === 'true') {
   const adminNameElement = document.querySelector('.admin-name');
 
@@ -139,19 +140,35 @@ function closeModal() {
 function updateUser(event, index) {
   event.preventDefault();
   let user = listUsers[index];
-  const name = document.getElementById('nameInput').getAttribute('value');
-  const username = document.getElementById('usernameInput').getAttribute('value');
-  const phone = document.getElementById('phoneInput').getAttribute('value');
-  const email = document.getElementById('emailInput').getAttribute('value');
-  const role = document.getElementById('roleInput').getAttribute('value');
+  let carts = cartArray.filter(cart => cart.username === listUsers[index].username);
+  let IDarray = carts.map(cart => cart.id);
+  console.log(IDarray);
+  console.log(carts);
+  const name = document.getElementById('nameInput').value;
+  const username = document.getElementById('usernameInput').value;
+  const phone = document.getElementById('phoneInput').value;
+  const email = document.getElementById('emailInput').value;
+  const role = document.getElementById('roleInput').value;
+  for (let i = 0; i < listUsers.length; i++) {
+    if (username === listUsers[i].username) {
+      alert('Tên đăng nhập đã tồn tại!');
+      return;
+    }
+  }
 
   user.fullName = name;
   user.username = username;
   user.phone = phone;
   user.email = email;
   user.role = role;
+  if (user.role !== 'admin')
+    IDarray.forEach(id => {
+      let matchedCart = cartArray.find(cart => cart.id === id);
+      matchedCart.username = username;
+    });
 
   localStorage.setItem('List-users', JSON.stringify(listUsers));
+  localStorage.setItem('CartArray', JSON.stringify(cartArray));
 
 
   closeModal();
@@ -162,10 +179,14 @@ function updateUser(event, index) {
 function handleChangeValue(event, inputId) {
   event.preventDefault();
   const input = document.getElementById(inputId);
-  input.setAttribute('value', event.target.value);
+  input.value = event.target.value; // Set the value property of the input element
 }
 
 function editUser(index) {
+  const existingModal = document.getElementById('editUserModal');
+  if (existingModal) {
+    existingModal.remove();
+  }
   let user = listUsers[index];
   const modal = document.createElement('div');
   modal.classList.add('modal');
@@ -180,57 +201,42 @@ function editUser(index) {
       </div>
       <div class="modal-body">
         <div>
-        <label>Nhập tên khách hàng mới:</label>
-        <input type="text" id="nameInput" value="${user.fullName}" onChange="handleChangeValue(event, 'nameInput')">
+          <label>Nhập tên khách hàng mới:</label>
+          <input type="text" id="nameInput" value="${user.fullName}">
         </div>
         <div>
-        <label>Nhập tên đăng nhập mới:</label>
-        <input type="text" id="usernameInput" value="${user.username}" onChange="handleChangeValue(event, 'usernameInput')">
+          <label>Nhập tên đăng nhập mới:</label>
+          <input type="text" id="usernameInput" value="${user.username}">
         </div>
         <div>
-        <label>Nhập số điện thoại mới:</label>
-        <input type="text" id="phoneInput" value="${user.phone}" onChange="handleChangeValue(event, 'phoneInput')">
+          <label>Nhập số điện thoại mới:</label>
+          <input type="text" id="phoneInput" value="${user.phone}">
         </div>
         <div>
-        <label>Nhập email mới:</label>
-        <input type="email" id="emailInput" value="${user.email}" onChange="handleChangeValue(event, 'emailInput')">
+          <label>Nhập email mới:</label>
+          <input type="email" id="emailInput" value="${user.email}">
         </div>
         <div>
-        <label>Nhập vai trò mới:</label>
-        <input type="text" id="roleInput" value="${user.role}" onChange="handleChangeValue(event, 'roleInput')">
+          <label>Nhập vai trò mới:</label>
+          <input type="text" id="roleInput" value="${user.role}">
         </div>
-      <div>
-    <div class="modal-footer">
-    <button id="saveButton" onclick="updateUser(event, ${index})">Save</button>
-    </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveButton">Save</button>
+      </div>
     </form>
   `;
 
   const closeButton = modalContent.querySelector('.close');
-
   closeButton.addEventListener('click', closeModal);
+
+  const saveButton = modalContent.querySelector('#saveButton');
+  saveButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    updateUser(event, index);
+  });
 
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
   openModal();
-}
-
-function saveChanges() {
-  const nameInput = document.getElementById('nameInput').value;
-  const usernameInput = document.getElementById('usernameInput').value;
-  const phoneInput = document.getElementById('phoneInput').value;
-  const emailInput = document.getElementById('emailInput').value;
-  const roleInput = document.getElementById('roleInput').value;
-
-  const user = listUsers[index];
-  user.fullName = nameInput;
-  user.username = usernameInput;
-  user.phone = phoneInput;
-  user.email = emailInput;
-  user.role = roleInput;
-
-  localStorage.setItem('List-users', JSON.stringify(listUsers));
-
-  closeModal();
-  displayCustomerList();
 }

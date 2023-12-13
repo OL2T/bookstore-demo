@@ -6,6 +6,11 @@ function createBill() {
     style: "currency",
     currency: "VND",
   });
+  function formatDate(inputDate) {
+    const parts = inputDate.split('-');
+    const formattedDate = `${parts[1]}-${parts[0]}-${parts[2]}`;
+    return formattedDate;
+  }
   const reportContainer = document.querySelector('.report-container');
   reportContainer.innerHTML = '';
   const list = document.querySelector(".booktype");
@@ -64,7 +69,7 @@ function createBill() {
     <td class="customer-address">${order.địa_chỉ}</td>
     <td>${order.phonenumber}</td>
     <td>${formatVND.format(order.tổng_tiền)}</td>
-   <td class="customer-date">${order.date}</td>
+   <td class="customer-date">${formatDate(order.date)}</td>
    <td>
    <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
    </td>
@@ -128,7 +133,7 @@ function createBill() {
      <td class="customer-address">${order.địa_chỉ}</td>
     <td>${order.phonenumber}</td>
     <td>${formatVND.format(order.tổng_tiền)}</td>
-   <td class="customer-date">${order.date}</td>
+   <td class="customer-date">${formatDate(order.date)}</td>
    <td>
    <button class="view-btn" onclick="see_order_detail(${order.id})"><i class="fa-solid fa-eye"></i></button>
    </td>

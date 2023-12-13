@@ -19,31 +19,28 @@ function bookSort() {
 
   <div class="upload-btn"><button class="upload-btn" onclick="showUploadForm()">Thêm sách mới</button></div>
   <div class="pop-up-upload-form">
-  <label for="book-upload-id">Book's ID:</label>
+  <label for="book-upload-id">Mã ID:</label>
   <input type="text" id="book-upload-id" name="book-upload-id">
-  <label for="book-upload-name">Book's title:</label>
+  <label for="book-upload-name">Tên sách:</label>
   <input type="text" id="book-upload-name" name="book-upload-name">
-  <label for="book-upload-price">Book's price:</label>
+  <label for="book-upload-price">Giá:</label>
   <input type="text" id="book-upload-price" name="book-upload-price">
-            <label for="book-category">Book's category:</label>
+            <label for="book-category">Thể loại:</label>
             <select id="book-upload-type" >
-             <option value="" disabled selected>Choose category</option>           
+             <option value="" disabled selected>Chọn thể loại</option>           
             <option value="Thiếu nhi">Thiếu nhi</option>
             <option value="Sách giáo khoa">Sách giáo khoa</option>
             <option value="Sách ngoại ngữ">Sách ngoại ngữ</option>
             <option value="Văn học">Văn học</option>
                    
             </select>
-            <div id="other-category-input" style="display: none;">
-  <label for="book-upload-other-category">Other Category:</label>
-  <input type="text" id="book-upload-other-category" name="book-upload-other-category">
-</div>
+        
 
-   <label for="book-upload-author">Book's author:</label>
+   <label for="book-upload-author">Tác giả:</label>
   <input type="text" id="book-upload-author" name="book-upload-author">
-   <label for="book-upload-publisher">Book's publisher:</label>
+   <label for="book-upload-publisher">Nhà xuất bản:</label>
   <input type="text" id="book-upload-publisher" name="book-upload-publisher">
-  <label for="myfile">Select a file:</label>
+  <label for="myfile">Chọn file ảnh:</label>
   <input type="file" id="myfile" name="myfile" accept="image/*" onchange="handleImageUpload(event)">
   <div class="image-container"></div>
   <div class="upload-form-btn">
@@ -53,30 +50,27 @@ function bookSort() {
   </div>
 
    <div class="pop-up-edit-form">
-  <label for="book-edit-id">Book's ID:</label>
+  <label for="book-edit-id">Mã ID:</label>
   <input type="text" id="book-edit-id" name="book-edit-id">
-  <label for="book-edit-name">Book's title:</label>
+  <label for="book-edit-name">Tên sách:</label>
   <input type="text" id="book-edit-name" name="book-edit-name">
-  <label for="book-edit-price">Book's price:</label>
+  <label for="book-edit-price">Giá:</label>
   <input type="text" id="book-edit-price" name="book-edit-price">
-            <label for="book-category">Book's category:</label>
+            <label for="book-category">Thể loại:</label>
             <select id="book-edit-type" >
-             <option value="" disabled selected>Choose category</option>
+             <option value="" disabled selected>Chọn thể loại</option>
             <option value="Thiếu nhi">Thiếu nhi</option>
             <option value="Sách giáo khoa">Sách giáo khoa</option>
             <option value="Sách ngoại ngữ">Sách ngoại ngữ</option>
             <option value="Văn học">Văn học</option>
            
             </select>
-            <div id="other-category-input-edit" style="display: none;">
-  <label for="book-edit-other-category">Other Category:</label>
-  <input type="text" id="book-edit-other-category" name="book-edit-other-category">
-</div>
-   <label for="book-edit-author">Book's author:</label>
+     
+   <label for="book-edit-author">Tác giả:</label>
   <input type="text" id="book-edit-author" name="book-edit-author">
-   <label for="book-edit-publisher">Book's publisher:</label>
+   <label for="book-edit-publisher">Nhà xuất bản:</label>
   <input type="text" id="book-edit-publisher" name="book-edit-publisher">
-  <label for="myfile">Select a file:</label>
+  <label for="myfile">Chọn file ảnh:</label>
   <input type="file" id="myfile" name="myfile" accept="image/*" onchange="handleImageUpload(event)">
   <div class="image-container"></div>
   <div class="edit-form-btn">
@@ -86,7 +80,7 @@ function bookSort() {
 </div>
     <div class="book-category">
       <select id="categoryDropdown">
-      <option value="" disabled selected>Select a category</option>
+      <option value="" disabled selected>Chọn thể loại</option>
        <option value="Tất cả">Tất cả</option>
         <option value="Thiếu nhi">Thiếu nhi</option>
         <option value="Sách ngoại ngữ">Sách ngoại ngữ</option>
@@ -285,7 +279,7 @@ function showEditForm(editButton) {
   const Book = arr.find(book => book.productId.toString() === bookIdvalue);
 
   var bookId = document.getElementById('book-edit-id');
-  bookId.placeholder = Book.productId + " (not editable)";
+  bookId.placeholder = Book.productId + " (không được đổi)";
   bookId.disabled = true;
   var bookTitle = document.getElementById('book-edit-name');
   bookTitle.placeholder = Book.name;
